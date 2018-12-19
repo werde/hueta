@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1544606883 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\app.cpp
+	"App.h"
+
+1544607079 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\app.h
+	<iostream>
+	<Windows.h>
+
+1545225192 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\main.cpp
+	<iostream>
+	"__trash.h"
+	"App.h"
+
+1544600206 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\window.cpp
+	"Window.h"
+
+1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\window.h
+
+1544607366 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
+	<Windows.h>
+
+1545226486 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+	<iostream>
+	<Windows.h>
+	<GL/GL.h>
+	"__trash.h"
+	"MyWindow.h"
+
+1544600206 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.cpp
+	"Window.h"
+
+1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
+
+1545228026 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+	"App.h"
+
+1545212557 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.h
+	<iostream>
+	<windows.h>
+	"GL/gl.h"
+
+1545207071 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.cpp
+	"MyWindow.h"
+
