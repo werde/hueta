@@ -88,6 +88,11 @@ bool App::SetContext()
     return true;
 }
 
+bool App::InitGLVars()
+{
+    return true;
+}
+
 
 void App::loop()
 {

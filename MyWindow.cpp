@@ -24,6 +24,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 MyWindow::MyWindow()
 {
+    // Window window
     WNDCLASSEXA wndClass = {0};
 
     wndClass.cbSize = sizeof(WNDCLASSEX);
@@ -55,6 +56,8 @@ MyWindow::MyWindow()
 
     ShowWindow(_hwnd, SW_SHOW);
     UpdateWindow(_hwnd);
+
+    _cfg = (WinCfg*) malloc(sizeof(WinCfg));
 }
 
 HDC MyWindow::GetDC()

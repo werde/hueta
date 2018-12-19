@@ -24,6 +24,7 @@ class App
         bool _quit = false;
 
         bool SetContext();
+        bool InitGLVars();
         void loop();
         int _counter = 0;
 

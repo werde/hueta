@@ -30,6 +30,7 @@ protected:
 private:
     HWND _hwnd;
     PWndProc _wndProc;
+    WinCfg* _cfg;
 };
 
 #endif // WINDOW_H
