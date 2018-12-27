@@ -46,7 +46,7 @@ MyWindow::MyWindow()
         MessageBox(NULL, "Window Registration Failed!", "Error!",  MB_ICONEXCLAMATION | MB_OK);
     }
 
-    _hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, wndClass.lpszClassName, "test window", WS_OVERLAPPEDWINDOW, 0, 0, 300, 300, 0, 0, wndClass.hInstance, 0);
+    _hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, wndClass.lpszClassName, "test window", WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, 0, 0, wndClass.hInstance, 0);
 
     if (!_hwnd)
     {

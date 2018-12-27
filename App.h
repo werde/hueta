@@ -3,13 +3,34 @@
 
 #include <iostream>
 #include <Windows.h>
+
+#define GL_GLEXT_PROTOTYPES
 #include <GL/GL.h>
+#include <GL/glext.h>
 
 #include "__trash.h"
 
 #include "MyWindow.h"
 
+typedef void (__attribute__((__stdcall__))*hui )(GLsizei, GLuint*);
+typedef void (__attribute__((__stdcall__))*hui2)(GLenum, GLuint);
+typedef void (__attribute__((__stdcall__))*hui3)(GLenum, GLsizei, const void*, GLenum);
+typedef void (__attribute__((__stdcall__))*hui4)(GLuint);
+typedef void (__attribute__((__stdcall__))*hui5)(GLuint);
+typedef void (__attribute__((__stdcall__))*hui6)(GLuint, GLint, GLenum, GLboolean, GLsizei, const GLvoid*);
+typedef GLuint (__attribute__((__stdcall__))*hui7)(GLenum);
+typedef void (__attribute__((__stdcall__))*hui8)(GLuint shader, GLsizei count, const GLchar *const*string, const GLint *length);
+typedef void (__attribute__((__stdcall__))*hui9)(GLuint);
+typedef GLuint (__attribute__((__stdcall__))*hui10)();
+typedef void (__attribute__((__stdcall__))*hui11)(GLuint, GLuint);
+typedef void (__attribute__((__stdcall__))*hui12)(GLuint);
+typedef void (__attribute__((__stdcall__))*hui13)(GLuint);
+
+//typedef void
+
 extern HINSTANCE hInst;
+
+
 
 class App
 {
