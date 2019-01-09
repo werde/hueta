@@ -7,9 +7,18 @@ App::App() : _mw(NULL)
 
 void App::run()
 {
-    const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
-    const GLchar *FSS = "void main() \n { \n gl_FragColor = vec4(0.4,0.4,0.8,1.0); \n } \n\0";
-
+    const GLchar *VSS = "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+const GLchar *FSS = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
     ///**** window*/
     _mw = new MyWindow();
     HWND hWnd = _mw->GetHwnd();
@@ -22,10 +31,9 @@ void App::run()
 
 	InitGLVars();
 
-    GLfloat v[] = {
-                   -1.0f, -1.5f,  0.0f,
-                   1.0f, -1.0f,  0.0f,
-                  0.0f, 1.0f,  0.0f
+    GLfloat v[] = { 0.0f, 0.0f, 0.0f,
+                    0.5f, 0.5f, 0.0f,
+                    0.5f, 0.0f, 0.0f
                 };
 
     HMODULE ogl32 = LoadLibrary("opengl32");
@@ -43,19 +51,11 @@ void App::run()
     hui12 glLinkProgram = (hui12) wglGetProcAddress("glLinkProgram");
     hui13 glUseProgram = (hui13) wglGetProcAddress("glUseProgram");
     hui14 glGenVertexArrays = (hui14) wglGetProcAddress("glGenVertexArrays");
-    hui15 glGetAttribLocation = (hui15) wglGetProcAddress("glGetAttribLocation");
-    hui16 glDisableVertexAttribArray = (hui16) wglGetProcAddress("glDisableVertexAttribArray");
-    hui17 glGetShaderiv = (hui17) wglGetProcAddress("glGetShaderiv");
-    hui18 glGetShaderInfoLog = (hui18) wglGetProcAddress("glGetShaderInfoLog");
 
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, 9*sizeof(float), v, GL_STATIC_DRAW);
-
-    //glEnableVertexAttribArray(0);
-    //glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(v), v, GL_STATIC_DRAW);
 /*
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -68,61 +68,17 @@ void App::run()
     glShaderSource(fragmentShader, 1, &FSS, NULL);
     glCompileShader(vertexShader);
     glCompileShader(fragmentShader);
-
-    ///Error check
-	GLint Result = GL_FALSE;
-	int InfoLogLength = 0;
-
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char VertexShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		//printf("%s\n", &VertexShaderErrorMessage[0]);
-		MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char FragmentShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		//printf("%s\n", &FragmentShaderErrorMessage[0]);
-		MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-	/// Check the program
-	/*
-	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);
-	}
-	*/
-
     GLuint sp = glCreateProgram();
     glAttachShader(sp, vertexShader);
     glAttachShader(sp, fragmentShader);
     glLinkProgram(sp);
 
-    const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    //MessageBox(NULL, (LPCSTR)version,  "e", MB_ICONEXCLAMATION | MB_OK);
-
     while (!_quit)
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear ( GL_COLOR_BUFFER_BIT );
         glUseProgram(sp);
-
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
+        glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(offset));
         glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        glDisableVertexAttribArray(0);
-
         SwapBuffers(myHDC);
 
         loop();

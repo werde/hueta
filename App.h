@@ -25,6 +25,12 @@ typedef GLuint (__attribute__((__stdcall__))*hui10)();
 typedef void (__attribute__((__stdcall__))*hui11)(GLuint, GLuint);
 typedef void (__attribute__((__stdcall__))*hui12)(GLuint);
 typedef void (__attribute__((__stdcall__))*hui13)(GLuint);
+typedef void (__attribute__((__stdcall__))*hui14 )(GLsizei, GLuint*);
+typedef GLint (__attribute__((__stdcall__))*hui15 )(GLuint, const GLchar *);
+typedef GLint (__attribute__((__stdcall__))*hui16 )(GLuint);
+typedef void (__attribute__((__stdcall__))*hui17 )(GLuint, GLenum, GLint*);
+typedef void (__attribute__((__stdcall__))*hui18 )(GLuint, GLsizei, GLsizei, GLchar*);
+
 
 //typedef void
 
