@@ -2,8 +2,7 @@
 #define WINDOW_H
 
 #include <iostream>
-#include <windows.h>
-#include "GL/gl.h"
+#include <Windows.h>
 
 extern HINSTANCE hInst;
 const char cp_windClassName[] = "myWindClassName";

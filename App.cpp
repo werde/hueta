@@ -1,7 +1,34 @@
 #include "App.h"
 
+#include "__trash.h"
+
+static GLboolean MyGLInit()
+{
+	glGenBuffers = (PFNGLGENBUFFERSPROC) wglGetProcAddress("glGenBuffers");
+	glEnableVertexAttribArray = (PFNGLENABLEVERTEXATTRIBARRAYPROC) wglGetProcAddress("glEnableVertexAttribArray");
+	glBindBuffer = (PFNGLBINDBUFFERPROC) wglGetProcAddress("glBindBuffer");
+	glBufferData = (PFNGLBUFFERDATAPROC) wglGetProcAddress("glBufferData");
+	glBindVertexArray = (PFNGLBINDVERTEXARRAYPROC) wglGetProcAddress("glBindVertexArray");
+	glVertexAttribPointer = (PFNGLVERTEXATTRIBPOINTERPROC) wglGetProcAddress("glVertexAttribPointer");
+	glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
+	glShaderSource = (PFNGLSHADERSOURCEPROC) wglGetProcAddress("glShaderSource");
+	glCompileShader = (PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
+	glCreateProgram = (PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
+	glAttachShader = (PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
+	glLinkProgram = (PFNGLLINKPROGRAMPROC) wglGetProcAddress("glLinkProgram");
+	glUseProgram = (PFNGLUSEPROGRAMPROC) wglGetProcAddress("glUseProgram");
+	glGenVertexArrays = (PFNGLGENVERTEXARRAYSPROC) wglGetProcAddress("glGenVertexArrays");
+	glGetAttribLocation = (PFNGLGETATTRIBLOCATIONPROC) wglGetProcAddress("glGetAttribLocation");
+	glDisableVertexAttribArray = (PFNGLDISABLEVERTEXATTRIBARRAYPROC) wglGetProcAddress("glDisableVertexAttribArray");
+	glGetShaderiv = (PFNGLGETSHADERIVPROC) wglGetProcAddress("glGetShaderiv");
+	glGetShaderInfoLog = (PFNGLGETSHADERINFOLOGPROC) wglGetProcAddress("glGetShaderInfoLog");
+	return true;
+};
+
 App::App() : _mw(NULL)
 {
+
+
 
 }
 
@@ -27,39 +54,19 @@ void App::run()
                    1.0f, -1.0f,  0.0f,
                   0.0f, 1.0f,  0.0f
                 };
-
-    HMODULE ogl32 = LoadLibrary("opengl32");
-    hui glGenBuffers = (hui)wglGetProcAddress("glGenBuffers");
-    hui4 glEnableVertexAttribArray = (hui4) wglGetProcAddress("glEnableVertexAttribArray");
-    hui2 glBindBuffer = (hui2)wglGetProcAddress("glBindBuffer");
-    hui3 glBufferData = (hui3)wglGetProcAddress("glBufferData");
-    hui5 glBindVertexArray = (hui5) wglGetProcAddress("glBindVertexArray");
-    hui6 glVertexAttribPointer = (hui6) wglGetProcAddress("glVertexAttribPointer");
-    hui7 glCreateShader = (hui7) wglGetProcAddress("glCreateShader");
-    hui8 glShaderSource = (hui8) wglGetProcAddress("glShaderSource");
-    hui9 glCompileShader = (hui9)wglGetProcAddress("glCompileShader");
-    hui10 glCreateProgram = (hui10) wglGetProcAddress("glCreateProgram");
-    hui11 glAttachShader = (hui11) wglGetProcAddress("glAttachShader");
-    hui12 glLinkProgram = (hui12) wglGetProcAddress("glLinkProgram");
-    hui13 glUseProgram = (hui13) wglGetProcAddress("glUseProgram");
-    hui14 glGenVertexArrays = (hui14) wglGetProcAddress("glGenVertexArrays");
-    hui15 glGetAttribLocation = (hui15) wglGetProcAddress("glGetAttribLocation");
-    hui16 glDisableVertexAttribArray = (hui16) wglGetProcAddress("glDisableVertexAttribArray");
-    hui17 glGetShaderiv = (hui17) wglGetProcAddress("glGetShaderiv");
-    hui18 glGetShaderInfoLog = (hui18) wglGetProcAddress("glGetShaderInfoLog");
+    MyGLInit();
 
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, 9*sizeof(float), v, GL_STATIC_DRAW);
 
-    //glEnableVertexAttribArray(0);
-    //glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-/*
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-*/
 
     GLuint vertexShader, fragmentShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -78,8 +85,8 @@ void App::run()
 	if ( InfoLogLength > 0 ){
 		char VertexShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		//printf("%s\n", &VertexShaderErrorMessage[0]);
-		MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
+		printf("%s\n", &VertexShaderErrorMessage[0]);
+		///MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
 	}
 
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
@@ -87,28 +94,27 @@ void App::run()
 	if ( InfoLogLength > 0 ){
 		char FragmentShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		//printf("%s\n", &FragmentShaderErrorMessage[0]);
-		MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
+		printf("%s\n", &FragmentShaderErrorMessage[0]);
+		///MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
 	}
-
-	/// Check the program
-	/*
-	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);
-	}
-	*/
 
     GLuint sp = glCreateProgram();
     glAttachShader(sp, vertexShader);
     glAttachShader(sp, fragmentShader);
     glLinkProgram(sp);
 
+	/// Check the program
+	/*glGetProgramiv(sp, GL_LINK_STATUS, &Result);
+	glGetProgramiv(sp, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	if ( InfoLogLength > 0 ){
+		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
+		glGetProgramInfoLog(sp, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+		printf("%s\n", &ProgramErrorMessage[0]);
+	}*/
+
+
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    //MessageBox(NULL, (LPCSTR)version,  "e", MB_ICONEXCLAMATION | MB_OK);
+    ///MessageBox(NULL, (LPCSTR)version,  "e", MB_ICONEXCLAMATION | MB_OK);
 
     while (!_quit)
     {

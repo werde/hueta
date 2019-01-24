@@ -1,6 +1,5 @@
 #include <iostream>
-
-#include "__trash.h"
+#include <Windows.h>
 #include "App.h"
 
 
