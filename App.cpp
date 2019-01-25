@@ -118,6 +118,14 @@ void App::run()
 
     while (!_quit)
     {
+
+        // Main message loop:
+        MSG msg;
+        while (::PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
@@ -130,8 +138,6 @@ void App::run()
         glDisableVertexAttribArray(0);
 
         SwapBuffers(myHDC);
-
-        loop();
     }
 }
 

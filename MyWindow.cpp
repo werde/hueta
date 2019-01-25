@@ -9,6 +9,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		}
 		break;
+		case WM_SIZE:
+            break;
         case WM_CLOSE:
             DestroyWindow(hWnd);
             exit(1488);
@@ -58,6 +60,25 @@ MyWindow::MyWindow()
     UpdateWindow(_hwnd);
 
     _cfg = (WinCfg*) malloc(sizeof(WinCfg));
+}
+
+RECT GetSize()
+{
+    RECT rect;
+    if(GetWindowRect(hwnd, &rect))
+    {
+        int width = rect.right - rect.left;
+        int height = rect.bottom - rect.top;
+    }
+/*
+BITMAP structBitmapHeader;
+memset( &structBitmapHeader, 0, sizeof(BITMAP) );
+
+HGDIOBJ hBitmap = GetCurrentObject(hDC, OBJ_BITMAP);
+GetObject(hBitmap, sizeof(BITMAP), &structBitmapHeader);
+
+//structBitmapHeader.bmWidth
+//structBitmapHeader.bmHeight*/
 }
 
 HDC MyWindow::GetDC()
