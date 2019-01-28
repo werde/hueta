@@ -1,4 +1,5 @@
 #include "MyWindow.h"
+#include "App.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -10,6 +11,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 		case WM_SIZE:
+		    a->resize();
             break;
         case WM_CLOSE:
             DestroyWindow(hWnd);
@@ -62,28 +64,36 @@ MyWindow::MyWindow()
     _cfg = (WinCfg*) malloc(sizeof(WinCfg));
 }
 
-RECT GetSize()
+
+HDC MyWindow::GetDC()
 {
+    return ::GetDC(this->_hwnd);
+}
+
+void MyWindow::GetSize(RECT* r)
+{
+    ::GetClientRect(_hwnd, r);
+
+/*
     RECT rect;
     if(GetWindowRect(hwnd, &rect))
     {
         int width = rect.right - rect.left;
         int height = rect.bottom - rect.top;
     }
+*/
 /*
-BITMAP structBitmapHeader;
-memset( &structBitmapHeader, 0, sizeof(BITMAP) );
+    HDC hDC = ::GetDC(this->_hwnd);
 
-HGDIOBJ hBitmap = GetCurrentObject(hDC, OBJ_BITMAP);
-GetObject(hBitmap, sizeof(BITMAP), &structBitmapHeader);
+    BITMAP structBitmapHeader;
+    memset( &structBitmapHeader, 0, sizeof(BITMAP) );
 
-//structBitmapHeader.bmWidth
-//structBitmapHeader.bmHeight*/
-}
+    HGDIOBJ hBitmap = GetCurrentObject(hDC, OBJ_BITMAP);
+    GetObject(hBitmap, sizeof(BITMAP), &structBitmapHeader);
 
-HDC MyWindow::GetDC()
-{
-    return ::GetDC(this->_hwnd);
+    structBitmapHeader.bmWidth;
+    structBitmapHeader.bmHeight;
+*/
 }
 
 MyWindow::~MyWindow()

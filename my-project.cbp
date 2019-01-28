@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-fpermissive" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
@@ -30,7 +31,9 @@
 		<Unit filename="MyWindow.cpp" />
 		<Unit filename="MyWindow.h" />
 		<Unit filename="__trash.h" />
+		<Unit filename="include/Model.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Model.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

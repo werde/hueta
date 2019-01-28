@@ -4,6 +4,7 @@
 
 
 HINSTANCE hInst;
+
 App* a;
 
 int WINAPI WinMain(HINSTANCE hi, HINSTANCE hi2, LPSTR lpstr, int i)

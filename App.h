@@ -18,6 +18,7 @@ class App
         App();
         void cfgInit();
         void run();
+        bool resize();
 
     private:
         void* cfg;

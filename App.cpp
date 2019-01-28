@@ -112,10 +112,6 @@ void App::run()
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}*/
 
-
-    const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    ///MessageBox(NULL, (LPCSTR)version,  "e", MB_ICONEXCLAMATION | MB_OK);
-
     while (!_quit)
     {
 
@@ -126,6 +122,7 @@ void App::run()
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+        // Rendering part
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
@@ -189,19 +186,30 @@ bool App::SetContext()
 
 bool App::InitGLVars()
 {
-    glViewport(0,0,800,600);
+    RECT rect;
+    _mw->GetSize(&rect);
+
+    glViewport(0,0,rect.right,rect.bottom);
     glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
-//    glLoadIdentity();
+    glLoadIdentity();
 
-//    glMatrixMode(GL_MODELVIEW);
-//    glLoadIdentity();
-
-//	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
+	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.5f, 0.2f, 0.5f, 0.5f);				// Black Background
 	glClearDepth(1.0f);									// Depth Buffer Setup
 //	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-//	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
-//    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);*/
+	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    return true;
+}
+
+bool App::resize()
+{
+    if (!_mw) return false;
+
+    RECT rect;
+    _mw->GetSize(&rect);
+    glViewport(0,0,rect.right,rect.bottom);
+
     return true;
 }
 
