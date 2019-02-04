@@ -13,6 +13,6 @@ int WINAPI WinMain(HINSTANCE hi, HINSTANCE hi2, LPSTR lpstr, int i)
     hInst = hi;
     a = new App();
     a->run();
-
+//
     return 0;
 }

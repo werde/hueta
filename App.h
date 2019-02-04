@@ -9,6 +9,7 @@
 #include <GL/glext.h>
 
 #include "MyWindow.h"
+#include "Model.h"
 
 extern HINSTANCE hInst;
 

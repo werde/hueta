@@ -23,13 +23,14 @@ static GLboolean MyGLInit()
 	glGetShaderiv = (PFNGLGETSHADERIVPROC) wglGetProcAddress("glGetShaderiv");
 	glGetShaderInfoLog = (PFNGLGETSHADERINFOLOGPROC) wglGetProcAddress("glGetShaderInfoLog");
 	return true;
-};
+}
 
 App::App() : _mw(NULL)
 {
+    char buf[1024];
+    GetModuleFileNameA(NULL, buf, 1024);
 
-
-
+    printf("%s\n", buf);
 }
 
 void App::run()
@@ -111,6 +112,9 @@ void App::run()
 		glGetProgramInfoLog(sp, InfoLogLength, NULL, &ProgramErrorMessage[0]);
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}*/
+
+    Model m1;
+    m1.LoadObj(&m1);
 
     while (!_quit)
     {

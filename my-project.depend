@@ -6,7 +6,7 @@
 	<iostream>
 	<Windows.h>
 
-1548682768 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\main.cpp
+1549270678 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\main.cpp
 	<iostream>
 	<Windows.h>
 	"App.h"
@@ -18,19 +18,20 @@
 
 1548337951 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 
-1548682998 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+1549270199 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
 	<iostream>
 	<Windows.h>
 	<GL/GL.h>
 	<GL/glext.h>
 	"MyWindow.h"
+	"Model.h"
 
 1544600206 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.cpp
 	"Window.h"
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1548684161 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1549282124 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"__trash.h"
 
@@ -42,11 +43,12 @@
 	"MyWindow.h"
 	"App.h"
 
-1548684502 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1549290946 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
-1548684490 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1549290792 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
+	"GL/gl.h"
 
