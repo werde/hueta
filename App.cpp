@@ -113,8 +113,10 @@ void App::run()
 		printf("%s\n", &ProgramErrorMessage[0]);
 	}*/
 
-    Model m1;
-    m1.LoadObj(&m1);
+    Model m;
+    m.LoadObj(&m);
+
+    glBufferData(GL_ARRAY_BUFFER, m.v.size() * sizeof(vec3), &m.v[0], GL_STATIC_DRAW);
 
     while (!_quit)
     {

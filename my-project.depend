@@ -31,7 +31,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1549282124 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1549376090 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"__trash.h"
 
@@ -43,10 +43,10 @@
 	"MyWindow.h"
 	"App.h"
 
-1549290946 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1549375658 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
-1549290792 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1549375036 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>

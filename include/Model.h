@@ -7,33 +7,40 @@
 
 #include "GL/gl.h"
 
-typedef union vec4
+template <typename T=GLfloat> union _vec4
 {
-    GLfloat m[4];
+    T m[4];
     struct
     {
-        GLfloat x, y, z, w;
+        T x, y, z, w;
     };
-} vec4;
+};
 
-typedef union vec3
+template <typename T=GLfloat> union _vec3
 {
-    GLfloat m[3];
+    T m[3];
     struct
     {
-        GLfloat x, y, z;
+        T x, y, z;
     };
-} vec3;
+};
 
-typedef union vec2
+template <typename T=GLfloat> union _vec2
 {
-    GLfloat m[2];
+    T m[2];
     struct
     {
-        GLfloat x, y;
+        T x, y, z;
     };
-} vec2;
+};
 
+typedef _vec4<GLfloat> vec4;
+typedef _vec3<GLfloat> vec3;
+typedef _vec2<GLfloat> vec2;
+
+typedef _vec4<GLint> veci4;
+typedef _vec3<GLint> veci3;
+typedef _vec2<GLint> veci2;
 
 class Model
 {
@@ -46,6 +53,11 @@ class Model
     std::vector<vec3> v;
     std::vector<vec2> vt;
     std::vector<vec3> vn;
+
+    std::vector<veci3> vi;
+    std::vector<veci3> uvi;
+    std::vector<veci3> ni;
+
     protected:
 
     private:
