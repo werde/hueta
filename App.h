@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <string>
+#include <fstream>
+#include <sstream>
+
 
 //#define GL_GLEXT_PROTOTYPES
 #include <GL/GL.h>

@@ -2,6 +2,23 @@
 
 #include "__trash.h"
 
+void readShaderFile(const char* file_path, const GLchar* pShaderCode)
+{
+    FILE* f = fopen(file_path, "rb");
+    if (f == NULL)
+    {
+        printf("Error Reading File %s\n", file_path);
+    }
+
+    fseek(f, 0L, SEEK_END);
+    unsigned int numbytes = ftell(f);
+    fseek(f, 0L, SEEK_SET);
+
+    fread(pShaderCode, sizeof(char), numbytes, f);
+
+    //printf("%s\n", pShaderCode);
+}
+
 static GLboolean MyGLInit()
 {
 	glGenBuffers = (PFNGLGENBUFFERSPROC) wglGetProcAddress("glGenBuffers");
@@ -22,6 +39,11 @@ static GLboolean MyGLInit()
 	glDisableVertexAttribArray = (PFNGLDISABLEVERTEXATTRIBARRAYPROC) wglGetProcAddress("glDisableVertexAttribArray");
 	glGetShaderiv = (PFNGLGETSHADERIVPROC) wglGetProcAddress("glGetShaderiv");
 	glGetShaderInfoLog = (PFNGLGETSHADERINFOLOGPROC) wglGetProcAddress("glGetShaderInfoLog");
+	glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC) wglGetProcAddress("glGetUniformLocation");
+    glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC) wglGetProcAddress("glUniformMatrix4fv");
+    glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
+    glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
+
 	return true;
 }
 
@@ -35,8 +57,16 @@ App::App() : _mw(NULL)
 
 void App::run()
 {
+    /*
     const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
     const GLchar *FSS = "void main() \n { \n gl_FragColor = vec4(0.4,0.4,0.8,1.0); \n } \n\0";
+    */
+
+    GLchar *VSS = (GLchar*) malloc(sizeof(GLchar)*16384);
+    GLchar *FSS = (GLchar*) malloc(sizeof(GLchar)*16384);
+
+    readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
+    readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
 
     ///**** window*/
     _mw = new MyWindow();
@@ -57,18 +87,7 @@ void App::run()
                 };
     MyGLInit();
 
-    GLuint vbo;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, 9*sizeof(float), v, GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
+    ///******
     GLuint vertexShader, fragmentShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -103,6 +122,7 @@ void App::run()
     glAttachShader(sp, vertexShader);
     glAttachShader(sp, fragmentShader);
     glLinkProgram(sp);
+    ///******
 
 	/// Check the program
 	/*glGetProgramiv(sp, GL_LINK_STATUS, &Result);
@@ -115,8 +135,19 @@ void App::run()
 
     Model m;
     m.LoadObj(&m);
+//------------------
+    GLuint MatrixID = glGetUniformLocation(sp, "MVP");
+    GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
 
-    glBufferData(GL_ARRAY_BUFFER, m.v.size() * sizeof(vec3), &m.v[0], GL_STATIC_DRAW);
+    GLuint vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, m.v.size()*sizeof(vec3), &(m.v[0]), GL_STATIC_DRAW);
+
+	GLuint uvbo;
+	glGenBuffers(1, &uvbo);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
+    glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
     while (!_quit)
     {
@@ -128,17 +159,35 @@ void App::run()
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
-        // Rendering part
+        /// Rendering part
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
+		mat4 ProjectionMatrix;
+		mat4 ViewMatrix;
+        mat4 ModelMatrix;
+        mat4 MVP;
+        MVP = IDENTITY_MATRIX;
+        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
+
+		glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, m.tex);
+        glUniform1i(TextureID, 0);
+
+        // 1st attribute buffer
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+		// 2nd attribute buffer
+		glEnableVertexAttribArray(1);
+		glBindBuffer(GL_ARRAY_BUFFER, uvbo);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,(void*)0);
+
+        glDrawArrays(GL_TRIANGLES, 0, m.v.size());
 
         glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
 
         SwapBuffers(myHDC);
     }
