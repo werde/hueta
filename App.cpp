@@ -163,10 +163,10 @@ void App::run()
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
-		mat4 ProjectionMatrix;
-		mat4 ViewMatrix;
-        mat4 ModelMatrix;
-        mat4 MVP;
+		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
+		mat4 ViewMatrix = lookAt(Camera.pos, Camera.focus); ;
+        mat4 ModelMatrix = IDENTITY_MATRIX;
+        mat4 MVP = multymat(&ModelMatrix, &ProjectionMatrix);
         MVP = IDENTITY_MATRIX;
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 

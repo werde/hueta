@@ -35,6 +35,8 @@
 		<Unit filename="__trash.h" />
 		<Unit filename="include/Model.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mat.cpp" />
+		<Unit filename="mat.h" />
 		<Unit filename="src/Model.cpp" />
 		<Extensions>
 			<code_completion />
