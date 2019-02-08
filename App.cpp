@@ -149,6 +149,10 @@ void App::run()
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
     glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
+
+    vec4 pos = {{30, 0.5, 30, 0}};
+	vec4 focus = {{1, 0, -1, 0}};
+
     while (!_quit)
     {
 
@@ -164,7 +168,7 @@ void App::run()
         glUseProgram(sp);
 
 		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
-		mat4 ViewMatrix = lookAt(Camera.pos, Camera.focus); ;
+		mat4 ViewMatrix = lookAt(pos, focus); ;
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 MVP = multymat(&ModelMatrix, &ProjectionMatrix);
         MVP = IDENTITY_MATRIX;

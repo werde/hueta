@@ -47,3 +47,52 @@ mat4 perspective(float fovy, float aspect_ratio, float near_plane, float far_pla
 
 	return out;
 }
+
+void normalizevec4(vec4* v) {
+	float sqr = v->m[0] * v->m[0] + v->m[1] * v->m[1] + v->m[2] * v->m[2];
+	if(sqr == 1 || sqr == 0)
+		return;
+	float invrt = 1.f/sqrt(sqr);
+	v->m[0] *= invrt;
+	v->m[1] *= invrt;
+	v->m[2] *= invrt;
+}
+
+vec4 crossvec4(vec4 v1, vec4 v2) {
+	vec4 out = {{0}};
+	out.m[0] = v1.m[1]*v2.m[2] - v1.m[2]*v2.m[1];
+	out.m[1] = v1.m[2]*v2.m[0] - v1.m[0]*v2.m[2];
+	out.m[2] = v1.m[0]*v2.m[1] - v1.m[1]*v2.m[0];
+	return out;
+}
+
+float dotvec4(vec4 v1, vec4 v2) {
+	return v1.m[0] * v2.m[0] + v1.m[1] * v2.m[1] + v1.m[2] * v2.m[2] + v1.m[3] * v2.m[3];
+}
+
+mat4 lookAt(vec4 pos, vec4 dir) {
+	vec4 f = dir;
+	normalizevec4(&f);
+	vec4 u = {{0, 1, 0, 0}};
+	vec4 s = crossvec4(f, u);
+	normalizevec4(&s);
+	u = crossvec4(s, f);
+
+	mat4 out = IDENTITY_MATRIX;
+	out.m[0] = s.x;
+	out.m[4] = s.y;
+	out.m[8] = s.z;
+
+	out.m[1] = u.x;
+	out.m[5] = u.y;
+	out.m[9] = u.z;
+
+	out.m[2] = -f.x;
+	out.m[6] = -f.y;
+	out.m[10] = -f.z;
+
+	out.m[12] = -dotvec4(s, pos);
+	out.m[13] = -dotvec4(u, pos);
+	out.m[14] =  dotvec4(f, pos);
+	return out;
+}

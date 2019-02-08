@@ -63,6 +63,10 @@ static const vec4 INV_Z_AXIS =  {{0.0,  0.0, -1.0, 0.0}};
 
 mat4 multymat(mat4* m1, mat4* m2);
 vec4 multymatvec(const mat4* m, const vec4* v);
-mat4 perspective(float fovy, float aspect_ratio, float near_plane, float far_plane) ;
+mat4 perspective(float fovy, float aspect_ratio, float near_plane, float far_plane);
+void normalizevec4(vec4* v);
+vec4 crossvec4(vec4 v1, vec4 v2);
+float dotvec4(vec4 v1, vec4 v2);
+mat4 lookAt(vec4 pos, vec4 dir);
 
 #endif // MAT_H_INCLUDED

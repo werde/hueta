@@ -39,4 +39,5 @@ class App
         HGLRC _ctx;
 };
 
+
 #endif // APP_H
