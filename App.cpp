@@ -15,8 +15,62 @@ void readShaderFile(const char* file_path, const GLchar* pShaderCode)
     fseek(f, 0L, SEEK_SET);
 
     fread(pShaderCode, sizeof(char), numbytes, f);
+}
 
-    //printf("%s\n", pShaderCode);
+void compileShaderProgramm(GLuint* sp)
+{
+
+    //const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
+    //const GLchar *FSS = "void main() \n { \n gl_FragColor = vec4(0.4,0.4,0.8,1.0); \n } \n\0";
+
+    GLchar *VSS = (GLchar*) malloc(sizeof(GLchar)*16384);
+    GLchar *FSS = (GLchar*) malloc(sizeof(GLchar)*16384);
+
+    readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
+    readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
+
+    GLuint vertexShader, fragmentShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(vertexShader, 1, &VSS, NULL);
+    glShaderSource(fragmentShader, 1, &FSS, NULL);
+    glCompileShader(vertexShader);
+    glCompileShader(fragmentShader);
+
+    ///*Error check
+	GLint Result = GL_FALSE;
+	int InfoLogLength = 0;
+
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &Result);
+	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	if ( InfoLogLength > 0 ){
+		char VertexShaderErrorMessage[InfoLogLength+1];
+		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
+		printf("%s\n", &VertexShaderErrorMessage[0]);
+		//MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
+	}
+
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
+	glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	if ( InfoLogLength > 0 ){
+		char FragmentShaderErrorMessage[InfoLogLength+1];
+		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
+		printf("%s\n", &FragmentShaderErrorMessage[0]);
+		//MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
+	}
+
+    glAttachShader(*sp, vertexShader);
+    glAttachShader(*sp, fragmentShader);
+    glLinkProgram(*sp);
+
+	/// Check the program
+	/*glGetProgramiv(sp, GL_LINK_STATUS, &Result);
+	glGetProgramiv(sp, GL_INFO_LOG_LENGTH, &InfoLogLength);
+	if ( InfoLogLength > 0 ){
+		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
+		glGetProgramInfoLog(sp, InfoLogLength, NULL, &ProgramErrorMessage[0]);
+		printf("%s\n", &ProgramErrorMessage[0]);
+	}*/
 }
 
 static GLboolean MyGLInit()
@@ -43,6 +97,7 @@ static GLboolean MyGLInit()
     glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC) wglGetProcAddress("glUniformMatrix4fv");
     glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
     glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
+    glUniform3f = (PFNGLUNIFORM3FPROC) wglGetProcAddress("glUniform3f");
 
 	return true;
 }
@@ -57,17 +112,6 @@ App::App() : _mw(NULL)
 
 void App::run()
 {
-    /*
-    const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
-    const GLchar *FSS = "void main() \n { \n gl_FragColor = vec4(0.4,0.4,0.8,1.0); \n } \n\0";
-    */
-
-    GLchar *VSS = (GLchar*) malloc(sizeof(GLchar)*16384);
-    GLchar *FSS = (GLchar*) malloc(sizeof(GLchar)*16384);
-
-    readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
-    readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
-
     ///**** window*/
     _mw = new MyWindow();
     HWND hWnd = _mw->GetHwnd();
@@ -79,78 +123,44 @@ void App::run()
     SetContext();
 
 	InitGLVars();
+	MyGLInit();
 
-    GLfloat v[] = {
-                   -1.0f, -1.5f,  0.0f,
-                   1.0f, -1.0f,  0.0f,
-                  0.0f, 1.0f,  0.0f
-                };
-    MyGLInit();
+	GLuint sp = glCreateProgram();
+	compileShaderProgramm(&sp);
 
-    ///******
-    GLuint vertexShader, fragmentShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(vertexShader, 1, &VSS, NULL);
-    glShaderSource(fragmentShader, 1, &FSS, NULL);
-    glCompileShader(vertexShader);
-    glCompileShader(fragmentShader);
-
-    ///Error check
-	GLint Result = GL_FALSE;
-	int InfoLogLength = 0;
-
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char VertexShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		printf("%s\n", &VertexShaderErrorMessage[0]);
-		///MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char FragmentShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		printf("%s\n", &FragmentShaderErrorMessage[0]);
-		///MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-    GLuint sp = glCreateProgram();
-    glAttachShader(sp, vertexShader);
-    glAttachShader(sp, fragmentShader);
-    glLinkProgram(sp);
-    ///******
-
-	/// Check the program
-	/*glGetProgramiv(sp, GL_LINK_STATUS, &Result);
-	glGetProgramiv(sp, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(sp, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);
-	}*/
+    GLfloat v[] =   {
+                    -1.0f, -1.5f,  0.0f,
+                    1.0f, -1.0f,  0.0f,
+                    0.0f, 1.0f,  0.0f
+                    };
+    vec3 ex_Color = {{0.0,1.0,0.0}};
 
     Model m;
     m.LoadObj(&m);
 //------------------
+
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
+    GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
 
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, m.v.size()*sizeof(vec3), &(m.v[0]), GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, m.v.size()*sizeof(vec3), &(m.v[0]), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*9, v, GL_STATIC_DRAW);
 
 	GLuint uvbo;
 	glGenBuffers(1, &uvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
     glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
+	GLuint ecbo;
+	glGenBuffers(1, &ecbo);
+	glBindBuffer(GL_ARRAY_BUFFER, ecbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), ex_Color.m, GL_STATIC_DRAW);
 
-    vec4 pos = {{30, 0.5, 30, 0}};
+
+    vec4 pos = {{30, 99.5, 30, 0}};
 	vec4 focus = {{1, 0, -1, 0}};
 
     while (!_quit)
@@ -170,28 +180,38 @@ void App::run()
 		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
 		mat4 ViewMatrix = lookAt(pos, focus); ;
         mat4 ModelMatrix = IDENTITY_MATRIX;
-        mat4 MVP = multymat(&ModelMatrix, &ProjectionMatrix);
-        MVP = IDENTITY_MATRIX;
+        mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
+        mat4 MVP = multymat(&temp, &ProjectionMatrix);;
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
+        //glUniformMatrix4fv(ex_ColorID, 1, GL_FALSE, ex_Color.m);
+        glUniform3f(uniColor, red, 0.0, 0.0)
+
+/*
 		glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, m.tex);
         glUniform1i(TextureID, 0);
-
+*/
         // 1st attribute buffer
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 		// 2nd attribute buffer
 		glEnableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, uvbo);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,(void*)0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,0);
 
-        glDrawArrays(GL_TRIANGLES, 0, m.v.size());
+		// 3rd attribute buffer
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, ecbo);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0,0);
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
 
         SwapBuffers(myHDC);
     }
@@ -278,7 +298,7 @@ void App::loop()
     // message queue
     int bRet = true;
     MSG msg;
-/*    while ((*/bRet = GetMessage(&msg, NULL, 0, 0);//) != 0)
+//    while ((*/bRet = GetMessage(&msg, NULL, 0, 0);//) != 0)
 //    {
         if (bRet == -1)
         {
