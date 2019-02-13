@@ -1,6 +1,6 @@
 #version 120 core
 
-uniform vec3 colorV;
+uniform vec3 ex_Color;
 
 varying vec2 UV;
 
@@ -9,5 +9,5 @@ uniform sampler2D myTextureSampler;
 void main(){
 
 	vec4 color = texture2D(myTextureSampler, UV);
-	gl_FragColor = vec4(colorV, 1.0);
+	gl_FragColor = vec4(ex_Color, 1.0);
 }

@@ -1,77 +1,7 @@
 #include "App.h"
 
 #include "__trash.h"
-
-void readShaderFile(const char* file_path, const GLchar* pShaderCode)
-{
-    FILE* f = fopen(file_path, "rb");
-    if (f == NULL)
-    {
-        printf("Error Reading File %s\n", file_path);
-    }
-
-    fseek(f, 0L, SEEK_END);
-    unsigned int numbytes = ftell(f);
-    fseek(f, 0L, SEEK_SET);
-
-    fread(pShaderCode, sizeof(char), numbytes, f);
-}
-
-void compileShaderProgramm(GLuint* sp)
-{
-
-    //const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
-    //const GLchar *FSS = "void main() \n { \n gl_FragColor = vec4(0.4,0.4,0.8,1.0); \n } \n\0";
-
-    GLchar *VSS = (GLchar*) malloc(sizeof(GLchar)*16384);
-    GLchar *FSS = (GLchar*) malloc(sizeof(GLchar)*16384);
-
-    readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
-    readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
-
-    GLuint vertexShader, fragmentShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(vertexShader, 1, &VSS, NULL);
-    glShaderSource(fragmentShader, 1, &FSS, NULL);
-    glCompileShader(vertexShader);
-    glCompileShader(fragmentShader);
-
-    ///*Error check
-	GLint Result = GL_FALSE;
-	int InfoLogLength = 0;
-
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char VertexShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		printf("%s\n", &VertexShaderErrorMessage[0]);
-		//MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
-	glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		char FragmentShaderErrorMessage[InfoLogLength+1];
-		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		printf("%s\n", &FragmentShaderErrorMessage[0]);
-		//MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
-	}
-
-    glAttachShader(*sp, vertexShader);
-    glAttachShader(*sp, fragmentShader);
-    glLinkProgram(*sp);
-
-	/// Check the program
-	/*glGetProgramiv(sp, GL_LINK_STATUS, &Result);
-	glGetProgramiv(sp, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 ){
-		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(sp, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);
-	}*/
-}
+#include "shaders.h"
 
 static GLboolean MyGLInit()
 {
@@ -133,7 +63,7 @@ void App::run()
                     1.0f, -1.0f,  0.0f,
                     0.0f, 1.0f,  0.0f
                     };
-    vec3 ex_Color = {{0.0,1.0,0.0}};
+    GLfloat ex_Color[3] = {0.0,0.7,0.3};
 
     Model m;
     m.LoadObj(&m);
@@ -146,22 +76,20 @@ void App::run()
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    //glBufferData(GL_ARRAY_BUFFER, m.v.size()*sizeof(vec3), &(m.v[0]), GL_STATIC_DRAW);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*9, v, GL_STATIC_DRAW);
+
+    GLuint mvbo;
+    glGenBuffers(1, &mvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, mvbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*m.v.size(), &(m.v[0]), GL_STATIC_DRAW);
 
 	GLuint uvbo;
 	glGenBuffers(1, &uvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
     glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
-	GLuint ecbo;
-	glGenBuffers(1, &ecbo);
-	glBindBuffer(GL_ARRAY_BUFFER, ecbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vec3), ex_Color.m, GL_STATIC_DRAW);
-
-
-    vec4 pos = {{30, 99.5, 30, 0}};
-	vec4 focus = {{1, 0, -1, 0}};
+    vec4 pos = {{0.0, 0.0, -1.0, 0.0}};
+	vec4 focus = {{1, 0, 1, 0}};
 
     while (!_quit)
     {
@@ -177,7 +105,7 @@ void App::run()
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
-		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 1000.0f);
+		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
 		mat4 ViewMatrix = lookAt(pos, focus); ;
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
@@ -185,7 +113,7 @@ void App::run()
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
         //glUniformMatrix4fv(ex_ColorID, 1, GL_FALSE, ex_Color.m);
-        glUniform3f(uniColor, red, 0.0, 0.0)
+        glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
 /*
 		glActiveTexture(GL_TEXTURE0);
@@ -201,11 +129,6 @@ void App::run()
 		glEnableVertexAttribArray(1);
 		glBindBuffer(GL_ARRAY_BUFFER, uvbo);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,0);
-
-		// 3rd attribute buffer
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, ecbo);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0,0);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

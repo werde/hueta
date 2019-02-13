@@ -13,6 +13,7 @@
 #include <GL/glext.h>
 
 #include "MyWindow.h"
+#include "Camera.h"
 #include "Model.h"
 
 extern HINSTANCE hInst;
