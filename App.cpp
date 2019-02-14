@@ -37,7 +37,12 @@ App::App() : _mw(NULL)
     char buf[1024];
     GetModuleFileNameA(NULL, buf, 1024);
 
+    c = new Camera();
+
     printf("%s\n", buf);
+
+    POINT lpPoint;
+    GetCursorPos(&lpPoint);
 }
 
 void App::run()
@@ -88,9 +93,6 @@ void App::run()
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
     glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
-    vec4 pos = {{0.0, 0.0, -1.0, 0.0}};
-	vec4 focus = {{1, 0, 1, 0}};
-
     while (!_quit)
     {
 
@@ -105,8 +107,8 @@ void App::run()
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
-		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
-		mat4 ViewMatrix = lookAt(pos, focus); ;
+		mat4 ProjectionMatrix = perspective(90.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
+		mat4 ViewMatrix = lookAt(c->pos, c->focus); ;
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
         mat4 MVP = multymat(&temp, &ProjectionMatrix);;
@@ -214,6 +216,30 @@ bool App::resize()
 
     return true;
 }
+
+void App::handleKeyDown(UINT msg, WPARAM wParam)
+{
+    switch(wParam)
+    {
+    case MKEY_W:
+        c->forward(1.0f);
+        break;
+    case MKEY_A:
+        c->strafe(-1.0f);
+        break;
+    case MKEY_S:
+        c->forward(-1.0f);
+        break;
+    case MKEY_D:
+        c->strafe(1.0f);
+        break;
+    case MKEY_Q:
+        c->rotate(0.05, 0.0);
+        break;
+    default:
+        break;
+    }
+};
 
 
 void App::loop()

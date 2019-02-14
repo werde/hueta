@@ -1,6 +1,6 @@
 #include "Model.h"
-GLuint loadDDS(const char * imagepath){
-
+GLuint loadDDS(const char * imagepath)
+{
 	unsigned char header[124];
 
 	FILE *fp;

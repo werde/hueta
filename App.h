@@ -26,6 +26,7 @@ class App
         void run();
         bool resize();
 
+        void handleKeyDown(UINT msg, WPARAM wParam);
     private:
         void* cfg;
         void* state;
@@ -36,8 +37,12 @@ class App
         void loop();
         int _counter = 0;
 
+        Camera* c;
+
         MyWindow* _mw;
         HGLRC _ctx;
+
+        int mouseX, mouseY;
 };
 
 

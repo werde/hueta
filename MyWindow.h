@@ -1,6 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <stdio.h>
 #include <iostream>
 #include <Windows.h>
 

@@ -17,13 +17,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
             DestroyWindow(hWnd);
             exit(1488);
         break;
+        case WM_KEYDOWN:
+            printf("%d WM_KEYDOWN: 0x%x\n", msg, wParam);
+            a->handleKeyDown(msg, wParam);
+            //OutputDebugString(msg);
+        break;
         case WM_DESTROY:
             PostQuitMessage(0);
         break;
         default:
             return DefWindowProc(hWnd, msg, wParam, lParam);
     }
-    return 0;
+    return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 MyWindow::MyWindow()
