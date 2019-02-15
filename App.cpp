@@ -41,8 +41,10 @@ App::App() : _mw(NULL)
 
     printf("%s\n", buf);
 
-    POINT lpPoint;
-    GetCursorPos(&lpPoint);
+    POINT p;
+    GetCursorPos(&p);
+    mouseX = p.x;
+    mouseY = p.y;
 }
 
 void App::run()
@@ -93,16 +95,18 @@ void App::run()
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
     glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
+    DWORD dTime, ctr1, ctr2;
     while (!_quit)
     {
+        ctr1 = GetTickCount();
 
-        // Main message loop:
         MSG msg;
         while (::PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+
         /// Rendering part
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
@@ -117,14 +121,13 @@ void App::run()
         //glUniformMatrix4fv(ex_ColorID, 1, GL_FALSE, ex_Color.m);
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
-/*
 		glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, m.tex);
         glUniform1i(TextureID, 0);
-*/
+
         // 1st attribute buffer
         glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, mvbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 		// 2nd attribute buffer
@@ -132,13 +135,28 @@ void App::run()
 		glBindBuffer(GL_ARRAY_BUFFER, uvbo);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,0);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, m.v.size());
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
 
         SwapBuffers(myHDC);
+
+        /// render end
+
+        ctr2 = GetTickCount();
+        int dTime = ctr2 - ctr1;
+        _frameTime = static_cast<double>(dTime);
+        float fps60 = 1000.0/60.0;
+
+        /*
+        if (dTime < fps60)
+            Sleep((fps60 - dTime));
+        */
+
+        float fps = 1/(float)dTime;
+        printf("rought fps : %f\n", 1000*fps);
     }
 }
 
@@ -217,28 +235,66 @@ bool App::resize()
     return true;
 }
 
-void App::handleKeyDown(UINT msg, WPARAM wParam)
+void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    float speed = 0.1f;
+    float d = speed * _frameTime;
+
     switch(wParam)
     {
     case MKEY_W:
-        c->forward(1.0f);
+        c->forward(d);
         break;
     case MKEY_A:
-        c->strafe(-1.0f);
+        c->strafe(-1.0f*d);
         break;
     case MKEY_S:
-        c->forward(-1.0f);
+        c->forward(-1.0f*d);
         break;
     case MKEY_D:
-        c->strafe(1.0f);
+        c->strafe(d);
         break;
     case MKEY_Q:
         c->rotate(0.05, 0.0);
         break;
+    case MKEY_E:
+        c->rotate(-0.05, 0.0);
+        break;
+    case MKEY_Z:
+        c->rotate(0, 0.05);
+        break;
+    case MKEY_C:
+        c->rotate(0.0, -0.05);
+        break;
     default:
         break;
     }
+};
+
+void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    int xPos = GET_X_LPARAM(lParam);
+    int yPos = GET_Y_LPARAM(lParam);
+
+    int dx = mouseX - xPos;
+    int dy = mouseY - yPos;
+
+    const float kVert = 0.001f;
+    const float kHor = -0.001f;
+
+    c->rotate(dy*kVert, dx*kHor);
+
+    RECT rect;
+    _mw->GetSize(&rect);
+
+    mouseX = xPos;
+    mouseY = yPos;
+    //mouseX = rect.right/2;
+    //mouseY = rect.bottom/2;
+
+    //POINT pt;
+    //ClientToScreen(_mw->GetHwnd(), &pt);
+    //SetCursorPos(mouseX,mouseY);
 };
 
 

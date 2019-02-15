@@ -25,7 +25,7 @@ class Camera
         void strafe(GLfloat d);
         void vert(GLfloat d);
 
-        void rotate(GLfloat pitch, GLfloat yaw);
+        void rotate(GLfloat p, GLfloat y);
 
     protected:
 

@@ -97,9 +97,9 @@ GLuint loadDDS(const char * imagepath)
 Model::Model()
 {
     tex = 0;
-    v.reserve(10);
-    vt.reserve(10);
-    vn.reserve(10);
+    v.reserve(100);
+    vt.reserve(100);
+    vn.reserve(100);
 }
 
 bool Model::LoadObj(Model* m)
@@ -132,7 +132,7 @@ bool Model::LoadObj(Model* m)
         if (res == EOF)
             break;
 
-        if (!strcmp(buf, "v"))
+        if (strcmp(buf, "v") == 0)
         {
             vec3 vBuf;
             fscanf(f, "%f %f %f\n", &(vBuf.m[0]), &(vBuf.m[1]), &(vBuf.m[2]));
@@ -140,7 +140,7 @@ bool Model::LoadObj(Model* m)
             continue;
         }
 
-        if (!strcmp(buf, "vt"))
+        if (strcmp(buf, "vt") == 0)
         {
             vec2 vBuf;
             fscanf(f, "%f %f\n", &(vBuf.m[0]), &(vBuf.m[1]));
@@ -148,7 +148,7 @@ bool Model::LoadObj(Model* m)
             continue;
         }
 
-        if (!strcmp(buf, "vn"))
+        if (strcmp(buf, "vn") == 0)
         {
             vec3 vBuf;
             fscanf(f, "%f %f %f\n", &(vBuf.m[0]), &(vBuf.m[1]), &(vBuf.m[2]));
@@ -156,7 +156,7 @@ bool Model::LoadObj(Model* m)
             continue;
         }
 
-        if (!strcmp(buf, "f"))
+        if (strcmp(buf, "f") == 0)
         {
             GLuint viBuf[3], uviBuf[3], niBuf[3];
             fscanf(f, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &viBuf[0], &uviBuf[0], &niBuf[0],

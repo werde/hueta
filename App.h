@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <Windowsx.h>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -26,7 +27,8 @@ class App
         void run();
         bool resize();
 
-        void handleKeyDown(UINT msg, WPARAM wParam);
+        void handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam);
+        void handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam);
     private:
         void* cfg;
         void* state;
@@ -36,6 +38,7 @@ class App
         bool InitGLVars();
         void loop();
         int _counter = 0;
+        double _frameTime = 0.0;
 
         Camera* c;
 
@@ -43,6 +46,7 @@ class App
         HGLRC _ctx;
 
         int mouseX, mouseY;
+
 };
 
 

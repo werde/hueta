@@ -19,8 +19,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         break;
         case WM_KEYDOWN:
             printf("%d WM_KEYDOWN: 0x%x\n", msg, wParam);
-            a->handleKeyDown(msg, wParam);
-            //OutputDebugString(msg);
+            a->handleKeyDown(msg, wParam, lParam);
+        break;
+        case WM_MOUSEMOVE:
+            a->handleMouseMove(msg, wParam, lParam);
         break;
         case WM_DESTROY:
             PostQuitMessage(0);

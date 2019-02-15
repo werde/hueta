@@ -18,9 +18,10 @@
 
 1550134405 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 
-1550154932 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+1550232688 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
 	<iostream>
 	<Windows.h>
+	<Windowsx.h>
 	<string>
 	<fstream>
 	<sstream>
@@ -35,7 +36,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1550153713 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1550239423 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"__trash.h"
 	"shaders.h"
@@ -45,14 +46,14 @@
 	<iostream>
 	<Windows.h>
 
-1550133073 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.cpp
+1550222793 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.cpp
 	"MyWindow.h"
 	"App.h"
 
-1550131360 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1550239715 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
-1549544687 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1550223084 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -74,11 +75,11 @@
 	"GL/gl.h"
 	"GL/glext.h"
 
-1550153840 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.h
+1550215038 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.h
 	"GL/gl.h"
 	<math.h>
 	<../mat.h>
 
-1550154513 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
+1550240093 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 
