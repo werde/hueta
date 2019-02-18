@@ -172,7 +172,10 @@ bool Model::LoadObj(Model* m)
             ni.push_back(niBuf[0]);
             ni.push_back(niBuf[1]);
             ni.push_back(niBuf[2]);
+            continue;
         }
+        char ubuffer[1024];
+        fgets(ubuffer, sizeof(ubuffer), f);
     }
 
 	// For each vertex of each triangle

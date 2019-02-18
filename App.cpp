@@ -155,8 +155,8 @@ void App::run()
             Sleep((fps60 - dTime));
         */
 
-        float fps = 1/(float)dTime;
-        printf("rought fps : %f\n", 1000*fps);
+        //float fps = 1/(float)dTime;
+        //printf("rought fps : %f\n", 1000*fps);
     }
 }
 
@@ -279,6 +279,8 @@ void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
     int dx = mouseX - xPos;
     int dy = mouseY - yPos;
 
+    if ((dx == 0)&&(dy == 0)) return;
+
     const float kVert = 0.001f;
     const float kHor = -0.001f;
 
@@ -286,15 +288,15 @@ void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
 
     RECT rect;
     _mw->GetSize(&rect);
+    mouseX = rect.right/2;
+    mouseY = rect.bottom/2;
 
-    mouseX = xPos;
-    mouseY = yPos;
-    //mouseX = rect.right/2;
-    //mouseY = rect.bottom/2;
-
-    //POINT pt;
-    //ClientToScreen(_mw->GetHwnd(), &pt);
-    //SetCursorPos(mouseX,mouseY);
+    POINT pt;
+    pt.x = 0;
+    pt.y = 0;
+    ScreenToClient(_mw->GetHwnd(), &pt);
+    SetCursorPos(mouseX-pt.x,mouseY-pt.y);
+    printf("xPos %d, yPos %d, mX %d, mY %d %d %d\n", xPos, yPos, mouseX, mouseY, pt.x, pt.y);
 };
 
 
