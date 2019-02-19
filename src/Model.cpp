@@ -1,4 +1,87 @@
 #include "Model.h"
+
+GLuint loadBMP_custom(const char * imagepath){
+
+	printf("Reading image %s\n", imagepath);
+
+	// Data read from the header of the BMP file
+	unsigned char header[54];
+	unsigned int dataPos;
+	unsigned int imageSize;
+	unsigned int width, height;
+	// Actual RGB data
+	unsigned char * data;
+
+	// Open the file
+	FILE * file = fopen(imagepath,"rb");
+	if (!file){
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+		getchar();
+		return 0;
+	}
+
+	// Read the header, i.e. the 54 first bytes
+
+	// If less than 54 bytes are read, problem
+	if ( fread(header, 1, 54, file)!=54 ){
+		printf("Not a correct BMP file\n");
+		fclose(file);
+		return 0;
+	}
+	// A BMP files always begins with "BM"
+	if ( header[0]!='B' || header[1]!='M' ){
+		printf("Not a correct BMP file\n");
+		fclose(file);
+		return 0;
+	}
+	// Make sure this is a 24bpp file
+	if ( *(int*)&(header[0x1E])!=0  )         {printf("Not a correct BMP file\n");    fclose(file); return 0;}
+	if ( *(int*)&(header[0x1C])!=24 )         {printf("Not a correct BMP file\n");    fclose(file); return 0;}
+
+	// Read the information about the image
+	dataPos    = *(int*)&(header[0x0A]);
+	imageSize  = *(int*)&(header[0x22]);
+	width      = *(int*)&(header[0x12]);
+	height     = *(int*)&(header[0x16]);
+
+	// Some BMP files are misformatted, guess missing information
+	if (imageSize==0)    imageSize=width*height*3; // 3 : one byte for each Red, Green and Blue component
+	if (dataPos==0)      dataPos=54; // The BMP header is done that way
+
+	data = new unsigned char [imageSize];
+	fread(data,1,imageSize,file);
+	fclose (file);
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	// Give the image to OpenGL
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+
+	// OpenGL has now copied the data. Free our own version
+	//delete [] data;
+
+	// Poor filtering, or ...
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	// ... nice trilinear filtering ...
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	// ... which requires mipmaps. Generate them automatically.
+	//PFNGLGENERATEMIPMAPPROC glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) wglGetProcAddress("glGenerateMipmap");
+	//glGenerateMipmap(GL_TEXTURE_2D);
+    printf("********\n");
+	// Return the ID of the texture we just created
+	return textureID;
+}
+
+
 GLuint loadDDS(const char * imagepath)
 {
 	unsigned char header[124];
@@ -39,10 +122,9 @@ GLuint loadDDS(const char * imagepath)
 	/* close the file pointer */
 	fclose(fp);
 
-	//unsigned int components  = (fourCC == FOURCC_DXT1) ? 3 : 4;
-	unsigned int components  = 3;
+	unsigned int components  = (fourCC == FOURCC_DXT1) ? 3 : 4;
 	unsigned int format;
-	/*
+
 	switch(fourCC)
 	{
 	case FOURCC_DXT1:
@@ -58,8 +140,7 @@ GLuint loadDDS(const char * imagepath)
 		free(buffer);
 		return 0;
 	}
-    */
-    format = 33779;
+
 	// Create one OpenGL texture
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -68,8 +149,7 @@ GLuint loadDDS(const char * imagepath)
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 
-	//unsigned int blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
-	unsigned int blockSize = 16;
+	unsigned int blockSize = (format == GL_COMPRESSED_RGBA_S3TC_DXT1_EXT) ? 8 : 16;
 	unsigned int offset = 0;
 
 	/* load the mipmaps */
@@ -143,7 +223,7 @@ bool Model::LoadObj(Model* m)
         if (strcmp(buf, "vt") == 0)
         {
             vec2 vBuf;
-            fscanf(f, "%f %f\n", &(vBuf.m[0]), &(vBuf.m[1]));
+            fscanf(f, "%f %f\n", &(vBuf.m[1]), &(vBuf.m[0]));
             vt.push_back(vBuf);
             continue;
         }
@@ -198,10 +278,17 @@ bool Model::LoadObj(Model* m)
         m->vn.push_back(normal);
     }
 
+    for (int i = 0; i < m->v.size(); i++)
+    {
+        printf("#%d %f %f %f \n", i, m->v[i].m[0],  m->v[i].m[1],  m->v[i].m[2]);
+        printf("    %f %f    \n", m->vt[i].m[0], m->vt[i].m[1]);
+    }
+
     fclose(f);
 
     //
-    m->tex = loadDDS(".\\t.dds");
+    m->tex = loadBMP_custom(".\\t.bmp");
+    //m->tex = loadDDS(".\\t.dds");
     return true;
 }
 

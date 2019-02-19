@@ -1,5 +1,4 @@
 #include "App.h"
-
 #include "__trash.h"
 #include "shaders.h"
 
@@ -28,6 +27,7 @@ static GLboolean MyGLInit()
     glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
     glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
     glUniform3f = (PFNGLUNIFORM3FPROC) wglGetProcAddress("glUniform3f");
+    glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) wglGetProcAddress("glGenerateMipmap");
 
 	return true;
 }
@@ -70,7 +70,7 @@ void App::run()
                     1.0f, -1.0f,  0.0f,
                     0.0f, 1.0f,  0.0f
                     };
-    GLfloat ex_Color[3] = {0.0,0.7,0.3};
+    GLfloat ex_Color[3] = {0.3,0.2,0.6};
 
     Model m;
     m.LoadObj(&m);
@@ -79,21 +79,26 @@ void App::run()
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
-
+/*
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*9, v, GL_STATIC_DRAW);
-
+*/
     GLuint mvbo;
     glGenBuffers(1, &mvbo);
     glBindBuffer(GL_ARRAY_BUFFER, mvbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*m.v.size(), &(m.v[0]), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*m.v.size(), &(m.v[0]), GL_STATIC_DRAW);
 
 	GLuint uvbo;
 	glGenBuffers(1, &uvbo);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
-    glBufferData(GL_ARRAY_BUFFER, m.vt.size() * sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m.vt.size()*sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
+
+    for (int i=0; i<m.vt.size(); i++)
+    {
+        printf("%f %f\n", m.vt[i].m[0], m.vt[i].m[1]);
+    }
 
     DWORD dTime, ctr1, ctr2;
     while (!_quit)
@@ -107,11 +112,11 @@ void App::run()
             DispatchMessage(&msg);
         }
 
-        /// Rendering part
+        ///*Rendering part
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
-		mat4 ProjectionMatrix = perspective(90.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
+		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
 		mat4 ViewMatrix = lookAt(c->pos, c->focus); ;
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
@@ -121,14 +126,14 @@ void App::run()
         //glUniformMatrix4fv(ex_ColorID, 1, GL_FALSE, ex_Color.m);
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
-		glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, m.tex);
-        glUniform1i(TextureID, 0);
-
         // 1st attribute buffer
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, mvbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+		glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, m.tex);
+        glUniform1i(TextureID, 0);
 
 		// 2nd attribute buffer
 		glEnableVertexAttribArray(1);
@@ -139,12 +144,11 @@ void App::run()
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(2);
+        //glDisableVertexAttribArray(2);
 
         SwapBuffers(myHDC);
 
         /// render end
-
         ctr2 = GetTickCount();
         int dTime = ctr2 - ctr1;
         _frameTime = static_cast<double>(dTime);
@@ -210,17 +214,17 @@ bool App::InitGLVars()
 {
     RECT rect;
     _mw->GetSize(&rect);
-
     glViewport(0,0,rect.right,rect.bottom);
-    glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
-    glLoadIdentity();
+    //glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+    //glLoadIdentity();
 
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.5f, 0.2f, 0.5f, 0.5f);				// Black Background
-	glClearDepth(1.0f);									// Depth Buffer Setup
+//	glClearDepth(1.0f);									// Depth Buffer Setup
 //	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	glDepthFunc(GL_LESS);								// The Type Of Depth Testing To Do
+    glEnable(GL_CULL_FACE);
+//    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     return true;
 }
 
@@ -238,7 +242,7 @@ bool App::resize()
 void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
 {
     float speed = 0.1f;
-    float d = speed * _frameTime;
+    float d = 0.1;
 
     switch(wParam)
     {
