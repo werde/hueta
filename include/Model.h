@@ -34,6 +34,7 @@ class Model
     std::vector<vec3> vn;
 
     GLuint tex;
+    GLenum activeTex;
 
     protected:
 

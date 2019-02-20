@@ -7,13 +7,14 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-
+#include <chrono>
 
 //#define GL_GLEXT_PROTOTYPES
 #include <GL/GL.h>
 #include <GL/glext.h>
 
 #include "MyWindow.h"
+#include "Renderer.h"
 #include "Camera.h"
 #include "Model.h"
 
@@ -38,11 +39,12 @@ class App
         bool InitGLVars();
         void loop();
         int _counter = 0;
-        double _frameTime = 0.0;
+        float _lastFrame;
 
         Camera* c;
 
         MyWindow* _mw;
+        Renderer* _ren;
         HGLRC _ctx;
 
         int mouseX, mouseY;

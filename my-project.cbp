@@ -33,9 +33,12 @@
 		<Unit filename="MyWindow.cpp" />
 		<Unit filename="MyWindow.h" />
 		<Unit filename="__trash.h" />
+		<Unit filename="_trash.h" />
 		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Model.h" />
+		<Unit filename="include/Renderer.cpp" />
+		<Unit filename="include/Renderer.h" />
 		<Unit filename="include/shaders.cpp" />
 		<Unit filename="include/shaders.h" />
 		<Unit filename="main.cpp" />

@@ -192,8 +192,6 @@ bool Model::LoadObj(Model* m)
         printf("%s\n", path.c_str());
         return false;
     }
-
-
     printf("loadobj end !\n");
 
     std::vector<vec3> v;
@@ -223,7 +221,8 @@ bool Model::LoadObj(Model* m)
         if (strcmp(buf, "vt") == 0)
         {
             vec2 vBuf;
-            fscanf(f, "%f %f\n", &(vBuf.m[1]), &(vBuf.m[0]));
+            fscanf(f, "%f %f\n", &(vBuf.m[0]), &(vBuf.m[1]));
+            vBuf.m[1] = 1 - vBuf.m[1];
             vt.push_back(vBuf);
             continue;
         }

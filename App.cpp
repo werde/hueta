@@ -37,6 +37,7 @@ App::App() : _mw(NULL)
     char buf[1024];
     GetModuleFileNameA(NULL, buf, 1024);
 
+    _ren = new Renderer();
     c = new Camera();
 
     printf("%s\n", buf);
@@ -74,37 +75,21 @@ void App::run()
 
     Model m;
     m.LoadObj(&m);
+    _ren->registerModel(&m);
 //------------------
 
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
-/*
-    GLuint vbo;
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*9, v, GL_STATIC_DRAW);
-*/
-    GLuint mvbo;
-    glGenBuffers(1, &mvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, mvbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vec3)*m.v.size(), &(m.v[0]), GL_STATIC_DRAW);
-
-	GLuint uvbo;
-	glGenBuffers(1, &uvbo);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbo);
-    glBufferData(GL_ARRAY_BUFFER, m.vt.size()*sizeof(vec2), &(m.vt[0]), GL_STATIC_DRAW);
 
     for (int i=0; i<m.vt.size(); i++)
     {
         printf("%f %f\n", m.vt[i].m[0], m.vt[i].m[1]);
     }
 
-    DWORD dTime, ctr1, ctr2;
     while (!_quit)
     {
-        ctr1 = GetTickCount();
-
+        auto _start = std::chrono::high_resolution_clock::now();
         MSG msg;
         while (::PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
         {
@@ -123,44 +108,23 @@ void App::run()
         mat4 MVP = multymat(&temp, &ProjectionMatrix);;
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
-        //glUniformMatrix4fv(ex_ColorID, 1, GL_FALSE, ex_Color.m);
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
-        // 1st attribute buffer
-        glEnableVertexAttribArray(0);
-        glBindBuffer(GL_ARRAY_BUFFER, mvbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, m.tex);
-        glUniform1i(TextureID, 0);
-
-		// 2nd attribute buffer
-		glEnableVertexAttribArray(1);
-		glBindBuffer(GL_ARRAY_BUFFER, uvbo);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,0);
-
-        glDrawArrays(GL_TRIANGLES, 0, m.v.size());
-
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        //glDisableVertexAttribArray(2);
-
+        _ren->render();
         SwapBuffers(myHDC);
 
         /// render end
-        ctr2 = GetTickCount();
-        int dTime = ctr2 - ctr1;
-        _frameTime = static_cast<double>(dTime);
-        float fps60 = 1000.0/60.0;
+        auto _end = std::chrono::high_resolution_clock::now();
+        _lastFrame = static_cast<float>((_end - _start)/std::chrono::milliseconds(1));
 
-        /*
-        if (dTime < fps60)
-            Sleep((fps60 - dTime));
-        */
+        BYTE lpKeyState[256];
+        GetKeyboardState(lpKeyState);
+        if (lpKeyState[MKEY_U] & 0x1)
+        {
+            float speed = 0.0005;
+            c->forward(speed*_lastFrame);
+        }
 
-        //float fps = 1/(float)dTime;
-        //printf("rought fps : %f\n", 1000*fps);
     }
 }
 
@@ -243,6 +207,8 @@ void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
 {
     float speed = 0.1f;
     float d = 0.1;
+
+
 
     switch(wParam)
     {

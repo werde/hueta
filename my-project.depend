@@ -18,16 +18,18 @@
 
 1550567179 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 
-1550568104 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+1550671688 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
 	<iostream>
 	<Windows.h>
 	<Windowsx.h>
 	<string>
 	<fstream>
 	<sstream>
+	<chrono>
 	<GL/GL.h>
 	<GL/glext.h>
 	"MyWindow.h"
+	"Renderer.h"
 	"Camera.h"
 	"Model.h"
 
@@ -36,7 +38,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1550583400 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1550672490 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"__trash.h"
 	"shaders.h"
@@ -50,10 +52,10 @@
 	"MyWindow.h"
 	"App.h"
 
-1550586251 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1550670866 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
-1550567255 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1550655457 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -61,7 +63,7 @@
 	"GL/glext.h"
 	"../mat.h"
 
-1549636178 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.h
+1550670676 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.h
 	<math.h>
 	"GL/gl.h"
 
@@ -83,4 +85,16 @@
 
 1550240093 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
+
+1550669704 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+	"Renderer.h"
+	"Model.h"
+	"../_trash.h"
+
+1550667511 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.h
+	<vector>
+	<GL/gl.h>
+	<GL/glext.h>
+
+1550656257 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
 

@@ -29,7 +29,7 @@ template <typename T=GLfloat> union _vec2
     T m[2];
     struct
     {
-        T x, y, z;
+        T x, y;
     };
 };
 
