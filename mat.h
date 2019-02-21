@@ -5,7 +5,6 @@
 
 #include "GL/gl.h"
 
-
 template <typename T=GLfloat> union _vec4
 {
     T m[4];

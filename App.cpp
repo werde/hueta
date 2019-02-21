@@ -1,36 +1,13 @@
 #include "App.h"
-#include "__trash.h"
+
 #include "shaders.h"
 
-static GLboolean MyGLInit()
-{
-	glGenBuffers = (PFNGLGENBUFFERSPROC) wglGetProcAddress("glGenBuffers");
-	glEnableVertexAttribArray = (PFNGLENABLEVERTEXATTRIBARRAYPROC) wglGetProcAddress("glEnableVertexAttribArray");
-	glBindBuffer = (PFNGLBINDBUFFERPROC) wglGetProcAddress("glBindBuffer");
-	glBufferData = (PFNGLBUFFERDATAPROC) wglGetProcAddress("glBufferData");
-	glBindVertexArray = (PFNGLBINDVERTEXARRAYPROC) wglGetProcAddress("glBindVertexArray");
-	glVertexAttribPointer = (PFNGLVERTEXATTRIBPOINTERPROC) wglGetProcAddress("glVertexAttribPointer");
-	glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
-	glShaderSource = (PFNGLSHADERSOURCEPROC) wglGetProcAddress("glShaderSource");
-	glCompileShader = (PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
-	glCreateProgram = (PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
-	glAttachShader = (PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
-	glLinkProgram = (PFNGLLINKPROGRAMPROC) wglGetProcAddress("glLinkProgram");
-	glUseProgram = (PFNGLUSEPROGRAMPROC) wglGetProcAddress("glUseProgram");
-	glGenVertexArrays = (PFNGLGENVERTEXARRAYSPROC) wglGetProcAddress("glGenVertexArrays");
-	glGetAttribLocation = (PFNGLGETATTRIBLOCATIONPROC) wglGetProcAddress("glGetAttribLocation");
-	glDisableVertexAttribArray = (PFNGLDISABLEVERTEXATTRIBARRAYPROC) wglGetProcAddress("glDisableVertexAttribArray");
-	glGetShaderiv = (PFNGLGETSHADERIVPROC) wglGetProcAddress("glGetShaderiv");
-	glGetShaderInfoLog = (PFNGLGETSHADERINFOLOGPROC) wglGetProcAddress("glGetShaderInfoLog");
-	glGetUniformLocation = (PFNGLGETUNIFORMLOCATIONPROC) wglGetProcAddress("glGetUniformLocation");
-    glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC) wglGetProcAddress("glUniformMatrix4fv");
-    glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
-    glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
-    glUniform3f = (PFNGLUNIFORM3FPROC) wglGetProcAddress("glUniform3f");
-    glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC) wglGetProcAddress("glGenerateMipmap");
+#include "MyWindow.h"
+#include "Camera.h"
+#include "Renderer.h"
 
-	return true;
-}
+#include "Model.h"
+
 
 App::App() : _mw(NULL)
 {
@@ -61,7 +38,7 @@ void App::run()
     SetContext();
 
 	InitGLVars();
-	MyGLInit();
+	bool succ = MyGLInit();
 
 	GLuint sp = glCreateProgram();
 	compileShaderProgramm(&sp);
@@ -117,12 +94,27 @@ void App::run()
         auto _end = std::chrono::high_resolution_clock::now();
         _lastFrame = static_cast<float>((_end - _start)/std::chrono::milliseconds(1));
 
-        BYTE lpKeyState[256];
-        GetKeyboardState(lpKeyState);
-        if (lpKeyState[MKEY_U] & 0x1)
         {
-            float speed = 0.0005;
-            c->forward(speed*_lastFrame);
+            BYTE lpKeyState[256];
+            GetKeyboardState(lpKeyState);
+
+            float speed = 0.005;
+            if (lpKeyState[MKEY_W] & 0x1 << 7)
+            {
+                c->forward(speed*_lastFrame);
+            }
+            if (lpKeyState[MKEY_S] & 0x1 << 7)
+            {
+                c->forward(-1.0*speed*_lastFrame);
+            }
+            if (lpKeyState[MKEY_A] & 0x1 << 7)
+            {
+                c->strafe(-1.0*speed*_lastFrame);
+            }
+            if (lpKeyState[MKEY_D] & 0x1 << 7)
+            {
+                c->strafe(speed*_lastFrame);
+            }
         }
 
     }

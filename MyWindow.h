@@ -5,7 +5,6 @@
 #include <iostream>
 #include <Windows.h>
 
-
 extern HINSTANCE hInst;
 const char cp_windClassName[] = "myWindClassName";
 

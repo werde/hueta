@@ -9,17 +9,13 @@
 #include <sstream>
 #include <chrono>
 
-//#define GL_GLEXT_PROTOTYPES
-#include <GL/GL.h>
-#include <GL/glext.h>
-
-#include "MyWindow.h"
-#include "Renderer.h"
-#include "Camera.h"
-#include "Model.h"
+#include "__trash.h"
 
 extern HINSTANCE hInst;
 
+class Camera;
+class MyWindow;
+class Renderer;
 class App
 {
     public:
@@ -41,15 +37,14 @@ class App
         int _counter = 0;
         float _lastFrame;
 
-        Camera* c;
 
         MyWindow* _mw;
+        Camera* c;
         Renderer* _ren;
         HGLRC _ctx;
 
         int mouseX, mouseY;
 
 };
-
 
 #endif // APP_H
