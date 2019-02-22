@@ -16,6 +16,7 @@
 					<Add option="-O2" />
 					<Add option="-fpermissive" />
 					<Add directory="include" />
+					<Add directory="QuakeConsole" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,11 +33,16 @@
 		<Unit filename="App.h" />
 		<Unit filename="MyWindow.cpp" />
 		<Unit filename="MyWindow.h" />
+		<Unit filename="QuakeConsole/QuakeConsole.cpp" />
+		<Unit filename="QuakeConsole/QuakeConsole.h" />
+		<Unit filename="__trash.cpp" />
 		<Unit filename="__trash.h" />
 		<Unit filename="_trash.h" />
 		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Model.h" />
+		<Unit filename="include/Object.cpp" />
+		<Unit filename="include/Object.h" />
 		<Unit filename="include/Renderer.cpp" />
 		<Unit filename="include/Renderer.h" />
 		<Unit filename="include/shaders.cpp" />

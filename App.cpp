@@ -200,8 +200,6 @@ void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
     float speed = 0.1f;
     float d = 0.1;
 
-
-
     switch(wParam)
     {
     case MKEY_W:

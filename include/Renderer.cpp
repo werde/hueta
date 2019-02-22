@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Model.h"
+#include "../__trash.h"
 
 GLuint Renderer::registerBuffer(int sz, const GLvoid* data, GLenum usage=GL_STATIC_DRAW)
 {

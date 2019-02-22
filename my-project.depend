@@ -69,10 +69,11 @@
 1549636129 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.cpp
 	"mat.h"
 
-1550064992 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
+1550824258 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
 	"shaders.h"
+	"../__trash.h"
 
-1550065169 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.h
+1550824240 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.h
 	<stdio.h>
 	"GL/gl.h"
 	"GL/glext.h"
@@ -85,11 +86,12 @@
 1550240093 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 
-1550758829 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1550824291 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"Model.h"
+	"../__trash.h"
 
-1550759287 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.h
+1550824281 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
@@ -98,4 +100,10 @@
 
 1550759550 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
 	"__trash.h"
+
+1550825397 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.cpp
+	"Object.h"
+
+1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
+	"../mat.h"
 

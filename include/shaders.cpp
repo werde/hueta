@@ -1,5 +1,7 @@
 #include "shaders.h"
 
+#include "../__trash.h"
+
 void readShaderFile(const char* file_path, const GLchar* pShaderCode)
 {
     FILE* f = fopen(file_path, "rb");
