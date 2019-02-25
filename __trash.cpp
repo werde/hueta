@@ -22,6 +22,7 @@ PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
 PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
 PFNGLACTIVETEXTUREPROC glActiveTexture;
 PFNGLUNIFORM1IPROC glUniform1i;
+PFNGLUNIFORM2FPROC glUniform2f;
 PFNGLUNIFORM3FPROC glUniform3f;
 
 GLboolean MyGLInit()
@@ -48,6 +49,7 @@ GLboolean MyGLInit()
     glUniformMatrix4fv = (PFNGLUNIFORMMATRIX4FVPROC) wglGetProcAddress("glUniformMatrix4fv");
     glActiveTexture = (PFNGLACTIVETEXTUREPROC) wglGetProcAddress("glActiveTexture");
     glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
+    glUniform2f = (PFNGLUNIFORM2FPROC) wglGetProcAddress("glUniform2f");
     glUniform3f = (PFNGLUNIFORM3FPROC) wglGetProcAddress("glUniform3f");
 
 	return true;

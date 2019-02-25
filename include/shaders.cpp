@@ -17,7 +17,7 @@ void readShaderFile(const char* file_path, const GLchar* pShaderCode)
     fread(pShaderCode, sizeof(char), numbytes, f);
 }
 
-void compileShaderProgramm(GLuint* sp)
+void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* file_path_frag)
 {
 
     //const GLchar *VSS = "void main() \n { \n gl_Position = ftransform(); \n }\0";
@@ -26,8 +26,11 @@ void compileShaderProgramm(GLuint* sp)
     GLchar *VSS = (GLchar*) malloc(sizeof(GLchar)*16384);
     GLchar *FSS = (GLchar*) malloc(sizeof(GLchar)*16384);
 
-    readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
-    readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
+    //readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
+    //readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
+    readShaderFile(file_path_vert, VSS);
+    readShaderFile(file_path_frag, FSS);
+
 
     GLuint vertexShader, fragmentShader;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -46,7 +49,7 @@ void compileShaderProgramm(GLuint* sp)
 	if ( InfoLogLength > 0 ){
 		char VertexShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		printf("%s\n", &VertexShaderErrorMessage[0]);
+		printf("vert %s\n", &VertexShaderErrorMessage[0]);
 		//MessageBox(NULL, (LPCSTR)&VertexShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
 	}
 
@@ -55,7 +58,7 @@ void compileShaderProgramm(GLuint* sp)
 	if ( InfoLogLength > 0 ){
 		char FragmentShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		printf("%s\n", &FragmentShaderErrorMessage[0]);
+		printf("frag %s\n", &FragmentShaderErrorMessage[0]);
 		//MessageBox(NULL, (LPCSTR)&FragmentShaderErrorMessage[0],  "e", MB_ICONEXCLAMATION | MB_OK);
 	}
 

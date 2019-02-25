@@ -53,6 +53,7 @@ extern PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
 extern PFNGLUNIFORMMATRIX4FVPROC glUniformMatrix4fv;
 extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 extern PFNGLUNIFORM1IPROC glUniform1i;
+extern PFNGLUNIFORM2FPROC glUniform2f;
 extern PFNGLUNIFORM3FPROC glUniform3f;
 
 GLboolean MyGLInit();

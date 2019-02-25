@@ -41,7 +41,7 @@ void App::run()
 	bool succ = MyGLInit();
 
 	GLuint sp = glCreateProgram();
-	compileShaderProgramm(&sp);
+	compileShaderProgramm(&sp, ".\\TransformVertexShader.vertexshader", ".\\TextureFragmentShader.fragmentshader");
 
     GLfloat v[] =   {
                     -1.0f, -1.5f,  0.0f,
@@ -53,6 +53,7 @@ void App::run()
     Model m;
     m.LoadObj(&m);
     _ren->registerModel(&m);
+    QuakeConsole q;
 //------------------
 
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
@@ -88,6 +89,9 @@ void App::run()
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
         _ren->render();
+
+        q.draw();
+
         SwapBuffers(myHDC);
 
         /// render end
@@ -202,29 +206,8 @@ void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
 
     switch(wParam)
     {
-    case MKEY_W:
-        c->forward(d);
-        break;
-    case MKEY_A:
-        c->strafe(-1.0f*d);
-        break;
-    case MKEY_S:
-        c->forward(-1.0f*d);
-        break;
-    case MKEY_D:
-        c->strafe(d);
-        break;
-    case MKEY_Q:
-        c->rotate(0.05, 0.0);
-        break;
-    case MKEY_E:
-        c->rotate(-0.05, 0.0);
-        break;
-    case MKEY_Z:
-        c->rotate(0, 0.05);
-        break;
-    case MKEY_C:
-        c->rotate(0.0, -0.05);
+    case 0xc0:
+        printf("tilda \n");
         break;
     default:
         break;
@@ -246,17 +229,17 @@ void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
 
     c->rotate(dy*kVert, dx*kHor);
 
-    RECT rect;
-    _mw->GetSize(&rect);
-    mouseX = rect.right/2;
-    mouseY = rect.bottom/2;
+    //RECT rect;
+    //_mw->GetSize(&rect);
+    //mouseX = rect.right/2;
+    //mouseY = rect.bottom/2;
 
-    POINT pt;
-    pt.x = 0;
-    pt.y = 0;
-    ScreenToClient(_mw->GetHwnd(), &pt);
-    SetCursorPos(mouseX-pt.x,mouseY-pt.y);
-    printf("xPos %d, yPos %d, mX %d, mY %d %d %d\n", xPos, yPos, mouseX, mouseY, pt.x, pt.y);
+    //POINT pt;
+    //pt.x = 0;
+    //pt.y = 0;
+    //ScreenToClient(_mw->GetHwnd(), &pt);
+    //SetCursorPos(mouseX-pt.x,mouseY-pt.y);
+    //printf("xPos %d, yPos %d, mX %d, mY %d %d %d\n", xPos, yPos, mouseX, mouseY, pt.x, pt.y);
 };
 
 

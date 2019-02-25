@@ -10,6 +10,7 @@
 #include <chrono>
 
 #include "__trash.h"
+#include "QuakeConsole.h"
 
 extern HINSTANCE hInst;
 

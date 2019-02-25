@@ -7,6 +7,6 @@
 #include "GL/glext.h"
 
 void readShaderFile(const char* file_path, const GLchar* pShaderCode);
-void compileShaderProgramm(GLuint* sp);
+void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* file_path_frag);
 
 #endif // SHADERS_H_INCLUDED

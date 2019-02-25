@@ -14,11 +14,11 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\window.h
 
-1550759650 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
+1551104565 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 	<GL/GL.h>
 	<GL/glext.h>
 
-1550758781 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+1551103839 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
 	<iostream>
 	<Windows.h>
 	<Windowsx.h>
@@ -27,13 +27,14 @@
 	<sstream>
 	<chrono>
 	"__trash.h"
+	"QuakeConsole.h"
 
 1544600206 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.cpp
 	"Window.h"
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1550758775 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1551105046 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -51,7 +52,7 @@
 	"__trash.h"
 	"App.h"
 
-1550670866 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1550826617 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
 1550758584 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
@@ -69,11 +70,11 @@
 1549636129 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.cpp
 	"mat.h"
 
-1550824258 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
+1551105293 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
 	"shaders.h"
 	"../__trash.h"
 
-1550824240 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.h
+1551103576 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.h
 	<stdio.h>
 	"GL/gl.h"
 	"GL/glext.h"
@@ -98,12 +99,23 @@
 
 1550656257 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
 
-1550759550 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
+1551104580 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
 	"__trash.h"
 
 1550825397 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.cpp
 	"Object.h"
 
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
+	"../mat.h"
+
+1551104618 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+	"QuakeConsole.h"
+	"shaders.h"
+	"../__trash.h"
+
+1551103555 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
+	<vector>
+	<GL/gl.h>
+	<GL/glext.h>
 	"../mat.h"
 
