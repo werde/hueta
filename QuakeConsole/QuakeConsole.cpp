@@ -10,7 +10,10 @@ QuakeConsole::QuakeConsole()
 	v.push_back({-0.5f,  0.5f, 0.0f});
 	v.push_back({0.5f,  0.5f, 0.0f});
 
-    compileShaderProgramm(&bsp, ".\\billboard.vert", ".\\billboard.frag");
+	strcpy(p1, ".\\billboard.vert");
+	strcpy(p2, ".\\billboard.frag");
+
+    compileShaderProgramm(&bsp, p1, p2);
 
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

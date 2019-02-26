@@ -62,7 +62,7 @@ void App::run()
 
     for (int i=0; i<m.vt.size(); i++)
     {
-        printf("%f %f\n", m.vt[i].m[0], m.vt[i].m[1]);
+        //printf("%f %f\n", m.vt[i].m[0], m.vt[i].m[1]);
     }
 
     while (!_quit)

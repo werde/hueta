@@ -4,6 +4,7 @@
 
 void readShaderFile(const char* file_path, const GLchar* pShaderCode)
 {
+    /*
     FILE* f = fopen(file_path, "rb");
     if (f == NULL)
     {
@@ -12,9 +13,17 @@ void readShaderFile(const char* file_path, const GLchar* pShaderCode)
 
     fseek(f, 0L, SEEK_END);
     unsigned int numbytes = ftell(f);
+    printf("%d\n", numbytes);
     fseek(f, 0L, SEEK_SET);
 
     fread(pShaderCode, sizeof(char), numbytes, f);
+    fclose(f);
+    */
+    std::ifstream input(file_path.c_str(), std::ios::in | std::ios::binary);
+    char c;
+    while (input.get(c)) {
+        printf()
+    }
 }
 
 void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* file_path_frag)
@@ -28,8 +37,11 @@ void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* f
 
     //readShaderFile(".\\TransformVertexShader.vertexshader", VSS);
     //readShaderFile(".\\TextureFragmentShader.fragmentshader", FSS);
+    printf("Reading %s and %s.....\n", file_path_vert, file_path_frag);
     readShaderFile(file_path_vert, VSS);
     readShaderFile(file_path_frag, FSS);
+
+    printf("%s\n", VSS);
 
 
     GLuint vertexShader, fragmentShader;

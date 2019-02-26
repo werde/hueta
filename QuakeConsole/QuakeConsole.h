@@ -22,6 +22,8 @@ class QuakeConsole
         std::vector<vec2> UVs;
         GLuint bsp;
         GLuint vbo;
+
+        char p1[1024], p2[1024];
 };
 
 #endif // QUAKECONSOLE_H

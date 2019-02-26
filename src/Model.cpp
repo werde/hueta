@@ -279,8 +279,8 @@ bool Model::LoadObj(Model* m)
 
     for (int i = 0; i < m->v.size(); i++)
     {
-        printf("#%d %f %f %f \n", i, m->v[i].m[0],  m->v[i].m[1],  m->v[i].m[2]);
-        printf("    %f %f    \n", m->vt[i].m[0], m->vt[i].m[1]);
+        //printf("#%d %f %f %f \n", i, m->v[i].m[0],  m->v[i].m[1],  m->v[i].m[2]);
+        //printf("    %f %f    \n", m->vt[i].m[0], m->vt[i].m[1]);
     }
 
     fclose(f);

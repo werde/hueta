@@ -2,6 +2,9 @@
 #define SHADERS_H_INCLUDED
 
 #include <stdio.h>
+#include <string>
+#include <iostream>
+#include <fstream>
 
 #include "GL/gl.h"
 #include "GL/glext.h"
