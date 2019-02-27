@@ -46,6 +46,7 @@ class App
 
         int mouseX, mouseY;
 
+        QuakeConsole* _q;
 };
 
 #endif // APP_H

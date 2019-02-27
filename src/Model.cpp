@@ -1,5 +1,7 @@
 #include "Model.h"
 
+static int ttr = 0;
+
 GLuint loadBMP_custom(const char * imagepath){
 
 	printf("Reading image %s\n", imagepath);

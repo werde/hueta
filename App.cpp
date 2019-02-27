@@ -53,7 +53,7 @@ void App::run()
     Model m;
     m.LoadObj(&m);
     _ren->registerModel(&m);
-    QuakeConsole q;
+    _q = new QuakeConsole();
 //------------------
 
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
@@ -90,7 +90,7 @@ void App::run()
 
         _ren->render();
 
-        q.draw();
+        _q->draw();
 
         SwapBuffers(myHDC);
 
@@ -182,8 +182,10 @@ bool App::InitGLVars()
 	glClearColor(0.5f, 0.2f, 0.5f, 0.5f);				// Black Background
 //	glClearDepth(1.0f);									// Depth Buffer Setup
 //	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-	glDepthFunc(GL_LESS);								// The Type Of Depth Testing To Do
+	//glDepthFunc(GL_LESS);								// The Type Of Depth Testing To Do
     glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     return true;
 }
@@ -208,6 +210,7 @@ void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
     {
     case 0xc0:
         printf("tilda \n");
+        _q->toggle();
         break;
     default:
         break;
@@ -229,16 +232,16 @@ void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
 
     c->rotate(dy*kVert, dx*kHor);
 
-    //RECT rect;
-    //_mw->GetSize(&rect);
-    //mouseX = rect.right/2;
-    //mouseY = rect.bottom/2;
+    RECT rect;
+    _mw->GetSize(&rect);
+    mouseX = rect.right/2;
+    mouseY = rect.bottom/2;
 
-    //POINT pt;
-    //pt.x = 0;
-    //pt.y = 0;
-    //ScreenToClient(_mw->GetHwnd(), &pt);
-    //SetCursorPos(mouseX-pt.x,mouseY-pt.y);
+    POINT pt;
+    pt.x = 0;
+    pt.y = 0;
+    ScreenToClient(_mw->GetHwnd(), &pt);
+    SetCursorPos(mouseX-pt.x,mouseY-pt.y);
     //printf("xPos %d, yPos %d, mX %d, mY %d %d %d\n", xPos, yPos, mouseX, mouseY, pt.x, pt.y);
 };
 
