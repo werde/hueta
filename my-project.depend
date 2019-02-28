@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1551260584 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1551277915 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -52,7 +52,7 @@
 	"__trash.h"
 	"App.h"
 
-1551187519 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1551277949 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
 1551277402 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
@@ -63,7 +63,7 @@
 	<GL/glext.h>
 	"../mat.h"
 
-1550757757 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.h
+1551358173 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.h
 	<math.h>
 	"GL/gl.h"
 
@@ -111,13 +111,13 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1551277821 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1551358853 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
 	"../include/Model.h"
 
-1551277467 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
+1551362574 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>

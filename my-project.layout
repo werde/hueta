@@ -2,64 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="mat.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="mat.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1463" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="MyWindow.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="103" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="App.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="927" topLine="16" />
-		</Cursor>
-	</File>
-	<File name="include\Model.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="925" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="__trash.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="986" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\QuakeConsole.cpp" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2118" topLine="43" />
-		</Cursor>
-	</File>
-	<File name="__trash.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1309" topLine="20" />
-		</Cursor>
-	</File>
-	<File name="include\Camera.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="431" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\shaders.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2430" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="mat.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="91" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="18" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\QuakeConsole.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="543" topLine="0" />
+			<Cursor1 position="410" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="src\Model.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -67,9 +12,34 @@
 			<Cursor1 position="1709" topLine="51" />
 		</Cursor>
 	</File>
-	<File name="App.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="MyWindow.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1102" topLine="88" />
+			<Cursor1 position="167" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="MyWindow.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="103" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\QuakeConsole.cpp" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2289" topLine="72" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\QuakeConsole.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="495" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="__trash.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="986" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="__trash.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1309" topLine="20" />
 		</Cursor>
 	</File>
 	<File name="include\Camera.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -77,14 +47,19 @@
 			<Cursor1 position="66" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Renderer.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="include\Camera.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="106" topLine="1" />
+			<Cursor1 position="431" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\shaders.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Model.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="136" topLine="0" />
+			<Cursor1 position="925" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="App.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4756" topLine="165" />
 		</Cursor>
 	</File>
 	<File name="include\Renderer.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
@@ -92,9 +67,34 @@
 			<Cursor1 position="639" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="MyWindow.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="App.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="167" topLine="0" />
+			<Cursor1 position="927" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="include\Renderer.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="106" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\shaders.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2430" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\shaders.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="136" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="mat.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1463" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
