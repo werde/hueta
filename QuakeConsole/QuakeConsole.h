@@ -6,11 +6,12 @@
 #include <GL/glext.h>
 
 #include "../mat.h"
+#include "QCBackplate.h"
 
-#define QCXPAD 0.1f
-#define QCYPAD 0.1f
+#define QCXPAD 0.05f
+#define QCYPAD 0.05f
 #define YGAP 8
-#define XGAP 1
+#define XGAP 8
 #define QCROWS
 
 
@@ -33,19 +34,18 @@ class QuakeConsole
     protected:
 
     private:
-        std::vector<vec3> v;
-        std::vector<vec2> uvs;
-        GLuint bsp;
-        GLuint vbo;
-        GLuint uvbo;
-
-        char p1[1024], p2[1024];
-
         bool _enabled;
 
+        std::vector<vec3> _v;
+        std::vector<vec2> _uv;
+        GLuint _bsp;
+        GLuint _vbo;
+        GLuint _uvbo;
+
         GLuint _tex;
-        char _buf[8];
-        std::vector<vec3> vbuf;
+        char _buf[9];
+
+        QCBackplate* _qbc;
 };
 
 #endif // QUAKECONSOLE_H

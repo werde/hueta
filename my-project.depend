@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1551277915 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1551433005 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -52,10 +52,10 @@
 	"__trash.h"
 	"App.h"
 
-1551277949 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1551447330 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 
-1551277402 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1551447355 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -111,15 +111,37 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1551358853 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1551447404 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
 	"../include/Model.h"
 
-1551362574 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
+1551447395 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
+	"../mat.h"
+	"QCBackplate.h"
+
+1551443532 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
+	"QCBackplate.h"
+	"../__trash.h"
+	"../include/Model.h"
+
+1551443405 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.h
+	<vector>
+	"GL/gl.h"
+	"GL/glext.h"
+	"../mat.h"
+
+1551445817 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\qctextbuffer.cpp
+	"QCTextBuffer.h"
+	"../__trash.h"
+
+1551445973 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\qctextbuffer.h
+	<vector>
+	"GL/gl.h"
+	"GL/glext.h"
 	"../mat.h"
 

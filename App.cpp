@@ -67,6 +67,7 @@ void App::run()
 
     while (!_quit)
     {
+        malloc(2048);
         auto _start = std::chrono::high_resolution_clock::now();
         MSG msg;
         while (::PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))

@@ -6,24 +6,12 @@
 
 QuakeConsole::QuakeConsole() : _enabled{false}
 {
-	v.push_back({-0.9f, -0.9f, 0.0f});
-	v.push_back({0.9f, -0.9f, 0.0f});
-	v.push_back({-0.9f,  0.9f, 0.0f});
-	v.push_back({0.9f,  0.9f, 0.0f});
-
-	uvs.push_back({0.0, 0.0});
-	uvs.push_back({1.0, 0.0});
-	uvs.push_back({0.0, 1.0});
-	uvs.push_back({1.0, 1.0});
-
-	strcpy(p1, ".\\billboard.vert");
-	strcpy(p2, ".\\billboard.frag");
-
+    /// Symbol table
     GLfloat offsetX = 16.0;
     GLfloat offsetY = 20.0;
 	GLfloat dim = 256.0;
 
-	std::vector<Symbol> true_uvs;
+	std::vector<Symbol> symbols;
 	char keyIndex = 0;
 	for (int x = 0; x < dim; x+=16)
         for(int y = 16; y < 256; y+=20)
@@ -43,76 +31,89 @@ QuakeConsole::QuakeConsole() : _enabled{false}
         s.uv[3].x = (x+offsetX)/(GLfloat)dim;
         s.uv[3].y = (y+offsetY)/(GLfloat)dim;
 
-        true_uvs.push_back(s);
+        symbols.push_back(s);
         keyIndex++;
     }
 
-	bsp = glCreateProgram();
-    compileShaderProgramm(&bsp, p1, p2);
+    /// Shader program
+	_bsp = glCreateProgram();
+    compileShaderProgramm(&_bsp, ".\\billboard.vert", ".\\billboard.frag");
 
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, v.size()*sizeof(vec3), &(v[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &uvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbo);
-    int sz = true_uvs.size();
-    glBufferData(GL_ARRAY_BUFFER, uvs.size()*sizeof(vec2), &(true_uvs[23].uv[0]), GL_DYNAMIC_DRAW);
-
+    /// rest
     _tex = loadBMP_custom(".\\shizzle.bmp");
-    for (int i = 0; i < 8; i++)
-    {
-        _buf[i] = i*3;
-    }
+    decode();
+
+    _buf[0] = 41;
+    _buf[1] = 64;
+    _buf[2] = 52;
+    _buf[3] = 65;
+    _buf[4] = 11;
+    _buf[5] = 29;
+    _buf[6] = 64;
+    _buf[7] = 52;
+    _buf[8] = 52;
+
 
     for (int i = 0; i < sizeof(_buf); i++)
     {
-
+        int sIndex = _buf[i];
+        calcOGLcoords(i);
+        _uv.push_back(symbols[sIndex].uv[0]);
+        _uv.push_back(symbols[sIndex].uv[1]);
+        _uv.push_back(symbols[sIndex].uv[2]);
+        _uv.push_back(symbols[sIndex].uv[3]);
     }
+
+    glGenBuffers(1, &_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_uvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
+    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
+
+    _qbc = new QCBackplate();
 }
 
-void QuakeConsole::calcOGLcoords(int i, )
+void QuakeConsole::calcOGLcoords(int i)
 {
-    vec2 lt, lb, rt, rb;
-    float w = 800.0;
-    float h=600.0;
-    float cw=16.0;
-    float ch=20.0;
-    lt.x = QCXPAD*w + XGAP + cw*i;
-    lt.y = QCYPAD*h + YGAP + 0*i;
+    vec3 lt, lb, rt, rb;
+    float w = 800.0/2;
+    float h = 600.0/2;
+    float cw= 16.0;
+    float ch= 20.0;
 
-    lb.x = QCXPAD*w + XGAP + cw*i;
-    lb.y = QCXPAD*w + YGAP + ch*(i+1);
+    lt.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
+    lt.y = 1.0 - (QCYPAD*h + YGAP)/h;
+    lt.z = 0.0;
 
-    rt.x = QCXPAD*w + XGAP + cw*(i+1);
-    rt.y = QCYPAD*h + YGAP + 0*i;
+    lb.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
+    lb.y = 1.0 - (QCYPAD*h + YGAP + ch)/h;
+    lt.z = 0.0;
 
-    lt.x = QCXPAD*w + XGAP + cw*(i+1);
-    lt.x = QCXPAD*w + YGAP + ch*(i+1);
+    rt.x = -1.0 + (QCXPAD*w + XGAP + cw+ i*cw)/w;
+    rt.y = 1.0 - (QCYPAD*h + YGAP)/h;
+    lt.z = 0.0;
 
+    rb.x = -1.0 + (QCXPAD*w + XGAP + cw+ i*cw)/w;
+    rb.y = 1.0 - (QCYPAD*h + YGAP + ch)/h;
+    rb.z = 0.0;
+
+    _v.push_back(lb);
+    _v.push_back(rb);
+    _v.push_back(lt);
+    _v.push_back(rt);
 }
 
 void QuakeConsole::draw()
 {
     if (!_enabled) return;
 
-    glUseProgram(bsp);
+    glUseProgram(_bsp);
 
-	//GLuint CameraRight_worldspace_ID  = glGetUniformLocation(bsp, "CameraRight_worldspace");
-	//GLuint CameraUp_worldspace_ID  = glGetUniformLocation(bsp, "CameraUp_worldspace");
-	//GLuint ViewProjMatrixID = glGetUniformLocation(bsp, "VP");
-	//GLuint BillboardPosID = glGetUniformLocation(bsp, "BillboardPos");
-	//GLuint BillboardSizeID = glGetUniformLocation(bsp, "BillboardSize");
+    _qbc->render(_bsp);
 
-	//mat4 ViewMatrix = IDENTITY_MATRIX;
-    //glUniform3f(CameraRight_worldspace_ID, ViewMatrix.m[0], ViewMatrix.m[1], ViewMatrix.m[2]);
-    //glUniform3f(CameraUp_worldspace_ID   , ViewMatrix.m[0+4*1], ViewMatrix.m[1 + 4*1], ViewMatrix.m[2 + 4*1]);
-
-    //glUniform3f(BillboardPosID, 0.0f, 0.5f, 0.0f); // The billboard will be just above the cube
-    //glUniform2f(BillboardSizeID, 1.0f, 0.125f); // and 1m*12cm, because it matches its 256*32 resolution =)
-	//glUniformMatrix4fv(ViewProjMatrixID, 1, GL_FALSE, &(ViewMatrix.m[0]));
-
-	GLuint TextureID = glGetUniformLocation(bsp, "texSampler");
+	GLuint TextureID = glGetUniformLocation(_bsp, "texSampler");
 
     glActiveTexture(_tex);
     glBindTexture(GL_TEXTURE_2D, _tex);
@@ -121,13 +122,13 @@ void QuakeConsole::draw()
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
-    glBindBuffer(GL_ARRAY_BUFFER, uvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, _v.size());
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -135,5 +136,5 @@ void QuakeConsole::draw()
 
 QuakeConsole::~QuakeConsole()
 {
-    //dtor
+    delete _qbc;
 }

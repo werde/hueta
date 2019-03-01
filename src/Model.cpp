@@ -2,6 +2,39 @@
 
 static int ttr = 0;
 
+void decode()
+{
+    unsigned char signature[8];
+
+    FILE* f = fopen(".\\shizzle.png","rb");
+    fread(signature, sizeof(unsigned char), 8, f);
+    printf("%u %d %d %d %d %d %d %d\n", signature[0],signature[1],signature[2],signature[3],signature[4],signature[5],signature[6],signature[7]);
+
+    /*while (1)
+    {*/
+        void* length = malloc(4);
+        fread(length, 1, 4, f);
+
+        void* type = malloc(4);
+        fread(type, 1, 4, f);
+
+        unsigned long* p = length;
+        void* data = malloc(*p);
+        fread(data, 1, *p, f);
+
+        void* crc = malloc(4);
+        fread(crc, 1, 4, f);
+
+        //memcmp
+        printf("%s --- ", type);
+        void* test = malloc(4);
+        char* t = "IHDR";
+        int res = memcmp(type, t, 4);
+        printf("%d\n", res);
+
+    /*}*/
+}
+
 GLuint loadBMP_custom(const char * imagepath){
 
 	printf("Reading image %s\n", imagepath);

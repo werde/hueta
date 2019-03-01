@@ -33,6 +33,10 @@
 		<Unit filename="App.h" />
 		<Unit filename="MyWindow.cpp" />
 		<Unit filename="MyWindow.h" />
+		<Unit filename="QCTextBuffer.cpp" />
+		<Unit filename="QCTextBuffer.h" />
+		<Unit filename="QuakeConsole/QCBackplate.cpp" />
+		<Unit filename="QuakeConsole/QCBackplate.h" />
 		<Unit filename="QuakeConsole/QuakeConsole.cpp" />
 		<Unit filename="QuakeConsole/QuakeConsole.h" />
 		<Unit filename="__trash.cpp" />
