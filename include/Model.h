@@ -23,6 +23,19 @@
 void decode();
 GLuint loadBMP_custom(const char * imagepath);
 
+typedef struct
+{
+    long unsigned int width, height, sz;
+    char bit_depth;
+    char color_type;
+    char compression_method;
+    char filter_method;
+    char interlace_method;
+    char path[1024];
+    void* data;
+    void* imgData;
+}   ImageStruct;
+
 class Model
 {
     public:

@@ -22,6 +22,7 @@
 					<Add option="-s" />
 					<Add option="-lgdi32" />
 					<Add option="-lopengl32" />
+					<Add option="-lz" />
 				</Linker>
 			</Target>
 		</Build>
