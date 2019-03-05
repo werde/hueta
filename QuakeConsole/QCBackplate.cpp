@@ -23,7 +23,8 @@ QCBackplate::QCBackplate()
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
-    _tex = loadBMP_custom(".\\QCbg.bmp");
+    //_tex = loadBMP_custom(".\\QCbg.bmp");
+    _tex = decode();
 }
 
 QCBackplate::QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloat ofRight)

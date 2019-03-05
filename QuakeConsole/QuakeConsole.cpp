@@ -41,7 +41,6 @@ QuakeConsole::QuakeConsole() : _enabled{false}
 
     /// rest
     _tex = loadBMP_custom(".\\shizzle.bmp");
-    decode();
 
     _buf[0] = 41;
     _buf[1] = 64;

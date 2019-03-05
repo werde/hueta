@@ -52,11 +52,11 @@
 	"__trash.h"
 	"App.h"
 
-1551706874 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1551796582 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 	"zlib.h"
 
-1551701022 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1551779581 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -112,7 +112,7 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1551447404 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1551793112 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
@@ -125,7 +125,7 @@
 	"../mat.h"
 	"QCBackplate.h"
 
-1551443532 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
+1551791566 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
 	"QCBackplate.h"
 	"../__trash.h"
 	"../include/Model.h"

@@ -15,7 +15,7 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
     unsigned have;
     z_stream strm;
     unsigned char* in = src;
-    unsigned char* out = dst;
+    unsigned char* out = (unsigned char*) dst;
 
     strm.zalloc = Z_NULL;
     strm.zfree = Z_NULL;
@@ -23,50 +23,62 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
     strm.avail_in = 0;
     strm.next_in = Z_NULL;
     ret = inflateInit(&strm);
-
     if (ret != Z_OK) printf("ret != Z_OK\n");
 
+    int times = 0;
     do
     {
         strm.avail_in = szSrc;
-        /*if (ferror(source)) {
-            (void)inflateEnd(&strm);
-            return Z_ERRNO;
-        }*/
-        /*if (strm.avail_in == 0)
-            break;*/
         strm.next_in = in;
         do
         {
+            printf("times %d \n", times);
+            times++;
+
             strm.avail_out = szDst;
             strm.next_out = out;
+
+            for (int i = 0; i < szSrc; i++)
+            {
+                printf("%x ", *((unsigned char*)strm.next_in + i));
+            }
+            printf("szSrc %d \n", szSrc);
+
             ret = inflate(&strm, Z_NO_FLUSH);
 
+
+
+           if(ret == Z_STREAM_ERROR) printf("Z_STREAM_ERROR\n");  /* state not clobbered */
             switch (ret)
             {
             case Z_NEED_DICT:
-                ret = Z_DATA_ERROR;
+                printf("Z_NEED_DICT\n");
+                ret = Z_DATA_ERROR;     /* and fall through */
             case Z_DATA_ERROR:
+                printf("Z DATA ERROR\n");
             case Z_MEM_ERROR:
+                printf("Z MEM ERROR\n");
                 (void)inflateEnd(&strm);
                 return ret;
             }
+
             have = CHUNK - strm.avail_out;
         } while (strm.avail_out == 0);
     } while (ret != Z_STREAM_END);
 
-    return ret;
+    (void)inflateEnd(&strm);
+    return ret == Z_STREAM_END ? Z_OK : Z_DATA_ERROR;
 }
 
-void decode()
+GLuint decode()
 {
     ImageStruct is;
     memset(&is, 0, sizeof(ImageStruct));
 
-    long szImgDataRead=0;
+    unsigned long szImgDataRead=0;
     unsigned char signature[8];
 
-    FILE* f = fopen(".\\123.png","rb");
+    FILE* f = fopen(".\\2.png","rb");
     fread(signature, sizeof(unsigned char), 8, f);
     printf("%u %d %d %d %d %d %d %d\n", signature[0],signature[1],signature[2],signature[3],signature[4],signature[5],signature[6],signature[7]);
 
@@ -76,7 +88,6 @@ void decode()
         unsigned char buf[4];
         fread(&buf, 1, 4, f);
         length = (buf[0] << 24) | (buf[1] << 16) | (buf[2] << 8) | buf[3];
-        printf("length %d \n", length);
 
         unsigned char type[4];
         fread(type, 1, 4, f);
@@ -88,7 +99,7 @@ void decode()
         fread(crc, 1, 4, f);
 
         //memcmp
-        printf("%c%c%c%c\n", type[0], type[1], type[2], type[3]);
+        printf("%c%c%c%c block of length: %d\n", type[0], type[1], type[2], type[3], length);
         if (memcmp("IEND", type, 4) == 0)
         {
             break;
@@ -98,20 +109,20 @@ void decode()
             unsigned char buf2[4];
             unsigned char buf3[4];
 
-            memccpy(buf2, data, 1, 4);
+            memcpy(buf2, data, 4);
             is.width = (buf2[0] << 24) | (buf2[1] << 16) | (buf2[2] << 8) | buf2[3];
 
-            memccpy(buf3, data+4, 1, 4);
+            memcpy(buf3, data+4, 4);
             is.height = (buf3[0] << 24) | (buf3[1] << 16) | (buf3[2] << 8) | buf3[3];
 
-            memccpy(&(is.bit_depth), data+8, 1, 1);
-            memccpy(&(is.color_type), data+9, 1, 1);
-            memccpy(&(is.compression_method), data+10, 1, 1);
-            memccpy(&(is.filter_method), data+11, 1, 1);
-            memccpy(&(is.interlace_method), data+12, 1, 1);
+            memcpy(&(is.bit_depth), data+8, 1);
+            memcpy(&(is.color_type), data+9, 1);
+            memcpy(&(is.compression_method), data+10, 1);
+            memcpy(&(is.filter_method), data+11, 1);
+            memcpy(&(is.interlace_method), data+12, 1);
 
-            is.data = malloc(is.width*is.height*8);
-            is.imgData = malloc(is.width*is.height*8);
+            is.data = malloc(is.width*is.height*8*3);
+            is.imgData = malloc(is.width*is.height*8*3);
         }
         else if (memcmp("PLTE", type, 4) == 0)
         {
@@ -119,12 +130,56 @@ void decode()
         }
         else if ((memcmp("IDAT", type, 4) == 0) && (length != 0))
         {
-            memccpy(is.data, data, length, 1);
+            memcpy((unsigned char*)is.data + szImgDataRead, data, length);
             szImgDataRead += length;
         }
     }
 
+    for (int i = 0; i < szImgDataRead; i++)
+    {
+        printf("%x ", *((unsigned char*)is.data + i));
+    }
+    printf("szImgDataRead %d \n", szImgDataRead);
+
+    zdecompress(is.imgData, is.data, is.width*is.height*8*3, szImgDataRead);
     debug_is(&is);
+
+    for (int i = 0; i < 182; i++)
+    {
+        printf("%x ", *((unsigned char*)is.imgData + i));
+    }
+    printf("szSrc  \n");
+
+    void* d = malloc(is.width*is.height*8*3);
+    void* pd = d;
+    void* p = is.imgData;
+    for (int i = 0; i < is.height; i++)
+    {
+        printf("filter method %d\n", *((unsigned char*)p));
+        p++;
+        memcpy(pd, p, is.width*4);
+        pd += is.width*4;
+        p+= is.width*4;
+    }
+
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGR, GL_UNSIGNED_BYTE, d);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	switch (is.filter_method)
+	{
+    case 0:
+        break;
+    default:
+        break;
+	}
+
+	return textureID;
 }
 
 GLuint loadBMP_custom(const char * imagepath){
