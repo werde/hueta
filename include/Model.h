@@ -31,9 +31,12 @@ typedef struct
     char compression_method;
     char filter_method;
     char interlace_method;
+
     char path[1024];
     void* data;
+    size_t szData;
     void* imgData;
+    size_t szImgData;
 }   ImageStruct;
 
 class Model

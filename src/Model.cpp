@@ -4,7 +4,7 @@
 
 void debug_is(ImageStruct* is)
 {
-    printf("%d %d %d %d %d \n", is->bit_depth, is->color_type, is->compression_method, is->filter_method, is->interlace_method);
+    printf("bit_depth %d, color type %d, compress. method %d, filter %d, interlace %d \n", is->bit_depth, is->color_type, is->compression_method, is->filter_method, is->interlace_method);
     printf("%dX%d\n", is->width, is->height);
 }
 
@@ -121,8 +121,9 @@ GLuint decode()
             memcpy(&(is.filter_method), data+11, 1);
             memcpy(&(is.interlace_method), data+12, 1);
 
-            is.data = malloc(is.width*is.height*8*3);
-            is.imgData = malloc(is.width*is.height*8*3);
+            is.szImgData = is.width*is.height*4 + is.height;
+            printf("is.szImgData: %d \n", is.szImgData);
+            is.imgData = malloc(is.szImgData);
         }
         else if (memcmp("PLTE", type, 4) == 0)
         {
@@ -130,36 +131,40 @@ GLuint decode()
         }
         else if ((memcmp("IDAT", type, 4) == 0) && (length != 0))
         {
-            memcpy((unsigned char*)is.data + szImgDataRead, data, length);
-            szImgDataRead += length;
+            void* old = is.data;
+            is.data = malloc(is.szData + length);
+            memcpy(is.data, old, is.szData);
+
+            void* dst = is.data + is.szData;
+            memcpy(dst, data, length);
+            is.szData += length;
+            delete old;
         }
     }
 
-    for (int i = 0; i < szImgDataRead; i++)
+    for (int i = 0; i < is.szData; i++)
     {
         printf("%x ", *((unsigned char*)is.data + i));
     }
-    printf("szImgDataRead %d \n", szImgDataRead);
 
-    zdecompress(is.imgData, is.data, is.width*is.height*8*3, szImgDataRead);
+    zdecompress(is.imgData, is.data, is.szImgData, is.szData);
     debug_is(&is);
 
-    for (int i = 0; i < 182; i++)
+    for (int i = 0; i < is.szImgData; i++)
     {
         printf("%x ", *((unsigned char*)is.imgData + i));
     }
     printf("szSrc  \n");
 
-    void* d = malloc(is.width*is.height*8*3);
+    void* d = malloc(is.szImgData - is.height);
     void* pd = d;
     void* p = is.imgData;
     for (int i = 0; i < is.height; i++)
     {
         printf("filter method %d\n", *((unsigned char*)p));
-        p++;
-        memcpy(pd, p, is.width*4);
-        pd += is.width*4;
-        p+= is.width*4;
+        memcpy(pd, (p+1), is.width*4);
+        pd += 4*is.width;
+        p += (4*is.width + 1);
     }
 
 	GLuint textureID;
@@ -167,7 +172,7 @@ GLuint decode()
 	glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGR, GL_UNSIGNED_BYTE, d);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, d);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
