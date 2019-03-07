@@ -156,22 +156,22 @@ GLuint decode()
         printf("scanline #%d ", i);
         for (int j = 0; j <= 4*is.width; j++)
         {
-            printf("%x ",*((unsigned char*)is.imgData + j + i));
+            printf("%x ",*((unsigned char*)is.imgData + j + i*4*(is.width+1)));
         }
         printf("\n");
     }
     printf("\n");
 
-    void* d = malloc(is.szImgData - is.height);
-    void* pd = d;
-    void* p = is.imgData;
-    const void* readDataPointer = pd;
+    const void* realDataPointer = malloc(is.szImgData - is.height);
+    void* pRDP = realDataPointer;
+    void* pSrc = is.imgData;
     for (int i = 0; i < is.height; i++)
     {
-        printf("filter method %x\n", *((unsigned char*)p));
-        memcpy(pd, (p+1), is.width*4);
-        pd += 4*is.width;
-        p += (4*is.width + 1);
+        printf("filter method %x \n", *((unsigned char*)pSrc));
+        pSrc++;
+        memcpy(pRDP, pSrc, is.width*4);
+        pRDP += 4*is.width;
+        pSrc += 4*is.width;
     }
 
     printf("after chomping filter byte: \n");
@@ -180,7 +180,7 @@ GLuint decode()
         printf("scanline #%d ", i);
         for (int j = 0; j < 4*is.width; j++)
         {
-            printf("%x ",*((unsigned char*)readDataPointer + j + i*is.width*4));
+            printf("%x ",*((unsigned char*)realDataPointer + j + i*is.width*4));
         }
         printf("\n");
     }
@@ -203,7 +203,7 @@ GLuint decode()
 	glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, readDataPointer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, realDataPointer);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
