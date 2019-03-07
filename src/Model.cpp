@@ -78,7 +78,7 @@ GLuint decode()
     unsigned long szImgDataRead=0;
     unsigned char signature[8];
 
-    FILE* f = fopen(".\\2.png","rb");
+    FILE* f = fopen(".\\test2.png","rb");
     fread(signature, sizeof(unsigned char), 8, f);
     printf("%u %d %d %d %d %d %d %d\n", signature[0],signature[1],signature[2],signature[3],signature[4],signature[5],signature[6],signature[7]);
 
@@ -150,29 +150,60 @@ GLuint decode()
     zdecompress(is.imgData, is.data, is.szImgData, is.szData);
     debug_is(&is);
 
-    for (int i = 0; i < is.szImgData; i++)
+    printf("decompressed data: \n");
+    for (int i = 0; i < is.height; i++)
     {
-        printf("%x ", *((unsigned char*)is.imgData + i));
+        printf("scanline #%d ", i);
+        for (int j = 0; j <= 4*is.width; j++)
+        {
+            printf("%x ",*((unsigned char*)is.imgData + j + i));
+        }
+        printf("\n");
     }
-    printf("szSrc  \n");
+    printf("\n");
 
     void* d = malloc(is.szImgData - is.height);
     void* pd = d;
     void* p = is.imgData;
+    const void* readDataPointer = pd;
     for (int i = 0; i < is.height; i++)
     {
-        printf("filter method %d\n", *((unsigned char*)p));
+        printf("filter method %x\n", *((unsigned char*)p));
         memcpy(pd, (p+1), is.width*4);
         pd += 4*is.width;
         p += (4*is.width + 1);
     }
+
+    printf("after chomping filter byte: \n");
+    for (int i = 0; i < is.height; i++)
+    {
+        printf("scanline #%d ", i);
+        for (int j = 0; j < 4*is.width; j++)
+        {
+            printf("%x ",*((unsigned char*)readDataPointer + j + i*is.width*4));
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    /*
+    unsigned char* temp;
+    temp = (unsigned char*) d;
+    unsigned long tl;
+    for (int i = 0; i < (is.szImgData - is.height)/4; i++)
+    {
+        tl = (temp[0] << 24) | (temp[1] << 16) | (temp[2] << 8) | temp[3];
+        memcpy(temp, (void*)&tl, 4);
+        temp += 4;
+    }
+    */
 
 	GLuint textureID;
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, d);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, readDataPointer);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
