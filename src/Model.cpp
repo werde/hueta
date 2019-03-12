@@ -8,6 +8,56 @@ void debug_is(ImageStruct* is)
     printf("%dX%d\n", is->width, is->height);
 }
 
+void refilter1(unsigned char* targetLine, unsigned char* srcLine, int w)
+{
+    memcpy(targetLine, srcLine + 1, 4);
+    for (int i = 4; i < w; i++)
+    {
+        unsigned char r = *(srcLine + i - 3);
+        memcpy(targetLine + i, &r, 1);
+    }
+};
+
+void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w)
+{
+    for (int i = 0; i < w; i++)
+    {
+        unsigned char r = *(targetLine + i) + *(srcLine + i);
+        memcpy(targetLine + i, &r, 1);
+    }
+};
+
+void* refilter(ImageStruct* is)
+{
+    void* target = malloc(is->szImgData - is->height);
+
+    int szScanline = 4*is->width + 1;
+
+    for (int i = 0; i < is->height; i++)
+    {
+        void* targetLine = malloc(szScanline - 1);
+
+        switch (*((unsigned char*)is->imgData + i*szScanline))
+        {
+        case 0:
+            memcpy(targetLine, is->imgData + i*szScanline + 1, szScanline - 1);
+            break;
+        case 1:
+            refilter1(targetLine, is->imgData + i*szScanline, is->width);
+            break;
+        case 2:
+            refilter2(targetLine, is->imgData - 1*szScanline, is->width);
+            break;
+        default:
+            break;
+        };
+
+        memcpy(target+i*(szScanline-1), targetLine, szScanline-1);
+    }
+
+    return target;
+}
+
 int zdecompress(void* dst, const void* src, int szDst, int szSrc)
 {
     #define CHUNK 16384
@@ -156,9 +206,16 @@ GLuint decode()
         printf("scanline #%d ", i);
         for (int j = 0; j <= 4*is.width; j++)
         {
-            printf("%x ",*((unsigned char*)is.imgData + j + i*4*(is.width+1)));
+            printf("%x ",*((unsigned char*)is.imgData + j + i*(4*is.width + 1)));
         }
         printf("\n");
+    }
+    printf("\n");
+
+    printf("decompressed data: \n");
+    for (int i = 0; i < is.szImgData; i++)
+    {
+            printf("%x ",*((unsigned char*)is.imgData + i));
     }
     printf("\n");
 
@@ -186,6 +243,14 @@ GLuint decode()
     }
     printf("\n");
 
+    void* trg = refilter(&is);
+    printf("defiltered data: \n");
+    for (int i = 0; i < (is.szImgData - is.height); i++)
+    {
+            printf("%x ",*((unsigned char*)trg + i));
+    }
+    printf("\n");
+
     /*
     unsigned char* temp;
     temp = (unsigned char*) d;
@@ -203,7 +268,7 @@ GLuint decode()
 	glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, realDataPointer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, is.width, is.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, trg);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
