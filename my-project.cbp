@@ -55,6 +55,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="mat.cpp" />
 		<Unit filename="mat.h" />
+		<Unit filename="src/ImgLoad.cpp" />
+		<Unit filename="src/ImgLoad.h" />
 		<Unit filename="src/Model.cpp" />
 		<Extensions>
 			<code_completion />

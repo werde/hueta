@@ -9,6 +9,7 @@
 #include <GL/glext.h>
 
 #include "../mat.h"
+#include "../src/ImgLoad.h"
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
@@ -20,24 +21,10 @@
 #define GL_COMPRESSED_RGBA_S3TC_DXT3_EXT  0x83F2
 #define GL_COMPRESSED_RGBA_S3TC_DXT5_EXT  0x83F3
 
-GLuint decode();
+
+
 GLuint loadBMP_custom(const char * imagepath);
-
-typedef struct
-{
-    long unsigned int width, height, sz;
-    char bit_depth;
-    char color_type;
-    char compression_method;
-    char filter_method;
-    char interlace_method;
-
-    char path[1024];
-    void* data;
-    size_t szData;
-    void* imgData;
-    size_t szImgData;
-}   ImageStruct;
+GLuint loadTex(ImageStruct* is);
 
 class Model
 {

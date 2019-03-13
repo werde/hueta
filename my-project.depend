@@ -52,17 +52,18 @@
 	"__trash.h"
 	"App.h"
 
-1552398559 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1552485517 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 	"zlib.h"
 
-1551853526 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
+1552487872 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\model.h
 	<iostream>
 	<string>
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
 	"../mat.h"
+	"../src/ImgLoad.h"
 
 1551358173 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.h
 	<math.h>
@@ -125,7 +126,7 @@
 	"../mat.h"
 	"QCBackplate.h"
 
-1551791566 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
+1552486153 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
 	"QCBackplate.h"
 	"../__trash.h"
 	"../include/Model.h"
@@ -145,4 +146,12 @@
 	"GL/gl.h"
 	"GL/glext.h"
 	"../mat.h"
+
+1552486740 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imgload.cpp
+	"ImgLoad.h"
+
+1552486662 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imgload.h
+	<stdio.h>
+	<memory>
+	<zlib.h>
 
