@@ -2,6 +2,7 @@
 
 #include "../__trash.h"
 #include "../include/Model.h"
+#include "../src/ImgLoad.h"
 
 QCBackplate::QCBackplate()
 {
@@ -23,8 +24,9 @@ QCBackplate::QCBackplate()
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
-    _tex = loadBMP_custom(".\\QCbg.bmp");
-    //_tex = loadTex();
+    //_tex = loadBMP_custom(".\\QCbg.bmp");
+    ImageStruct* pIS = loadPNG(".\\QCbg.png");
+    _tex = loadTex(pIS);
 }
 
 QCBackplate::QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloat ofRight)

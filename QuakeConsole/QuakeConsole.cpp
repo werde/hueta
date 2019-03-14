@@ -30,9 +30,22 @@ QuakeConsole::QuakeConsole() : _enabled{false}
 
         s.uv[3].x = (x+offsetX)/(GLfloat)dim;
         s.uv[3].y = (y+offsetY)/(GLfloat)dim;
+/*
+        s.uv[0].x = x/          (GLfloat)dim;
+        s.uv[0].y = (y+offsetY)/(GLfloat)dim;
 
+        s.uv[1].x = (x+offsetX)/(GLfloat)dim;
+        s.uv[1].y = (y+offsetY)/(GLfloat)dim;
+
+        s.uv[2].x = x/          (GLfloat)dim;
+        s.uv[2].y = y/          (GLfloat)dim;
+
+        s.uv[3].x = (x+offsetX)/(GLfloat)dim;
+        s.uv[3].y =  y          /(GLfloat)dim;
+*/
         symbols.push_back(s);
         keyIndex++;
+
     }
 
     /// Shader program
@@ -40,7 +53,8 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     compileShaderProgramm(&_bsp, ".\\billboard.vert", ".\\billboard.frag");
 
     /// rest
-    _tex = loadBMP_custom(".\\shizzle.bmp");
+    _tex = loadTex(loadPNG(".\\shizzle.png"));
+    //_tex = loadBMP_custom(".\\shizzle.bmp");
 
     _buf[0] = 41;
     _buf[1] = 64;
@@ -51,6 +65,7 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     _buf[6] = 64;
     _buf[7] = 52;
     _buf[8] = 52;
+    _buf[9] = 41;
 
 
     for (int i = 0; i < sizeof(_buf); i++)

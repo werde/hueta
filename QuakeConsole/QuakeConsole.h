@@ -43,7 +43,7 @@ class QuakeConsole
         GLuint _uvbo;
 
         GLuint _tex;
-        char _buf[9];
+        char _buf[10];
 
         QCBackplate* _qbc;
 };

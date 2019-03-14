@@ -24,6 +24,6 @@ typedef struct
 }   ImageStruct;
 
 
-ImageStruct* loadPNG();
+ImageStruct* loadPNG(const char* path);
 
 #endif // IMGLOAD_H_INCLUDED

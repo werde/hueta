@@ -3,20 +3,24 @@
 void debug_is(ImageStruct* is)
 {
     printf("bit_depth %d, color type %d, compress. method %d, filter %d, interlace %d \n", is->bit_depth, is->color_type, is->compression_method, is->filter_method, is->interlace_method);
+    printf("pixel_length %d, bbp %d \n", is->szPixelData, is->bytes_per_pixel);
     printf("%dX%d\n", is->width, is->height);
 }
 
-void refilter1(unsigned char* targetLine, unsigned char* srcLine, int w)
+void refilter1(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
 {
-    memcpy(targetLine, srcLine + 1, 4);
-    for (int i = 4; i < w; i++)
+    memcpy(targetLine, srcLine + 1, bpp);
+    for (int i = bpp; i < w; i++)
     {
-        unsigned char r = *(targetLine + i) + *(srcLine + i - 3);
+        unsigned char r = *(targetLine + i) + *(targetLine + i - bpp);
         memcpy(targetLine + i, &r, 1);
+        //printf("Debug W %x %x %x %x \n", w, i, *(targetLine + i), *(srcLine + i - 3));
+
     }
+
 };
 
-void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w)
+void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
 {
     for (int i = 0; i < w; i++)
     {
@@ -26,7 +30,52 @@ void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w)
     }
 };
 
-void* refilter(void* src, long unsigned int szScanline, long unsigned int height)
+unsigned char paeth(unsigned char a, unsigned char b, unsigned char c)
+{
+    int p = a + b - c;
+    int pa = abs(p - a);
+    int pb = abs(p - b);
+    int pc = abs(p - c);
+
+    if ((pa <= pb) && (pa <= pc))
+        return a;
+    else if (pb <= pc)
+        return b;
+    else
+        return c;
+}
+
+void refilter4(unsigned char* targetLine, unsigned char* srcLine, unsigned char* srcPriorLine, int w, unsigned char bpp)
+{
+    for (int i = 0; i < w; i++)
+    {
+        unsigned char a, b, c;
+        if (i < bpp)
+        {
+            a = 0;
+            c = 0;
+        }
+        else
+        {
+            a = *(targetLine + i - bpp);
+
+            if (srcPriorLine == NULL)
+                c = 0;
+            else
+                c = *(srcPriorLine + i - bpp);
+        }
+        if (srcPriorLine == NULL)
+            b = 0;
+        else
+            b = *(srcPriorLine + i);
+
+        unsigned int r = *(targetLine + i) + paeth(a, b, c);
+        unsigned char modR = r%256;
+        memcpy(targetLine + i, &modR, 1);
+    }
+}
+
+void* refilter(void* src, long unsigned int szScanline, long unsigned int height, unsigned char bpp)
 {
     long unsigned int width = szScanline - 1;
     void* target = malloc((szScanline - 1)*height);
@@ -41,11 +90,17 @@ void* refilter(void* src, long unsigned int szScanline, long unsigned int height
             break;
         case 1:
             memcpy(targetLine, src + i*szScanline + 1, width);
-            refilter1(targetLine, src + i*szScanline, width);
+            refilter1(targetLine, src + i*szScanline, width, bpp);
             break;
         case 2:
             memcpy(targetLine, src + i*szScanline + 1, width);
-            refilter2(targetLine, target + (i-1)*width, width);
+            refilter2(targetLine, target + (i-1)*width, width, bpp);
+            break;
+        case 3:
+            break;
+        case 4:
+            memcpy(targetLine, src + i*szScanline + 1, width);
+            refilter4(targetLine, src + i*szScanline + 1, target + (i-1)*width, width, bpp);
             break;
         default:
             break;
@@ -82,17 +137,19 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
         strm.next_in = in;
         do
         {
-            printf("times %d \n", times);
+            //printf("times %d \n", times);
             times++;
 
             strm.avail_out = szDst;
             strm.next_out = out;
 
+            /*
             for (int i = 0; i < szSrc; i++)
             {
                 printf("%x ", *((unsigned char*)strm.next_in + i));
             }
-            printf("szSrc %d \n", szSrc);
+            */
+            //printf("szSrc %d \n", szSrc);
 
             ret = inflate(&strm, Z_NO_FLUSH);
 
@@ -118,7 +175,7 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
     return ret == Z_STREAM_END ? Z_OK : Z_DATA_ERROR;
 }
 
-ImageStruct* loadPNG()
+ImageStruct* loadPNG(const char* path)
 {
     ImageStruct* is = new ImageStruct();
     memset(is, 0, sizeof(ImageStruct));
@@ -126,7 +183,7 @@ ImageStruct* loadPNG()
     unsigned long szImgDataRead=0;
     unsigned char signature[8];
 
-    FILE* f = fopen(".\\test2.png","rb");
+    FILE* f = fopen(path, "rb");
     fread(signature, sizeof(unsigned char), 8, f);
     printf("%u %d %d %d %d %d %d %d\n", signature[0],signature[1],signature[2],signature[3],signature[4],signature[5],signature[6],signature[7]);
 
@@ -196,10 +253,12 @@ ImageStruct* loadPNG()
             }
 
             is->bytes_per_pixel = is->samples_per_pixel * is->bytes_per_sample;
+            printf("is->bytes_per_pixel %d\n", is->bytes_per_pixel);
 
             szImgData = is->width*is->height*is->bytes_per_pixel + is->height;
             imgData = malloc(szImgData);
 
+            is->szPixelData = is->width*is->height*is->bytes_per_pixel;
         }
         else if (memcmp("PLTE", type, 4) == 0)
         {
@@ -218,40 +277,61 @@ ImageStruct* loadPNG()
         }
     }
 
-    printf("raw data: \n");
+    /*printf("raw data: \n");
     for (int i = 0; i < szRawData; i++)
     {
         printf("%x ", *((unsigned char*)rawData + i));
     }
+    */
 
     zdecompress(imgData, rawData, szImgData, szRawData);
     debug_is(is);
+    printf("is->bytes_per_pixel %d\n", is->bytes_per_pixel);
 
+    /*
     printf("decompressed data: \n");
     for (int i = 0; i < is->height; i++)
     {
         printf("scanline #%d ", i);
-        for (int j = 0; j <= 4*is->width; j++)
+        for (int j = 0; j <= is->bytes_per_pixel*is->width; j++)
         {
-            printf("%x ",*((unsigned char*)imgData + j + i*(4*is->width + 1)));
+            //printf("%x ",*((unsigned char*)imgData + j + i*(4*is->width + 1)));
         }
         printf("\n");
     }
+    */
 
-    printf("decompressed data: \n");
+    /*printf("decompressed data: \n");
     for (int i = 0; i < szImgData; i++)
     {
         printf("%x ",*((unsigned char*)imgData + i));
     }
-    printf("\n");
+    printf("\n");*/
 
-    void* trg = refilter(imgData, szImgData/is->height, is->height);
-    printf("defiltered data: \n");
-    for (int i = 0; i < (szImgData - is->height); i++)
+    //void* trg = malloc(is->szPixelData);
+    void* trg = refilter(imgData, szImgData/is->height, is->height, is->bytes_per_pixel);
+    void* trg2 = malloc(is->szPixelData);
+
+    for (int i = 0; i < is->height; i++)
     {
-            printf("%x ",*((unsigned char*)trg + i));
+        int o = i*is->bytes_per_pixel*is->width;
+        int w = is->bytes_per_pixel*is->width;
+        memcpy(trg2 + o, trg + is->szPixelData - o - w, w);
+    }
+
+    /*
+    printf("defiltered data: \n");
+    for (int i = 0; i < is->height; i++)
+    {
+        for (int j = 0; j < is->bytes_per_pixel*is->width; j++)
+        {
+            printf("%x ",*((unsigned char*)trg + i*is->bytes_per_pixel*is->width + j));
+        }
+        printf("#%d\n", i);
     }
     printf("\n");
+    */
+    is->pixelData = trg2;
 
     return is;
 }
