@@ -113,20 +113,20 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1552573882 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1552642668 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
 	"../include/Model.h"
 
-1552572410 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
+1552639879 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
 	"../mat.h"
 	"QCBackplate.h"
 
-1552574007 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
+1552635397 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
 	"QCBackplate.h"
 	"../__trash.h"
 	"../include/Model.h"

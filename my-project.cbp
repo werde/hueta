@@ -40,6 +40,7 @@
 		<Unit filename="QuakeConsole/QCBackplate.h" />
 		<Unit filename="QuakeConsole/QuakeConsole.cpp" />
 		<Unit filename="QuakeConsole/QuakeConsole.h" />
+		<Unit filename="QuakeConsole/TextDefs.h" />
 		<Unit filename="__trash.cpp" />
 		<Unit filename="__trash.h" />
 		<Unit filename="_trash.h" />

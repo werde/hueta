@@ -4,6 +4,17 @@
 #include "../__trash.h"
 #include "../include/Model.h"
 
+#include "TextDefs.h"
+
+unsigned char convert(char c)
+{
+
+    unsigned char ar[256];
+
+    ar['a'] =
+
+}
+
 QuakeConsole::QuakeConsole() : _enabled{false}
 {
     /// Symbol table
@@ -54,10 +65,10 @@ QuakeConsole::QuakeConsole() : _enabled{false}
 
     /// rest
     _tex = loadTex(loadPNG(".\\shizzle.png"));
-    //_tex = loadBMP_custom(".\\shizzle.bmp");
+    //_tex = loadBMP_custom(".\\test.bmp");
 
-    _buf[0] = 41;
-    _buf[1] = 64;
+    _buf[0] = 116;
+    _buf[1] = 53;
     _buf[2] = 52;
     _buf[3] = 65;
     _buf[4] = 11;
@@ -98,25 +109,30 @@ void QuakeConsole::calcOGLcoords(int i)
     float ch= 20.0;
 
     lt.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
-    lt.y = 1.0 - (QCYPAD*h + YGAP)/h;
-    lt.z = 0.0;
+    lt.y =  1.0 - (QCYPAD*h + YGAP)/h;
+    lt.z =  0.0;
 
     lb.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
-    lb.y = 1.0 - (QCYPAD*h + YGAP + ch)/h;
-    lt.z = 0.0;
+    lb.y =  1.0 - (QCYPAD*h + YGAP + ch)/h;
+    lt.z =  0.0;
 
-    rt.x = -1.0 + (QCXPAD*w + XGAP + cw+ i*cw)/w;
-    rt.y = 1.0 - (QCYPAD*h + YGAP)/h;
-    lt.z = 0.0;
+    rt.x = -1.0 + (QCXPAD*w + XGAP + cw + i*cw)/w;
+    rt.y =  1.0 - (QCYPAD*h + YGAP)/h;
+    lt.z =  0.0;
 
-    rb.x = -1.0 + (QCXPAD*w + XGAP + cw+ i*cw)/w;
-    rb.y = 1.0 - (QCYPAD*h + YGAP + ch)/h;
-    rb.z = 0.0;
-
+    rb.x = -1.0 + (QCXPAD*w + XGAP + cw + i*cw)/w;
+    rb.y =  1.0 - (QCYPAD*h + YGAP + ch)/h;
+    rb.z =  0.0;
+/*
     _v.push_back(lb);
     _v.push_back(rb);
     _v.push_back(lt);
     _v.push_back(rt);
+*/
+    _v.push_back({lb.x, lb.y, 0.0f});
+    _v.push_back({rb.x, rb.y, 0.0f});
+    _v.push_back({lt.x,  lt.y, 0.0f});
+    _v.push_back({rt.x,  rt.y, 0.0f});
 }
 
 void QuakeConsole::draw()

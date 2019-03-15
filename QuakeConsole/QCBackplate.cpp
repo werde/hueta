@@ -31,7 +31,7 @@ QCBackplate::QCBackplate()
 
 QCBackplate::QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloat ofRight)
 {
-    GLfloat top = 1.0f - ofTop;
+   /* GLfloat top = 1.0f - ofTop;
     GLfloat bottom = -1.0f + ofBottom;
     GLfloat left = -1.0f + ofLeft;
     GLfloat right = 1.0f - ofRight;
@@ -54,7 +54,7 @@ QCBackplate::QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloa
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
-    _tex = loadBMP_custom(".\\QCbg.bmp");
+    _tex = loadBMP_custom(".\\QCbg.bmp");*/
 }
 
 void QCBackplate::render(GLuint sp)
