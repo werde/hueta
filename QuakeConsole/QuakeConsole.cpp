@@ -8,11 +8,63 @@
 
 unsigned char convert(char c)
 {
+    static unsigned char ar[256];
 
-    unsigned char ar[256];
+    ar['a'] = SHZL_a;
+    ar['b'] = SHZL_b;
+    ar['c'] = SHZL_c;
+    ar['d'] = SHZL_d;
+    ar['e'] = SHZL_e;
+    ar['f'] = SHZL_f;
+    ar['g'] = SHZL_g;
+    ar['h'] = SHZL_h;
+    ar['i'] = SHZL_i;
+    ar['j'] = SHZL_j;
+    ar['k'] = SHZL_k;
+    ar['l'] = SHZL_l;
+    ar['m'] = SHZL_m;
+    ar['n'] = SHZL_n;
+    ar['o'] = SHZL_o;
+    ar['p'] = SHZL_p;
+    ar['q'] = SHZL_q;
+    ar['r'] = SHZL_r;
+    ar['s'] = SHZL_s;
+    ar['t'] = SHZL_t;
+    ar['u'] = SHZL_u;
+    ar['v'] = SHZL_v;
+    ar['w'] = SHZL_w;
+    ar['x'] = SHZL_x;
+    ar['y'] = SHZL_y;
+    ar['z'] = SHZL_z;
 
-    ar['a'] =
+    ar['A'] = SHZL_A;
+    ar['B'] = SHZL_B;
+    ar['C'] = SHZL_C;
+    ar['D'] = SHZL_D;
+    ar['E'] = SHZL_E;
+    ar['F'] = SHZL_F;
+    ar['G'] = SHZL_G;
+    ar['H'] = SHZL_H;
+    ar['I'] = SHZL_I;
+    ar['J'] = SHZL_J;
+    ar['K'] = SHZL_K;
+    ar['L'] = SHZL_L;
+    ar['M'] = SHZL_M;
+    ar['N'] = SHZL_N;
+    ar['O'] = SHZL_O;
+    ar['P'] = SHZL_P;
+    ar['Q'] = SHZL_Q;
+    ar['R'] = SHZL_R;
+    ar['S'] = SHZL_S;
+    ar['T'] = SHZL_T;
+    ar['U'] = SHZL_U;
+    ar['V'] = SHZL_V;
+    ar['W'] = SHZL_W;
+    ar['X'] = SHZL_X;
+    ar['Y'] = SHZL_Y;
+    ar['Z'] = SHZL_Z;
 
+    return ar[c];
 }
 
 QuakeConsole::QuakeConsole() : _enabled{false}
@@ -22,7 +74,6 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     GLfloat offsetY = 20.0;
 	GLfloat dim = 256.0;
 
-	std::vector<Symbol> symbols;
 	char keyIndex = 0;
 	for (int x = 0; x < dim; x+=16)
         for(int y = 16; y < 256; y+=20)
@@ -54,7 +105,7 @@ QuakeConsole::QuakeConsole() : _enabled{false}
         s.uv[3].x = (x+offsetX)/(GLfloat)dim;
         s.uv[3].y =  y          /(GLfloat)dim;
 */
-        symbols.push_back(s);
+        _symbols.push_back(s);
         keyIndex++;
 
     }
@@ -78,15 +129,14 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     _buf[8] = 52;
     _buf[9] = 41;
 
-
     for (int i = 0; i < sizeof(_buf); i++)
     {
         int sIndex = _buf[i];
         calcOGLcoords(i);
-        _uv.push_back(symbols[sIndex].uv[0]);
-        _uv.push_back(symbols[sIndex].uv[1]);
-        _uv.push_back(symbols[sIndex].uv[2]);
-        _uv.push_back(symbols[sIndex].uv[3]);
+        _uv.push_back(_symbols[sIndex].uv[0]);
+        _uv.push_back(_symbols[sIndex].uv[1]);
+        _uv.push_back(_symbols[sIndex].uv[2]);
+        _uv.push_back(_symbols[sIndex].uv[3]);
     }
 
     glGenBuffers(1, &_vbo);
@@ -98,6 +148,7 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
     _qbc = new QCBackplate();
+    _cl = new CommandLine();
 }
 
 void QuakeConsole::calcOGLcoords(int i)
@@ -142,6 +193,7 @@ void QuakeConsole::draw()
     glUseProgram(_bsp);
 
     _qbc->render(_bsp);
+    _cl->render(_bsp);
 
 	GLuint TextureID = glGetUniformLocation(_bsp, "texSampler");
 
@@ -162,6 +214,33 @@ void QuakeConsole::draw()
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+}
+
+void QuakeConsole::key(WPARAM wParam, bool zaglav)
+{
+    if (zaglav)
+        _buf[0] = convert(wParam);
+    else
+        _buf[0] = convert(wParam + 32);
+
+    for (int i = 0; i < sizeof(_buf); i++)
+    {
+        int sIndex = _buf[i];
+        calcOGLcoords(i);
+        /*
+        _uv.push_back(_symbols[sIndex].uv[0]);
+        _uv.push_back(_symbols[sIndex].uv[1]);
+        _uv.push_back(_symbols[sIndex].uv[2]);
+        _uv.push_back(_symbols[sIndex].uv[3]);
+        */
+        _uv[4*i+0] = _symbols[sIndex].uv[0];
+        _uv[4*i+1] = _symbols[sIndex].uv[1];
+        _uv[4*i+2] = _symbols[sIndex].uv[2];
+        _uv[4*i+3] = _symbols[sIndex].uv[3];
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
+    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 }
 
 QuakeConsole::~QuakeConsole()

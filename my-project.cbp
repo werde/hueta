@@ -36,6 +36,8 @@
 		<Unit filename="MyWindow.h" />
 		<Unit filename="QCTextBuffer.cpp" />
 		<Unit filename="QCTextBuffer.h" />
+		<Unit filename="QuakeConsole/CommandLine.cpp" />
+		<Unit filename="QuakeConsole/CommandLine.h" />
 		<Unit filename="QuakeConsole/QCBackplate.cpp" />
 		<Unit filename="QuakeConsole/QCBackplate.h" />
 		<Unit filename="QuakeConsole/QuakeConsole.cpp" />

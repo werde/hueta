@@ -204,8 +204,28 @@ bool App::resize()
 
 void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    float speed = 0.1f;
-    float d = 0.1;
+    BYTE lpKeyState[256];
+    GetKeyboardState(lpKeyState);
+
+    if (_q->status())
+    {
+        switch(wParam)
+        {
+        case 0xc0:
+            printf("tilda \n");
+            _q->toggle();
+            break;
+        default:
+            bool zaglav = false;
+            if (lpKeyState[VK_LSHIFT] & 0x1 << 7) zaglav = true;
+            if (lpKeyState[VK_RSHIFT] & 0x1 << 7) zaglav = true;
+            if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0)  zaglav = true;
+            _q->key(wParam, zaglav);
+            break;
+        }
+
+        return;
+    }
 
     switch(wParam)
     {

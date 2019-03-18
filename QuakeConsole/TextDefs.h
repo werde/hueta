@@ -66,9 +66,4 @@
 #define SHZL_8 104
 #define SHZL_9 116
 
-
-
-
-
-
 #endif // TEXTDEFS_H_INCLUDED

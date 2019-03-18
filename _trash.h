@@ -1,6 +1,8 @@
 #ifndef _TRASH_H_INCLUDED
 #define _TRASH_H_INCLUDED
 
+#include "GL/glext.h"
+
 extern PFNGLGENBUFFERSPROC glGenBuffers;
 extern PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
 extern PFNGLBINDBUFFERPROC glBindBuffer;
@@ -25,6 +27,9 @@ extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 extern PFNGLUNIFORM1IPROC glUniform1i;
 extern PFNGLUNIFORM3FPROC glUniform3f;
 extern PFNGLGENERATEMIPMAPPROC glGenerateMipmap;
+//extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
+//extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+//extern PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
 
 
 #endif // _TRASH_H_INCLUDED

@@ -55,6 +55,9 @@ extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 extern PFNGLUNIFORM1IPROC glUniform1i;
 extern PFNGLUNIFORM2FPROC glUniform2f;
 extern PFNGLUNIFORM3FPROC glUniform3f;
+//extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
+//extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+//extern PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
 
 GLboolean MyGLInit();
 #endif

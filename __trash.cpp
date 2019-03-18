@@ -24,6 +24,9 @@ PFNGLACTIVETEXTUREPROC glActiveTexture;
 PFNGLUNIFORM1IPROC glUniform1i;
 PFNGLUNIFORM2FPROC glUniform2f;
 PFNGLUNIFORM3FPROC glUniform3f;
+//PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
+//PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+//PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
 
 GLboolean MyGLInit()
 {
@@ -51,6 +54,9 @@ GLboolean MyGLInit()
     glUniform1i = (PFNGLUNIFORM1IPROC) wglGetProcAddress("glUniform1i");
     glUniform2f = (PFNGLUNIFORM2FPROC) wglGetProcAddress("glUniform2f");
     glUniform3f = (PFNGLUNIFORM3FPROC) wglGetProcAddress("glUniform3f");
+    //glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC) wglGetProcAddress("glGenFramebuffers");
+    //glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC) wglGetProcAddress("glBindFramebuffer");
+    //glBlitFramebuffer = (PFNGLBLITFRAMEBUFFERPROC) wglGetProcAddress("glBlitFramebuffer");
 
 	return true;
 }

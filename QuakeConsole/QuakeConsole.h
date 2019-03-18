@@ -2,16 +2,20 @@
 #define QUAKECONSOLE_H
 
 #include <vector>
+
 #include <GL/gl.h>
 #include <GL/glext.h>
 
 #include "../mat.h"
 #include "QCBackplate.h"
+#include "CommandLine.h"
 
-#define QCXPAD 0.05f
-#define QCYPAD 0.05f
-#define YGAP 8
-#define XGAP 8
+#define QC_TOP 0.00f
+#define QC_BOTTOM 0.00f
+#define QC_LEFT 0.00f
+#define QC_RIGHT 0.00f
+#define YGAP 0
+#define XGAP 0
 #define QCROWS
 
 
@@ -27,9 +31,12 @@ class QuakeConsole
         QuakeConsole();
         virtual ~QuakeConsole();
 
+
         void draw();
+        void key(WPARAM wParam, bool zaglav);
 
         void toggle(){_enabled = !_enabled;};
+        bool status(){return _enabled;};
         void calcOGLcoords(int i);
     protected:
 
@@ -46,6 +53,13 @@ class QuakeConsole
         unsigned char _buf[10];
 
         QCBackplate* _qbc;
+        CommandLine* _cl;
+        std::vector<Symbol> _symbols;
+
+        //
+        int sWidth;
+        int sHeight;
+
 };
 
 #endif // QUAKECONSOLE_H

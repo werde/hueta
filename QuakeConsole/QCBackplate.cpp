@@ -6,10 +6,14 @@
 
 QCBackplate::QCBackplate()
 {
-    _v.push_back({-0.95f, -0.95f, 0.0f});
-    _v.push_back({0.95f, -0.95f, 0.0f});
-    _v.push_back({-0.95f,  0.95f, 0.0f});
-    _v.push_back({0.95f,  0.95f, 0.0f});
+    GLfloat top = 1.0f - QC_TOP;
+    GLfloat bottom = -1.0f + QC_BOTTOM;
+    GLfloat right =
+    GLfloat left
+    _v.push_back({-1.0f, -1.0f, 0.0f});
+    _v.push_back({1.0f, -1.0f, 0.0f});
+    _v.push_back({-1.0f,  1.0f, 0.0f});
+    _v.push_back({1.0f,  1.0f, 0.0f});
 
     _uv.push_back({0.0, 0.0});
     _uv.push_back({1.0, 0.0});
