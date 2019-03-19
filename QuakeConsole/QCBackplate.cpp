@@ -4,16 +4,17 @@
 #include "../include/Model.h"
 #include "../src/ImgLoad.h"
 
-QCBackplate::QCBackplate()
+QCBackplate::QCBackplate(Pos p)
 {
-    GLfloat top = 1.0f - QC_TOP;
-    GLfloat bottom = -1.0f + QC_BOTTOM;
-    GLfloat right =
-    GLfloat left
-    _v.push_back({-1.0f, -1.0f, 0.0f});
-    _v.push_back({1.0f, -1.0f, 0.0f});
-    _v.push_back({-1.0f,  1.0f, 0.0f});
-    _v.push_back({1.0f,  1.0f, 0.0f});
+    GLfloat t = p.y;
+    GLfloat b = p.y - p.h;
+    GLfloat l = p.x;
+    GLfloat r = p.x + p.w;
+
+    _v.push_back({l, b, 0.0f});
+    _v.push_back({r, b, 0.0f});
+    _v.push_back({l, t, 0.0f});
+    _v.push_back({r, t, 0.0f});
 
     _uv.push_back({0.0, 0.0});
     _uv.push_back({1.0, 0.0});
@@ -31,34 +32,6 @@ QCBackplate::QCBackplate()
     //_tex = loadBMP_custom(".\\QCbg.bmp");
     ImageStruct* pIS = loadPNG(".\\QCbg.png");
     _tex = loadTex(pIS);
-}
-
-QCBackplate::QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloat ofRight)
-{
-   /* GLfloat top = 1.0f - ofTop;
-    GLfloat bottom = -1.0f + ofBottom;
-    GLfloat left = -1.0f + ofLeft;
-    GLfloat right = 1.0f - ofRight;
-
-    _v.push_back({left , bottom, 0.0f});
-    _v.push_back({right, bottom, 0.0f});
-    _v.push_back({left ,  top,   0.0f});
-    _v.push_back({right,  top,   0.0f});
-
-    _uv.push_back({0.0, 0.0});
-    _uv.push_back({1.0, 0.0});
-    _uv.push_back({0.0, 1.0});
-    _uv.push_back({1.0, 1.0});
-
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_uvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
-    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
-
-    _tex = loadBMP_custom(".\\QCbg.bmp");*/
 }
 
 void QCBackplate::render(GLuint sp)

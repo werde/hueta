@@ -7,17 +7,9 @@
 #include <GL/glext.h>
 
 #include "../mat.h"
+#include "TextDefs.h"
 #include "QCBackplate.h"
 #include "CommandLine.h"
-
-#define QC_TOP 0.00f
-#define QC_BOTTOM 0.00f
-#define QC_LEFT 0.00f
-#define QC_RIGHT 0.00f
-#define YGAP 0
-#define XGAP 0
-#define QCROWS
-
 
 typedef struct
 {
@@ -37,6 +29,8 @@ class QuakeConsole
 
         void toggle(){_enabled = !_enabled;};
         bool status(){return _enabled;};
+
+        void TextArea();
         void calcOGLcoords(int i);
     protected:
 
@@ -50,16 +44,20 @@ class QuakeConsole
         GLuint _uvbo;
 
         GLuint _tex;
-        unsigned char _buf[10];
+        unsigned char _buf[900];
+        int sz_Buf;
 
         QCBackplate* _qbc;
         CommandLine* _cl;
         std::vector<Symbol> _symbols;
 
         //
-        int sWidth;
-        int sHeight;
-
+        Pos _pos;
+        int fH, fW;
+        int w, h;
+        int g;
+        int symPerStr;
+        int numStrings;
 };
 
 #endif // QUAKECONSOLE_H

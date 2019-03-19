@@ -10,6 +10,8 @@ unsigned char convert(char c)
 {
     static unsigned char ar[256];
 
+    memset(ar, 9, 256);
+
     ar['a'] = SHZL_a;
     ar['b'] = SHZL_b;
     ar['c'] = SHZL_c;
@@ -64,11 +66,21 @@ unsigned char convert(char c)
     ar['Y'] = SHZL_Y;
     ar['Z'] = SHZL_Z;
 
+    ar[' '] = SHZL_WHITESPACE;
+    ar['.'] = 177;
+
     return ar[c];
 }
 
 QuakeConsole::QuakeConsole() : _enabled{false}
 {
+    _pos = {-1.0f, 1.0f, 2.0f, 1.0f}; // x y width height
+    fH = 20; fW = 16;
+    w = 800; h = 600;
+    g = 10;
+    symPerStr = (w - 2*g)/fW; //symbold per string
+    numStrings = (h/2 - g)/(g + fH);
+
     /// Symbol table
     GLfloat offsetX = 16.0;
     GLfloat offsetY = 20.0;
@@ -115,21 +127,20 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     compileShaderProgramm(&_bsp, ".\\billboard.vert", ".\\billboard.frag");
 
     /// rest
-    _tex = loadTex(loadPNG(".\\shizzle.png"));
+    _tex = loadTex(loadPNG(".\\shizzle_i.png"));
     //_tex = loadBMP_custom(".\\test.bmp");
 
-    _buf[0] = 116;
-    _buf[1] = 53;
-    _buf[2] = 52;
-    _buf[3] = 65;
-    _buf[4] = 11;
-    _buf[5] = 29;
-    _buf[6] = 64;
-    _buf[7] = 52;
-    _buf[8] = 52;
-    _buf[9] = 41;
+    unsigned char* str = "Based on your input, get a random alpha numeric string.\n The random string generator creates a series of numbers and letters that have no pattern.\n These can be helpful for creating security codes.\n";
+    int len = strlen(str);
+    sz_Buf = len;
+    memcpy(_buf, str, len);
 
-    for (int i = 0; i < sizeof(_buf); i++)
+    for (int i = 0; i < sz_Buf; i++)
+    {
+        _buf[i] = convert(_buf[i]);
+    }
+
+    for (int i = 0; i < sz_Buf; i++)
     {
         int sIndex = _buf[i];
         calcOGLcoords(i);
@@ -147,43 +158,84 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
-    _qbc = new QCBackplate();
+    _qbc = new QCBackplate(_pos);
     _cl = new CommandLine();
+
+    printf("%s %s %d \n", _buf, str, len);
+}
+
+void pv(vec3 v)
+{
+    printf("%f %f %f \n", v.x, v.y, v.z);
+}
+
+void QuakeConsole::TextArea()
+{
+    unsigned char* pEnd;
+    pEnd = _buf + sz_Buf;
+    unsigned char pStart = _buf;
+
+    int curStr = 0;
+
+    while (*pEnd != )
+
 }
 
 void QuakeConsole::calcOGLcoords(int i)
 {
     vec3 lt, lb, rt, rb;
-    float w = 800.0/2;
-    float h = 600.0/2;
-    float cw= 16.0;
-    float ch= 20.0;
+    GLfloat fFH = fH*2.0/(GLfloat)h;
+    GLfloat fFW = fW*2.0/(GLfloat)w;
+    GLfloat fg = 2.0*g/(GLfloat)h;
 
-    lt.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
-    lt.y =  1.0 - (QCYPAD*h + YGAP)/h;
+    int n = i/symPerStr;    //string number
+    i = i - n*symPerStr;    //position in string
+
+    lt.x = -1.0 + (fg + fFW*i);
+    lt.y =  1.0 - (fg + fFH*n + fg*n) ;
     lt.z =  0.0;
 
-    lb.x = -1.0 + (QCXPAD*w + XGAP + i*cw)/w;
-    lb.y =  1.0 - (QCYPAD*h + YGAP + ch)/h;
-    lt.z =  0.0;
+    lb.x = -1.0 + (fg + fFW*i);
+    lb.y =  1.0 - (fg + fFH*(n + 1) + fg*n);
+    lb.z =  0.0;
 
-    rt.x = -1.0 + (QCXPAD*w + XGAP + cw + i*cw)/w;
-    rt.y =  1.0 - (QCYPAD*h + YGAP)/h;
-    lt.z =  0.0;
+    rt.x = -1.0 + (fg + fFW*(i + 1));
+    rt.y =  1.0 - (fg + fFH*n + fg*n);
+    rt.z =  0.0;
 
-    rb.x = -1.0 + (QCXPAD*w + XGAP + cw + i*cw)/w;
-    rb.y =  1.0 - (QCYPAD*h + YGAP + ch)/h;
+    rb.x = -1.0 + (fg + fFW*(i + 1));
+    rb.y =  1.0 - (fg + fFH*(n + 1) + fg*n);
     rb.z =  0.0;
+
+    // from bottom line
+    int numRows = 1 + sz_Buf/symPerStr;
+    int  n2 = numRows - n; //numRowFromBottom
+
+    GLfloat bottomLine = _pos.y - _pos.h;
+    GLfloat leftLine = _pos.x;
+
+    GLfloat b = bottomLine + (fg + n2*fFH + n2*fg);
+    GLfloat t = bottomLine + (fg + (n2+1)*fFH + n2*fg);
+    GLfloat l = leftLine + (fg + i*fFW);
+    GLfloat r = leftLine + (fg + (i+1)*fFW);
+
+    _v.push_back({l, b, 0.0f});
+    _v.push_back({r, b, 0.0f});
+    _v.push_back({l, t, 0.0f});
+    _v.push_back({r, t, 0.0f});
+
 /*
     _v.push_back(lb);
     _v.push_back(rb);
     _v.push_back(lt);
     _v.push_back(rt);
 */
+/*
     _v.push_back({lb.x, lb.y, 0.0f});
     _v.push_back({rb.x, rb.y, 0.0f});
     _v.push_back({lt.x,  lt.y, 0.0f});
     _v.push_back({rt.x,  rt.y, 0.0f});
+*/
 }
 
 void QuakeConsole::draw()

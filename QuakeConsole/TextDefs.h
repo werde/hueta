@@ -66,4 +66,11 @@
 #define SHZL_8 104
 #define SHZL_9 116
 
+#define SHZL_WHITESPACE 9
+
+typedef struct
+{
+    GLfloat x, y, w, h;
+} Pos;
+
 #endif // TEXTDEFS_H_INCLUDED

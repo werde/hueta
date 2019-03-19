@@ -6,13 +6,12 @@
 #include "GL/glext.h"
 
 #include "../mat.h"
+#include "TextDefs.h"
 
 class QCBackplate
 {
 public:
-    QCBackplate();
-    QCBackplate(GLfloat ofTop, GLfloat ofBottom, GLfloat ofLeft, GLfloat ofRight);
-
+    QCBackplate(Pos p);
     virtual ~QCBackplate();
 
     void render(GLuint sp);
