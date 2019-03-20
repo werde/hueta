@@ -9,13 +9,8 @@
 #include "../mat.h"
 #include "TextDefs.h"
 #include "QCBackplate.h"
+#include "TextArea.h"
 #include "CommandLine.h"
-
-typedef struct
-{
-    char c;
-    vec2 uv[4];
-} Symbol;
 
 class QuakeConsole
 {
@@ -29,35 +24,16 @@ class QuakeConsole
 
         void toggle(){_enabled = !_enabled;};
         bool status(){return _enabled;};
-
-        void TextArea();
-        void calcOGLcoords(int i);
     protected:
 
     private:
-        bool _enabled;
-
-        std::vector<vec3> _v;
-        std::vector<vec2> _uv;
-        GLuint _bsp;
-        GLuint _vbo;
-        GLuint _uvbo;
-
-        GLuint _tex;
-        unsigned char _buf[900];
-        int sz_Buf;
+        bool    _enabled;
+        GLuint  _bsp;
+        Pos     _pos;
 
         QCBackplate* _qbc;
+        TextArea*    _ta;
         CommandLine* _cl;
-        std::vector<Symbol> _symbols;
-
-        //
-        Pos _pos;
-        int fH, fW;
-        int w, h;
-        int g;
-        int symPerStr;
-        int numStrings;
 };
 
 #endif // QUAKECONSOLE_H

@@ -68,9 +68,19 @@
 
 #define SHZL_WHITESPACE 9
 
+#include "../mat.h"
+
 typedef struct
 {
     GLfloat x, y, w, h;
 } Pos;
+
+typedef struct
+{
+    char c;
+    vec2 uv[4];
+} Symbol;
+
+unsigned char convert(char c);
 
 #endif // TEXTDEFS_H_INCLUDED

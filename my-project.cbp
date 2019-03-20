@@ -42,6 +42,9 @@
 		<Unit filename="QuakeConsole/QCBackplate.h" />
 		<Unit filename="QuakeConsole/QuakeConsole.cpp" />
 		<Unit filename="QuakeConsole/QuakeConsole.h" />
+		<Unit filename="QuakeConsole/TextArea.cpp" />
+		<Unit filename="QuakeConsole/TextArea.h" />
+		<Unit filename="QuakeConsole/TextDefs.cpp" />
 		<Unit filename="QuakeConsole/TextDefs.h" />
 		<Unit filename="__trash.cpp" />
 		<Unit filename="__trash.h" />
