@@ -11,6 +11,7 @@
 #include "QCBackplate.h"
 #include "TextArea.h"
 #include "CommandLine.h"
+#include "Font.h"
 
 class QuakeConsole
 {
@@ -24,8 +25,8 @@ class QuakeConsole
 
         void toggle(){_enabled = !_enabled;};
         bool status(){return _enabled;};
-    protected:
 
+        Font* f;
     private:
         bool    _enabled;
         GLuint  _bsp;

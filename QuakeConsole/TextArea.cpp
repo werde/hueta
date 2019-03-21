@@ -3,48 +3,60 @@
 #include "../__trash.h"
 #include "../include/Model.h"
 
-
-TextArea::TextArea()
+TextArea::TextArea(Pos p, Font* f)
+    : _f{f}
 {
     fH = 20; fW = 16;
     w = 800; h = 600;
-    g = 10;
+    g = 6;
+    fg = g*2.0/(GLfloat)w;
+
+    fFW = fW*2.0/(GLfloat)w;
+    fFH = fH*2.0/(GLfloat)h;
+
+    _pos.x = p.x + fg;
+    _pos.y = p.y - fg;
+    _pos.h = p.h - 2*fg - fFH;
+    _pos.w = p.w - 2*fg;
+
+    bottom = _pos.y - _pos.h;
+    left = _pos.x;
 
     symPerStr = (w - 2*g)/fW;
     numStrings = (h/2 - g)/(g + fH);
 
     /// Fill symbol table
-    GLfloat offsetX = fW;
-    GLfloat offsetY = fH;
+    GLfloat offsetX = 16;
+    GLfloat offsetY = 20;
 	GLfloat dim = 256.0;
 
 	char keyIndex = 0;
 	for (int x = 0; x < dim; x+=16)
         for(int y = 16; y < 256; y+=20)
-    {
-        Symbol s;
-        s.c = keyIndex;
+        {
+            Symbol s;
+            s.c = keyIndex;
 
-        s.uv[0].x = x/          (GLfloat)dim;
-        s.uv[0].y = y/          (GLfloat)dim;
+            s.uv[0].x = x/          (GLfloat)dim;
+            s.uv[0].y = y/          (GLfloat)dim;
 
-        s.uv[1].x = (x+offsetX)/(GLfloat)dim;
-        s.uv[1].y = y/          (GLfloat)dim;
+            s.uv[1].x = (x+offsetX)/(GLfloat)dim;
+            s.uv[1].y = y/          (GLfloat)dim;
 
-        s.uv[2].x = x/          (GLfloat)dim;
-        s.uv[2].y = (y+offsetY)/(GLfloat)dim;
+            s.uv[2].x = x/          (GLfloat)dim;
+            s.uv[2].y = (y+offsetY)/(GLfloat)dim;
 
-        s.uv[3].x = (x+offsetX)/(GLfloat)dim;
-        s.uv[3].y = (y+offsetY)/(GLfloat)dim;
-        _symbols.push_back(s);
-        keyIndex++;
-    }
+            s.uv[3].x = (x+offsetX)/(GLfloat)dim;
+            s.uv[3].y = (y+offsetY)/(GLfloat)dim;
+            _symbols.push_back(s);
+            keyIndex++;
+        }
 
-    /// Load texture
+    /// Load font texture
     _tex = loadTex(loadPNG(".\\shizzle_i.png"));
 
     /// Buffer
-    unsigned char* str = "Based on your input, get \na\nrandom alpha numeric string.\n The random string \ngenerator creates a series of \nnumbers and letters \nthat have no pattern.\n These can be helpful for creating security \n codes.\n";
+    char* str = "Based on your input, get \na\nrandom alpha numeric string.\n The random string \ngenerator creates a series of \nnumbers and letters \nthat have no pattern.\n These can be helpful for creating security \n codes.\n";
     int len = strlen(str);
     sz_Buf = len;
     memcpy(_buf, str, len);
@@ -76,12 +88,7 @@ void TextArea::uv(int i)
 
 void TextArea::ss(int strNum, int xpos)
 {
-    vec3 lt, lb, rt, rb;
-    GLfloat fFH = fH*2.0/(GLfloat)h;
-    GLfloat fFW = fW*2.0/(GLfloat)w;
-    GLfloat fg = 2.0*g/(GLfloat)h;
-
-    GLfloat bottomLine = _pos.y - _pos.h;
+    GLfloat bottomLine = bottom + fg;
     GLfloat leftLine = _pos.x;
 
     int n2 = strNum;
@@ -101,30 +108,27 @@ void TextArea::fillvv()
 {
     unsigned char* pEnd = _buf + sz_Buf - 1;
     unsigned char* pStart = _buf;
-    printf("// ne nuzhno int charIndex = ;\n\n\n\n");
 
     int curStr = 0;
 
     unsigned char* p = pEnd - 1;
-        printf("*****test******* %d %d %d %d %d %c \n", pEnd - pStart, pEnd - _buf, pEnd - p, *p, *p );
-
     while (p >= pStart)
     {
         unsigned char* sEnd = p;
+
         do
         {
             p--;
         } while ((*p != '\n') && (p >= pStart));
 
         int i = 0;
-
         for (unsigned char* tPtr = p + 1; tPtr != sEnd; tPtr++)
         {
             ss(curStr, i);
             uv(tPtr - pStart);
             i++;
         }
-        printf("$ # %d %d-- % \n", curStr, sEnd - p + 1);
+
         curStr++;
     }
 }

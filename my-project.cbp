@@ -38,6 +38,8 @@
 		<Unit filename="QCTextBuffer.h" />
 		<Unit filename="QuakeConsole/CommandLine.cpp" />
 		<Unit filename="QuakeConsole/CommandLine.h" />
+		<Unit filename="QuakeConsole/Font.cpp" />
+		<Unit filename="QuakeConsole/Font.h" />
 		<Unit filename="QuakeConsole/QCBackplate.cpp" />
 		<Unit filename="QuakeConsole/QCBackplate.h" />
 		<Unit filename="QuakeConsole/QuakeConsole.cpp" />

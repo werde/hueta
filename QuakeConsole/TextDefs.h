@@ -67,6 +67,7 @@
 #define SHZL_9 116
 
 #define SHZL_WHITESPACE 9
+#define SHZL_COMMA 153
 
 #include "../mat.h"
 

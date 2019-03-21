@@ -60,6 +60,19 @@ unsigned char convert(char c)
     ar['Y'] = SHZL_Y;
     ar['Z'] = SHZL_Z;
 
+    ar['0'] = SHZL_0;
+    ar['1'] = SHZL_1;
+    ar['2'] = SHZL_2;
+    ar['3'] = SHZL_3;
+    ar['4'] = SHZL_4;
+    ar['5'] = SHZL_5;
+    ar['6'] = SHZL_6;
+    ar['7'] = SHZL_7;
+    ar['8'] = SHZL_8;
+    ar['9'] = SHZL_9;
+
+    ar[','] = SHZL_COMMA;
+
     ar[' '] = SHZL_WHITESPACE;
     ar['\n'] = '\n';
     ar['.'] = 177;

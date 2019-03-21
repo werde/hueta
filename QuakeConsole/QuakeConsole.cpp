@@ -13,8 +13,10 @@ QuakeConsole::QuakeConsole() : _enabled{false}
 	_bsp = glCreateProgram();
     compileShaderProgramm(&_bsp, ".\\billboard.vert", ".\\billboard.frag");
 
+    f = new Font(800, 600);
+
     _qbc = new QCBackplate(_pos);
-    _ta = new TextArea();
+    _ta = new TextArea(_pos, f);
     _cl = new CommandLine();
 }
 

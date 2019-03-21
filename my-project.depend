@@ -114,13 +114,13 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1553092626 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1553179212 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
 	"TextDefs.h"
 
-1553092043 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
+1553175814 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
@@ -129,6 +129,7 @@
 	"QCBackplate.h"
 	"TextArea.h"
 	"CommandLine.h"
+	"Font.h"
 
 1552986268 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
 	"QCBackplate.h"
@@ -161,7 +162,7 @@
 	<memory>
 	<zlib.h>
 
-1553090552 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.h
+1553173959 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.h
 	"../mat.h"
 
 1552918552 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.cpp
@@ -177,11 +178,27 @@
 	"GL/glext.h"
 	"../mat.h"
 
-1553090542 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.cpp
+1553174035 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.cpp
 	"TextDefs.h"
 
-1553093137 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.h
+1553179513 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.h
 	<vector>
 	"TextDefs.h"
 	"../mat.h"
+	"Font.h"
+
+1553174711 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.cpp
+	"TextArea.h"
+	"../__trash.h"
+	"../include/Model.h"
+
+1553179263 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\font.cpp
+	"Font.h"
+	"../__trash.h"
+	"../include/Model.h"
+
+1553179043 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\font.h
+	<vector>
+	"GL/gl.h"
+	"TextDefs.h"
 

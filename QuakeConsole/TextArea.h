@@ -6,10 +6,12 @@
 #include "TextDefs.h"
 #include "../mat.h"
 
+#include "Font.h"
+
 class TextArea
 {
     public:
-        TextArea();
+        TextArea(Pos p, Font* f);
         virtual ~TextArea();
 
         void render(GLuint sp);
@@ -26,10 +28,14 @@ class TextArea
         int sz_Buf;
         std::vector<Symbol> _symbols;
 
+        Font* _f;
+
         //
         int fH, fW;
+        GLfloat fFH, fFW;
         int w, h;
         int g;
+        GLfloat fg;
         int symPerStr;
         int numStrings;
 
@@ -39,6 +45,8 @@ class TextArea
 
         //
         Pos _pos;
+        GLfloat bottom, left;
+
 };
 
 #endif // TEXTAREA_H
