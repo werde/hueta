@@ -7,8 +7,8 @@ Font::Font(int w, int h)
     : _loaded{false}
 {
     fH = 20; fW = 16;
-    fFW = fW/(GLfloat)w;
-    fFH = fH/(GLfloat)h;
+    fFW = fW*2.0/(GLfloat)w;
+    fFH = fH*2.0/(GLfloat)h;
 
     /// Fill symbol table
     GLfloat offsetX = 16;
@@ -32,12 +32,12 @@ Font::Font(int w, int h)
 
             s.uv[3].x = (x+offsetX)/(GLfloat)dim;
             s.uv[3].y = (y+offsetY)/(GLfloat)dim;
-            _symbols.push_back(s);
+            symbols.push_back(s);
             keyIndex++;
         }
 
     /// Load font texture
-    _tex = loadTex(loadPNG(".\\shizzle_i.png"));
+    tex = loadTex(loadPNG(".\\shizzle_i.png"));
 }
 
 Font::~Font()

@@ -13,13 +13,13 @@ class Font
         Font(int, int);
         virtual ~Font();
 
-        GLuint _tex;
+        GLuint tex;
         int fH, fW;
         GLfloat fFH, fFW;
-
+        std::vector<Symbol> symbols;
     private:
         bool _loaded;
-        std::vector<Symbol> _symbols;
+
 };
 
 #endif // FONT_H

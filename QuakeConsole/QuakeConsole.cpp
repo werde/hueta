@@ -17,7 +17,7 @@ QuakeConsole::QuakeConsole() : _enabled{false}
 
     _qbc = new QCBackplate(_pos);
     _ta = new TextArea(_pos, f);
-    _cl = new CommandLine();
+    _cl = new CommandLine(_pos, f);
 }
 
 void QuakeConsole::draw()

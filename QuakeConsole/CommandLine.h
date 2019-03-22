@@ -8,6 +8,8 @@
 #include "GL/glext.h"
 
 #include "../mat.h"
+#include "TextDefs.h"
+#include "Font.h"
 
 typedef struct
 {
@@ -18,20 +20,30 @@ typedef struct
 class CommandLine
 {
     public:
-        CommandLine();
+        CommandLine(Pos p, Font *f);
         virtual ~CommandLine();
 
         void render(GLuint sp);
 
-    protected:
-
     private:
-    GLuint _tex;
-    GLuint _vbo;
-    GLuint _uvbo;
+        GLuint _vbo;
+        GLuint _uvbo;
 
-    std::vector<vec3> _v;
-    std::vector<vec2> _uv;
+        std::vector<vec3> _v;
+        std::vector<vec2> _uv;
+
+        Font* _f;
+
+        void fillvv();
+        char _buf[25];
+        int sz_Buf;
+
+        //
+        Pos _pos;
+        int w, h;
+        int g;
+        GLfloat fg;
+        GLfloat bottomLine, leftLine;
 };
 
 #endif // COMMANDLINE_H
