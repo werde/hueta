@@ -33,6 +33,39 @@ void QuakeConsole::draw()
 
 void QuakeConsole::key(WPARAM wParam, bool zaglav)
 {
+    switch (wParam)
+    {
+    case VK_LEFT:
+        _cl->left();
+        break;
+    case VK_UP:
+        //_cl->up();
+        break;
+    case VK_RIGHT:
+        _cl->right();
+        break;
+    case VK_DOWN:
+        //_cl->right();
+        break;
+    case VK_RETURN:
+        _cl->enter();
+        break;
+    case 0x41 ... 0x5A:
+        {
+            char l;
+            if (zaglav)
+                l = convert(wParam);
+            else
+                l = convert(wParam + 32);
+
+            _cl->addLetter(l);
+        }
+        break;
+    default:
+        break;
+    }
+
+
     /*
     if (zaglav)
         _buf[0] = convert(wParam);

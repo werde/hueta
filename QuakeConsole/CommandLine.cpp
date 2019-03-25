@@ -5,7 +5,7 @@
 #include "../include/Model.h"
 
 CommandLine::CommandLine(Pos p, Font* f)
-    : _f{f}
+    : _f{f}, _curPos{0}
 {
     w = 800; h = 600;
     g = 6;
@@ -18,8 +18,8 @@ CommandLine::CommandLine(Pos p, Font* f)
     bottomLine = _pos.y;
     leftLine = _pos.x;
 
-    memset(_buf, '90', 10)
-    sz_Buf=25;
+    memset(_buf, 90, 10);
+    sz_Buf=10;
     /*for (int i = 0; i < sz_Buf-1; i++)
     {
         _buf[i] = convert(_buf[i]);
@@ -34,20 +34,62 @@ CommandLine::CommandLine(Pos p, Font* f)
     glGenBuffers(1, &_uvbo);
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_cvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _cvbo);
+    glBufferData(GL_ARRAY_BUFFER, _curV.size()*sizeof(vec3), &(_curV[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_cuvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _cuvbo);
+    glBufferData(GL_ARRAY_BUFFER, _curUV.size()*sizeof(vec2), &(_curUV[0]), GL_DYNAMIC_DRAW);
+}
+
+void CommandLine::right()
+{
+    _curPos++;
+
+    refillvv();
+}
+
+void CommandLine::left()
+{
+    if (_curPos < 1) return;
+    _curPos--;
+
+    refillvv();
+}
+
+void CommandLine::enter()
+{
+    sz_Buf = 0;
+
+    refillvv();
+}
+
+void CommandLine::addLetter(char l)
+{
+    if (sz_Buf >= sizeof(_buf)) return;
+    if (_curPos + 1 == sz_Buf)
+        sz_Buf++;
+
+    memset(_buf + _curPos, l, 1);
+    _curPos++;
+
+    refillvv();
 }
 
 void CommandLine::fillvv()
 {
-    unsigned char* pEnd = _buf + sz_Buf - 1;
+    unsigned char* pEnd = _buf + sz_Buf;
     unsigned char* pStart = _buf;
 
     unsigned char* p = _buf;
     int i = 0;
-    while (p <= pEnd)
+    while (p < pEnd)
     {
 
         GLfloat b = bottomLine;
-        GLfloat t = bottomLine + fg + fFH;
+        GLfloat t = bottomLine + fg + _f->fFH;
         GLfloat l = leftLine + (fg + i*_f->fFW);
         GLfloat r = leftLine + (fg + (i+1)*_f->fFW);
 
@@ -56,16 +98,65 @@ void CommandLine::fillvv()
         _v.push_back({r, t, 0.0f});
         _v.push_back({l, t, 0.0f});
 
+        int sIndex = _buf[i];
+        _uv.push_back(_f->symbols[sIndex].uv[0]);
+        _uv.push_back(_f->symbols[sIndex].uv[1]);
+        _uv.push_back(_f->symbols[sIndex].uv[3]);
+        _uv.push_back(_f->symbols[sIndex].uv[2]);
+
         i++;
+        p++;
     }
+
+    GLfloat b2 = bottomLine - 0.03;
+    GLfloat t2 = bottomLine + fg + _f->fFH;
+    GLfloat l2 = leftLine + (fg + _curPos*_f->fFW);
+    GLfloat r2 = leftLine + (fg + (_curPos + 1)*_f->fFW);
+
+    _curV.push_back({l2, b2, 0.0f});
+    _curV.push_back({r2, b2, 0.0f});
+    _curV.push_back({r2, t2, 0.0f});
+    _curV.push_back({l2, t2, 0.0f});
+
+    int sIndex2 = 186;
+    _curUV.push_back(_f->symbols[sIndex2].uv[0]);
+    _curUV.push_back(_f->symbols[sIndex2].uv[1]);
+    _curUV.push_back(_f->symbols[sIndex2].uv[3]);
+    _curUV.push_back(_f->symbols[sIndex2].uv[2]);
+}
+
+void CommandLine::refillvv()
+{
+    _v.clear();
+    _uv.clear();
+    _curV.clear();
+    _curUV.clear();
+
+    fillvv();
+
+    glGenBuffers(1, &_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_uvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
+    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_cvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _cvbo);
+    glBufferData(GL_ARRAY_BUFFER, _curV.size()*sizeof(vec3), &(_curV[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_cuvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _cuvbo);
+    glBufferData(GL_ARRAY_BUFFER, _curUV.size()*sizeof(vec2), &(_curUV[0]), GL_DYNAMIC_DRAW);
 }
 
 void CommandLine::render(GLuint sp)
 {
-/*	GLuint TextureID = glGetUniformLocation(sp, "texSampler");
+	GLuint TextureID = glGetUniformLocation(sp, "texSampler");
 
     glActiveTexture(_f->tex);
-    glBindTexture(GL_TEXTURE_2D, _f->tex);
+    glBindTexture(GL_TEXTURE_2D,_f->tex);
     glUniform1i(TextureID, 0);
 
     glEnableVertexAttribArray(0);
@@ -77,17 +168,24 @@ void CommandLine::render(GLuint sp)
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glDrawArrays(GL_QUADS, 0, _v.size());
 
     glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);*/
-/*
-    glActiveTexture(_f->tex);
-    glBindTexture(GL_TEXTURE_2D, _f->tex);
-    glUniform1i(TextureID, 0);
-
+    glDisableVertexAttribArray(1);
+    ///
     glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);*/
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, _cvbo);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+
+    glBindBuffer(GL_ARRAY_BUFFER, _cuvbo);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+
+    glDrawArrays(GL_QUADS, 0, _curV.size());
+
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 }
 
 CommandLine::~CommandLine()

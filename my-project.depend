@@ -114,7 +114,7 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1553265416 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1553524909 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
@@ -165,13 +165,13 @@
 1553173959 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.h
 	"../mat.h"
 
-1552918552 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.cpp
+1553524501 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.cpp
 	"CommandLine.h"
 	"../src/ImgLoad.h"
 	"../__trash.h"
 	"../include/Model.h"
 
-1553266113 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.h
+1553524754 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.h
 	<stdio.h>
 	<vector>
 	"GL/gl.h"

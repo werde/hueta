@@ -2,7 +2,32 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="QuakeConsole\TextArea.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="__trash.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1589" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="mat.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="410" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\CommandLine.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="724" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="QCTextBuffer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="135" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\Font.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="199" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\TextArea.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="65" topLine="0" />
 		</Cursor>
@@ -17,9 +42,9 @@
 			<Cursor1 position="106" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\CommandLine.cpp" open="1" top="1" tabpos="14" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="QuakeConsole\CommandLine.cpp" open="1" top="1" tabpos="13" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="420" topLine="5" />
+			<Cursor1 position="1585" topLine="57" />
 		</Cursor>
 	</File>
 	<File name="include\shaders.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,12 +57,12 @@
 			<Cursor1 position="136" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextArea.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="QuakeConsole\TextArea.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1596" topLine="48" />
+			<Cursor1 position="1206" topLine="39" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\Font.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="QuakeConsole\Font.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="53" topLine="0" />
 		</Cursor>
@@ -62,12 +87,12 @@
 			<Cursor1 position="927" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="src\ImgLoad.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="src\ImgLoad.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9487" topLine="295" />
+			<Cursor1 position="9487" topLine="293" />
 		</Cursor>
 	</File>
-	<File name="src\Model.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="src\Model.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="358" topLine="274" />
 		</Cursor>
@@ -82,9 +107,9 @@
 			<Cursor1 position="1925" topLine="24" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\QuakeConsole.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="QuakeConsole\QuakeConsole.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="478" topLine="0" />
+			<Cursor1 position="1240" topLine="40" />
 		</Cursor>
 	</File>
 	<File name="MyWindow.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -97,12 +122,12 @@
 			<Cursor1 position="1383" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextDefs.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="QuakeConsole\TextDefs.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1314" topLine="31" />
 		</Cursor>
 	</File>
-	<File name="src\ImgLoad.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="src\ImgLoad.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="387" topLine="0" />
 		</Cursor>
@@ -112,9 +137,9 @@
 			<Cursor1 position="639" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\QuakeConsole.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="QuakeConsole\QuakeConsole.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="252" topLine="0" />
+			<Cursor1 position="67" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="QCTextBuffer.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -137,39 +162,14 @@
 			<Cursor1 position="965" topLine="30" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextDefs.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="QuakeConsole\TextDefs.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1551" topLine="41" />
 		</Cursor>
 	</File>
-	<File name="App.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="App.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="717" topLine="41" />
-		</Cursor>
-	</File>
-	<File name="__trash.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1589" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="mat.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="410" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\CommandLine.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="763" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="QCTextBuffer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="135" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\Font.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="199" topLine="0" />
+			<Cursor1 position="5922" topLine="203" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

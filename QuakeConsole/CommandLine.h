@@ -24,17 +24,20 @@ class CommandLine
         virtual ~CommandLine();
 
         void render(GLuint sp);
-
+        void right();
+        void left();
+        void enter();
+        void addLetter(char l);
     private:
         GLuint _vbo;
         GLuint _uvbo;
+        GLuint _cvbo;
+        GLuint _cuvbo;
 
         std::vector<vec3> _v;
         std::vector<vec2> _uv;
 
         Font* _f;
-
-        void fillvv();
         char _buf[25];
         int sz_Buf;
 
@@ -44,6 +47,14 @@ class CommandLine
         int g;
         GLfloat fg;
         GLfloat bottomLine, leftLine;
+
+        std::vector<vec3>  _curV;
+        std::vector<vec2>  _curUV;
+
+        int _curPos;
+
+        void fillvv();
+        void refillvv();
 };
 
 #endif // COMMANDLINE_H
