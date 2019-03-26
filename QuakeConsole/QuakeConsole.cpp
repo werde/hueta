@@ -48,7 +48,13 @@ void QuakeConsole::key(WPARAM wParam, bool zaglav)
         //_cl->right();
         break;
     case VK_RETURN:
-        _cl->enter();
+        _cl->enter(_ta);
+        break;
+    case VK_DELETE:
+        _cl->delet();
+        break;
+    case VK_BACK:
+        _cl->backspace();
         break;
     case 0x41 ... 0x5A:
         {

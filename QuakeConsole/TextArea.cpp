@@ -24,24 +24,30 @@ TextArea::TextArea(Pos p, Font* f)
     /// Buffer
     char* str = "Based on your input, get \na\nrandom alpha numeric string.\n The random string \ngenerator creates a series of \nnumbers and letters \nthat have no pattern.\n These can be helpful for creating security \n codes.\n";
     int len = strlen(str);
-    sz_Buf = len;
+    _szBuf = len;
     memcpy(_buf, str, len);
 
-    for (int i = 0; i < sz_Buf; i++)
+    for (int i = 0; i < _szBuf; i++)
     {
         _buf[i] = convert(_buf[i]);
     }
 
     fillvv();
-
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_uvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
-    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 }
+
+void TextArea::appendBuffer(char* p, int len)
+{
+    if (_szBuf + len < TA_MAX_BUF)
+    {
+        memcpy(_buf + _szBuf, p, len);
+        _szBuf += len;
+        fillvv();
+    }
+    else
+    {
+
+    }
+};
 
 void TextArea::uv(int i)
 {
@@ -72,7 +78,10 @@ void TextArea::ss(int strNum, int xpos)
 
 void TextArea::fillvv()
 {
-    unsigned char* pEnd = _buf + sz_Buf - 1;
+    _v.clear();
+    _uv.clear();
+
+    unsigned char* pEnd = _buf + _szBuf - 1;
     unsigned char* pStart = _buf;
 
     int curStr = 0;
@@ -97,6 +106,14 @@ void TextArea::fillvv()
 
         curStr++;
     }
+
+    glGenBuffers(1, &_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
+
+    glGenBuffers(1, &_uvbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
+    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 }
 
 void TextArea::render(GLuint sp)

@@ -8,6 +8,8 @@
 #include "TextDefs.h"
 #include "Font.h"
 
+#define TA_MAX_BUF 900
+
 class TextArea
 {
     public:
@@ -15,6 +17,7 @@ class TextArea
         virtual ~TextArea();
 
         void render(GLuint sp);
+        void appendBuffer(char* p, int len);
     protected:
 
     private:
@@ -23,8 +26,8 @@ class TextArea
         GLuint _vbo;
         GLuint _uvbo;
 
-        unsigned char _buf[900];
-        int sz_Buf;
+        unsigned char _buf[TA_MAX_BUF];
+        int _szBuf;
 
         Font* _f;
         //

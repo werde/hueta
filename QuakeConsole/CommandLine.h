@@ -11,6 +11,10 @@
 #include "TextDefs.h"
 #include "Font.h"
 
+#define CL_MAX_BUF 12
+
+class TextArea;
+
 typedef struct
 {
     unsigned char type = 0;
@@ -26,7 +30,9 @@ class CommandLine
         void render(GLuint sp);
         void right();
         void left();
-        void enter();
+        void enter(TextArea* ta);
+        void delet();
+        void backspace();
         void addLetter(char l);
     private:
         GLuint _vbo;
@@ -38,8 +44,8 @@ class CommandLine
         std::vector<vec2> _uv;
 
         Font* _f;
-        char _buf[25];
-        int sz_Buf;
+        unsigned char _buf[CL_MAX_BUF];
+        int _szBuf;
 
         //
         Pos _pos;
@@ -48,8 +54,8 @@ class CommandLine
         GLfloat fg;
         GLfloat bottomLine, leftLine;
 
-        std::vector<vec3>  _curV;
-        std::vector<vec2>  _curUV;
+        std::vector<vec3> _curV;
+        std::vector<vec2> _curUV;
 
         int _curPos;
 

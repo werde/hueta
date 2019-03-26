@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1552902036 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1553607864 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -114,7 +114,7 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1553524909 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1553611133 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
@@ -162,16 +162,18 @@
 	<memory>
 	<zlib.h>
 
-1553173959 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.h
+1553609210 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.h
+	<stdio.h>
 	"../mat.h"
 
-1553524501 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.cpp
+1553611221 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.cpp
 	"CommandLine.h"
 	"../src/ImgLoad.h"
 	"../__trash.h"
 	"../include/Model.h"
+	"TextArea.h"
 
-1553524754 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.h
+1553611166 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandline.h
 	<stdio.h>
 	<vector>
 	"GL/gl.h"
@@ -180,16 +182,16 @@
 	"TextDefs.h"
 	"Font.h"
 
-1553174035 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.cpp
+1553609321 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textdefs.cpp
 	"TextDefs.h"
 
-1553265592 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.h
+1553610782 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.h
 	<vector>
 	"../mat.h"
 	"TextDefs.h"
 	"Font.h"
 
-1553263034 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.cpp
+1553611428 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.cpp
 	"TextArea.h"
 	"../__trash.h"
 	"../include/Model.h"

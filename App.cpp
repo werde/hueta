@@ -99,6 +99,7 @@ void App::run()
         auto _end = std::chrono::high_resolution_clock::now();
         _lastFrame = static_cast<float>((_end - _start)/std::chrono::milliseconds(1));
 
+        if (!_q->status())
         {
             BYTE lpKeyState[256];
             GetKeyboardState(lpKeyState);
@@ -223,7 +224,6 @@ void App::handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam)
             _q->key(wParam, zaglav);
             break;
         }
-
         return;
     }
 
@@ -263,7 +263,6 @@ void App::handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam)
     pt.y = 0;
     ScreenToClient(_mw->GetHwnd(), &pt);
     SetCursorPos(mouseX-pt.x,mouseY-pt.y);
-    //printf("xPos %d, yPos %d, mX %d, mY %d %d %d\n", xPos, yPos, mouseX, mouseY, pt.x, pt.y);
 };
 
 

@@ -77,5 +77,7 @@ unsigned char convert(char c)
     ar['\n'] = '\n';
     ar['.'] = 177;
 
+    printf("%c %d  $", c, ar[c]);
+
     return ar[c];
 }

@@ -1,6 +1,8 @@
 #ifndef TEXTDEFS_H_INCLUDED
 #define TEXTDEFS_H_INCLUDED
 
+#include <stdio.h>
+
 #define SHZL_a 17
 #define SHZL_b 29
 #define SHZL_c 41

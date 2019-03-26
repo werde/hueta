@@ -3,9 +3,10 @@
 #include "../src/ImgLoad.h"
 #include "../__trash.h"
 #include "../include/Model.h"
+#include "TextArea.h"
 
 CommandLine::CommandLine(Pos p, Font* f)
-    : _f{f}, _curPos{0}
+    : _f{f}, _curPos{0}, _szBuf{0}
 {
     w = 800; h = 600;
     g = 6;
@@ -18,34 +19,16 @@ CommandLine::CommandLine(Pos p, Font* f)
     bottomLine = _pos.y;
     leftLine = _pos.x;
 
-    memset(_buf, 90, 10);
-    sz_Buf=10;
-    /*for (int i = 0; i < sz_Buf-1; i++)
-    {
-        _buf[i] = convert(_buf[i]);
-    }*/
+    memset(_buf, 137, 10);
+    _szBuf=10;
 
     fillvv();
-
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_uvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
-    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_cvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _cvbo);
-    glBufferData(GL_ARRAY_BUFFER, _curV.size()*sizeof(vec3), &(_curV[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_cuvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _cuvbo);
-    glBufferData(GL_ARRAY_BUFFER, _curUV.size()*sizeof(vec2), &(_curUV[0]), GL_DYNAMIC_DRAW);
 }
 
 void CommandLine::right()
 {
+    if (_curPos >= CL_MAX_BUF - 1) return;
+    if (_curPos >= _szBuf) return;
     _curPos++;
 
     refillvv();
@@ -59,28 +42,62 @@ void CommandLine::left()
     refillvv();
 }
 
-void CommandLine::enter()
+void CommandLine::enter(TextArea* ta)
 {
-    sz_Buf = 0;
+    ta->appendBuffer(_buf, _szBuf);
+    _szBuf = 0;
+    _curPos = 0;
 
+    refillvv();
+}
+
+void CommandLine::delet()
+{
+    if (_szBuf < 1) return;
+    if (_curPos >= _szBuf) return;
+
+    memcpy(_buf + _curPos, _buf + _curPos + 1, _szBuf - _curPos - 1);
+    _szBuf--;
+
+    refillvv();
+}
+
+void CommandLine::backspace()
+{
+    if (_curPos < 1) return;
+
+    _curPos--;
+    memcpy(_buf + _curPos, _buf + _curPos + 1, _szBuf - _curPos - 1);
+
+    _szBuf--;
     refillvv();
 }
 
 void CommandLine::addLetter(char l)
 {
-    if (sz_Buf >= sizeof(_buf)) return;
-    if (_curPos + 1 == sz_Buf)
-        sz_Buf++;
+    if (_szBuf >= CL_MAX_BUF)
+    {
+        memset(_buf + _curPos, l, 1);
+        refillvv();
+        return;
+    }
 
+    char* temp  = malloc(_szBuf - _curPos);
+    memcpy(temp, _buf  + _curPos, _szBuf - _curPos);
     memset(_buf + _curPos, l, 1);
-    _curPos++;
+    memcpy(_buf + _curPos + 1, temp, _szBuf - _curPos);
 
+    _szBuf++;
+    right();
     refillvv();
+
+    ///
+    delete temp;
 }
 
 void CommandLine::fillvv()
 {
-    unsigned char* pEnd = _buf + sz_Buf;
+    unsigned char* pEnd = _buf + _szBuf;
     unsigned char* pStart = _buf;
 
     unsigned char* p = _buf;
@@ -123,16 +140,7 @@ void CommandLine::fillvv()
     _curUV.push_back(_f->symbols[sIndex2].uv[1]);
     _curUV.push_back(_f->symbols[sIndex2].uv[3]);
     _curUV.push_back(_f->symbols[sIndex2].uv[2]);
-}
 
-void CommandLine::refillvv()
-{
-    _v.clear();
-    _uv.clear();
-    _curV.clear();
-    _curUV.clear();
-
-    fillvv();
 
     glGenBuffers(1, &_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -149,6 +157,16 @@ void CommandLine::refillvv()
     glGenBuffers(1, &_cuvbo);
     glBindBuffer(GL_ARRAY_BUFFER, _cuvbo);
     glBufferData(GL_ARRAY_BUFFER, _curUV.size()*sizeof(vec2), &(_curUV[0]), GL_DYNAMIC_DRAW);
+}
+
+void CommandLine::refillvv()
+{
+    _v.clear();
+    _uv.clear();
+    _curV.clear();
+    _curUV.clear();
+
+    fillvv();
 }
 
 void CommandLine::render(GLuint sp)
