@@ -8,7 +8,7 @@
 #include "TextDefs.h"
 #include "Font.h"
 
-#define TA_MAX_BUF 900
+#define TA_MAX_BUF 500
 
 class TextArea
 {

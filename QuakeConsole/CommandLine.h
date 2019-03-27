@@ -11,7 +11,7 @@
 #include "TextDefs.h"
 #include "Font.h"
 
-#define CL_MAX_BUF 12
+#define CL_MAX_BUF 25
 
 class TextArea;
 

@@ -17,6 +17,7 @@
 					<Add option="-fpermissive" />
 					<Add directory="include" />
 					<Add directory="QuakeConsole" />
+					<Add directory="scene" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -53,7 +54,6 @@
 		<Unit filename="_trash.h" />
 		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
-		<Unit filename="include/Model.h" />
 		<Unit filename="include/Object.cpp" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/Renderer.cpp" />
@@ -63,9 +63,14 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="mat.cpp" />
 		<Unit filename="mat.h" />
-		<Unit filename="src/ImgLoad.cpp" />
-		<Unit filename="src/ImgLoad.h" />
+		<Unit filename="scene/Scene.cpp" />
+		<Unit filename="scene/Scene.h" />
+		<Unit filename="src/IMAGELoad.cpp" />
+		<Unit filename="src/IMAGELoad.h" />
 		<Unit filename="src/Model.cpp" />
+		<Unit filename="src/Model.h" />
+		<Unit filename="src/PNGLoad.cpp" />
+		<Unit filename="src/PNGLoad.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

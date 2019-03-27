@@ -21,9 +21,8 @@ typedef struct
     unsigned char path[1024];
     void* pixelData;
     unsigned long szPixelData;
-}   ImageStruct;
+} PNGImageStruct;
 
-
-ImageStruct* loadPNG(const char* path);
+PNGImageStruct* makePNG_IS(const char* path);
 
 #endif // IMGLOAD_H_INCLUDED

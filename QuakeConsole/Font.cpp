@@ -1,7 +1,7 @@
 #include "Font.h"
 
 #include "../__trash.h"
-#include "../include/Model.h"
+#include "../src/IMAGELoad.h"
 
 Font::Font(int w, int h)
     : _loaded{false}
@@ -37,7 +37,7 @@ Font::Font(int w, int h)
         }
 
     /// Load font texture
-    tex = loadTex(loadPNG(".\\shizzle_i.png"));
+    tex = loadTex(".\\shizzle_i.png");
 }
 
 Font::~Font()

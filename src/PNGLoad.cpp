@@ -1,35 +1,6 @@
-#include "ImgLoad.h"
+#include "PNGLoad.h"
 
-void debug_is(ImageStruct* is)
-{
-    printf("bit_depth %d, color type %d, compress. method %d, filter %d, interlace %d \n", is->bit_depth, is->color_type, is->compression_method, is->filter_method, is->interlace_method);
-    printf("pixel_length %d, bbp %d \n", is->szPixelData, is->bytes_per_pixel);
-    printf("%dX%d\n", is->width, is->height);
-}
-
-void refilter1(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
-{
-    memcpy(targetLine, srcLine + 1, bpp);
-    for (int i = bpp; i < w; i++)
-    {
-        unsigned char r = *(targetLine + i) + *(targetLine + i - bpp);
-        memcpy(targetLine + i, &r, 1);
-        //printf("Debug W %x %x %x %x \n", w, i, *(targetLine + i), *(srcLine + i - 3));
-
-    }
-
-};
-
-void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
-{
-    for (int i = 0; i < w; i++)
-    {
-        unsigned char r = *(targetLine + i) + *(srcLine + i);
-        memcpy(targetLine + i, &r, 1);
-        //printf("debug #%x %x %x %x\n", i, r,  *(targetLine + i), *(srcLine + i));
-    }
-};
-
+///reapply filter 1-4
 unsigned char paeth(unsigned char a, unsigned char b, unsigned char c)
 {
     int p = a + b - c;
@@ -44,6 +15,25 @@ unsigned char paeth(unsigned char a, unsigned char b, unsigned char c)
     else
         return c;
 }
+
+void refilter1(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
+{
+    memcpy(targetLine, srcLine + 1, bpp);
+    for (int i = bpp; i < w; i++)
+    {
+        unsigned char r = *(targetLine + i) + *(targetLine + i - bpp);
+        memcpy(targetLine + i, &r, 1);
+    }
+};
+
+void refilter2(unsigned char* targetLine, unsigned char* srcLine, int w, unsigned char bpp)
+{
+    for (int i = 0; i < w; i++)
+    {
+        unsigned char r = *(targetLine + i) + *(srcLine + i);
+        memcpy(targetLine + i, &r, 1);
+    }
+};
 
 void refilter4(unsigned char* targetLine, unsigned char* srcLine, unsigned char* srcPriorLine, int w, unsigned char bpp)
 {
@@ -113,6 +103,7 @@ void* refilter(void* src, long unsigned int szScanline, long unsigned int height
     return target;
 }
 
+/// ZLib Decompress
 int zdecompress(void* dst, const void* src, int szDst, int szSrc)
 {
     #define CHUNK 16384
@@ -137,28 +128,18 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
         strm.next_in = in;
         do
         {
-            //printf("times %d \n", times);
             times++;
 
             strm.avail_out = szDst;
             strm.next_out = out;
-
-            /*
-            for (int i = 0; i < szSrc; i++)
-            {
-                printf("%x ", *((unsigned char*)strm.next_in + i));
-            }
-            */
-            //printf("szSrc %d \n", szSrc);
-
             ret = inflate(&strm, Z_NO_FLUSH);
 
-           if(ret == Z_STREAM_ERROR) printf("Z_STREAM_ERROR\n");  /* state not clobbered */
+           if(ret == Z_STREAM_ERROR) printf("Z_STREAM_ERROR\n");
             switch (ret)
             {
             case Z_NEED_DICT:
                 printf("Z_NEED_DICT\n");
-                ret = Z_DATA_ERROR;     /* and fall through */
+                ret = Z_DATA_ERROR;
             case Z_DATA_ERROR:
                 printf("Z DATA ERROR\n");
             case Z_MEM_ERROR:
@@ -166,7 +147,6 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
                 (void)inflateEnd(&strm);
                 return ret;
             }
-
             have = CHUNK - strm.avail_out;
         } while (strm.avail_out == 0);
     } while (ret != Z_STREAM_END);
@@ -175,10 +155,10 @@ int zdecompress(void* dst, const void* src, int szDst, int szSrc)
     return ret == Z_STREAM_END ? Z_OK : Z_DATA_ERROR;
 }
 
-ImageStruct* loadPNG(const char* path)
+PNGImageStruct* makePNG_IS(const char* path)
 {
-    ImageStruct* is = new ImageStruct();
-    memset(is, 0, sizeof(ImageStruct));
+    PNGImageStruct* is = new PNGImageStruct();
+    memset(is, 0, sizeof(PNGImageStruct));
 
     unsigned long szImgDataRead=0;
     unsigned char signature[8];
@@ -277,38 +257,10 @@ ImageStruct* loadPNG(const char* path)
         }
     }
 
-    /*printf("raw data: \n");
-    for (int i = 0; i < szRawData; i++)
-    {
-        printf("%x ", *((unsigned char*)rawData + i));
-    }
-    */
-
     zdecompress(imgData, rawData, szImgData, szRawData);
-    debug_is(is);
+
     printf("is->bytes_per_pixel %d\n", is->bytes_per_pixel);
 
-    /*
-    printf("decompressed data: \n");
-    for (int i = 0; i < is->height; i++)
-    {
-        printf("scanline #%d ", i);
-        for (int j = 0; j <= is->bytes_per_pixel*is->width; j++)
-        {
-            //printf("%x ",*((unsigned char*)imgData + j + i*(4*is->width + 1)));
-        }
-        printf("\n");
-    }
-    */
-
-    /*printf("decompressed data: \n");
-    for (int i = 0; i < szImgData; i++)
-    {
-        printf("%x ",*((unsigned char*)imgData + i));
-    }
-    printf("\n");*/
-
-    //void* trg = malloc(is->szPixelData);
     void* trg = refilter(imgData, szImgData/is->height, is->height, is->bytes_per_pixel);
     void* trg2 = malloc(is->szPixelData);
 
@@ -319,18 +271,6 @@ ImageStruct* loadPNG(const char* path)
         memcpy(trg2 + o, trg + is->szPixelData - o - w, w);
     }
 
-    /*
-    printf("defiltered data: \n");
-    for (int i = 0; i < is->height; i++)
-    {
-        for (int j = 0; j < is->bytes_per_pixel*is->width; j++)
-        {
-            printf("%x ",*((unsigned char*)trg + i*is->bytes_per_pixel*is->width + j));
-        }
-        printf("#%d\n", i);
-    }
-    printf("\n");
-    */
     is->pixelData = trg2;
 
     return is;

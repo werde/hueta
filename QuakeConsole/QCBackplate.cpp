@@ -1,8 +1,7 @@
 #include "QCBackplate.h"
 
 #include "../__trash.h"
-#include "../include/Model.h"
-#include "../src/ImgLoad.h"
+#include "../src/IMAGELoad.h"
 
 QCBackplate::QCBackplate(Pos p)
 {
@@ -30,8 +29,7 @@ QCBackplate::QCBackplate(Pos p)
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
     //_tex = loadBMP_custom(".\\QCbg.bmp");
-    ImageStruct* pIS = loadPNG(".\\QCbg.png");
-    _tex = loadTex(pIS);
+    _tex = loadTex(".\\QCbg.png");
 }
 
 void QCBackplate::render(GLuint sp)

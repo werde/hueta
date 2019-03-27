@@ -1,7 +1,7 @@
 #include "TextArea.h"
 
 #include "../__trash.h"
-#include "../include/Model.h"
+#include "../src/IMAGELoad.h"
 
 TextArea::TextArea(Pos p, Font* f)
     : _f{f}
@@ -22,7 +22,7 @@ TextArea::TextArea(Pos p, Font* f)
     numStrings = (h/2 - g)/(g + _f->fH);
 
     /// Buffer
-    char* str = "Based on your input, get \na\nrandom alpha numeric string.\n The random string \ngenerator creates a series of \nnumbers and letters \nthat have no pattern.\n These can be helpful for creating security \n codes.\n";
+    char* str = "Test string.\n123\n";
     int len = strlen(str);
     _szBuf = len;
     memcpy(_buf, str, len);
@@ -37,15 +37,29 @@ TextArea::TextArea(Pos p, Font* f)
 
 void TextArea::appendBuffer(char* p, int len)
 {
-    if (_szBuf + len < TA_MAX_BUF)
+    if (_szBuf + len + 1 < TA_MAX_BUF)
     {
         memcpy(_buf + _szBuf, p, len);
-        _szBuf += len;
+        _buf[_szBuf + len] = '\n';
+        _szBuf = _szBuf + len + 1;
         fillvv();
     }
     else
     {
+        char* pStart = _buf;
+        char* pEnd = _buf + _szBuf - 1;
+        char* pBufEnd = _buf + TA_MAX_BUF - 1;
 
+        int free = TA_MAX_BUF - _szBuf;
+        int toCopy = _szBuf - (len + 1 - free);
+
+        printf("%d %d %d", _szBuf, len, toCopy);
+        memcpy(pStart, pStart + (len + 1 - free), toCopy);
+        memcpy(pStart + toCopy, p, len);
+        _buf[TA_MAX_BUF-1] = '\n';
+        _szBuf = TA_MAX_BUF;
+
+        fillvv();
     }
 };
 
@@ -86,7 +100,7 @@ void TextArea::fillvv()
 
     int curStr = 0;
 
-    unsigned char* p = pEnd - 1;
+    unsigned char* p = pEnd;
     while (p >= pStart)
     {
         unsigned char* sEnd = p;

@@ -9,7 +9,7 @@
 #include <GL/glext.h>
 
 #include "../mat.h"
-#include "../src/ImgLoad.h"
+#include "../src/PNGLoad.h"
 
 #define FOURCC_DXT1 0x31545844 // Equivalent to "DXT1" in ASCII
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
@@ -22,7 +22,6 @@
 #define GL_COMPRESSED_RGBA_S3TC_DXT5_EXT  0x83F3
 
 GLuint loadBMP_custom(const char * imagepath);
-GLuint loadTex(ImageStruct* is);
 
 class Model
 {

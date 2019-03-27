@@ -6,8 +6,7 @@
 #include "Camera.h"
 #include "Renderer.h"
 
-#include "Model.h"
-
+#include "./src/Model.h"
 
 App::App() : _mw(NULL)
 {

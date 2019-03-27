@@ -1,8 +1,8 @@
 #include "CommandLine.h"
 
-#include "../src/ImgLoad.h"
+#include "../src/PNGLoad.h"
 #include "../__trash.h"
-#include "../include/Model.h"
+#include "../src/Model.h"
 #include "TextArea.h"
 
 CommandLine::CommandLine(Pos p, Font* f)
@@ -44,6 +44,8 @@ void CommandLine::left()
 
 void CommandLine::enter(TextArea* ta)
 {
+    if(_szBuf < 1) return;
+
     ta->appendBuffer(_buf, _szBuf);
     _szBuf = 0;
     _curPos = 0;

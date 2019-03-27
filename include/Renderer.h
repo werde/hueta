@@ -14,7 +14,6 @@ typedef struct
     GLuint uvbo;
 } ModelObj;
 
-
 class Renderer
 {
     public:
