@@ -18,6 +18,7 @@
 					<Add directory="include" />
 					<Add directory="QuakeConsole" />
 					<Add directory="scene" />
+					<Add directory="src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -37,6 +38,8 @@
 		<Unit filename="MyWindow.h" />
 		<Unit filename="QCTextBuffer.cpp" />
 		<Unit filename="QCTextBuffer.h" />
+		<Unit filename="QuakeConsole/CommandInterpretor.cpp" />
+		<Unit filename="QuakeConsole/CommandInterpretor.h" />
 		<Unit filename="QuakeConsole/CommandLine.cpp" />
 		<Unit filename="QuakeConsole/CommandLine.h" />
 		<Unit filename="QuakeConsole/Font.cpp" />
@@ -65,6 +68,8 @@
 		<Unit filename="mat.h" />
 		<Unit filename="scene/Scene.cpp" />
 		<Unit filename="scene/Scene.h" />
+		<Unit filename="src/BMPLoad.cpp" />
+		<Unit filename="src/BMPLoad.h" />
 		<Unit filename="src/IMAGELoad.cpp" />
 		<Unit filename="src/IMAGELoad.h" />
 		<Unit filename="src/Model.cpp" />

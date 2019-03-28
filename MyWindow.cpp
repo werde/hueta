@@ -38,6 +38,7 @@ MyWindow::MyWindow()
 {
     // Window window
     WNDCLASSEXA wndClass = {0};
+    DWORD       dwStyle  = (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU);
 
     wndClass.cbSize = sizeof(WNDCLASSEX);
     wndClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;;
@@ -58,7 +59,7 @@ MyWindow::MyWindow()
         MessageBox(NULL, "Window Registration Failed!", "Error!",  MB_ICONEXCLAMATION | MB_OK);
     }
 
-    _hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, wndClass.lpszClassName, "test window", WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, 0, 0, wndClass.hInstance, 0);
+    _hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, wndClass.lpszClassName, "test window", dwStyle, 0, 0, 800, 600, 0, 0, wndClass.hInstance, 0);
 
     if (!_hwnd)
     {
@@ -72,6 +73,31 @@ MyWindow::MyWindow()
     _cfg = (WinCfg*) malloc(sizeof(WinCfg));
 }
 
+void setSize()
+{
+/*
+        if (GetWindowLongPtr(hwnd, GWL_STYLE) & WS_POPUP)
+        {
+            SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | WS_OVERLAPPEDWINDOW);
+            SetWindowPos(hwnd, NULL, 0, 0, 600, 400, SWP_FRAMECHANGED);
+        }
+        else
+        {//show full-screen
+            int w = GetSystemMetrics(SM_CXSCREEN);
+            int h = GetSystemMetrics(SM_CYSCREEN);
+            SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | WS_POPUP);
+            SetWindowPos(hwnd, HWND_TOP, 0, 0, w, h, SWP_FRAMECHANGED);
+        }*/
+
+}
+
+void MyWindow::fullscreenBorderless()
+{
+    int w = GetSystemMetrics(SM_CXSCREEN);
+    int h = GetSystemMetrics(SM_CYSCREEN);
+    SetWindowLongPtr(_hwnd, GWL_STYLE, WS_VISIBLE | WS_POPUP);
+    SetWindowPos(_hwnd, HWND_TOP, 0, 0, w, h, SWP_FRAMECHANGED);
+}
 
 HDC MyWindow::GetDC()
 {

@@ -11,4 +11,5 @@ void main()
 	vec2 texCoords = vec2(UV);
 	vec4 color = texture2D(myTextureSampler, UV);
 	gl_FragColor = color;
+	//gl_FragColor = vec4(0.5, 255, 0.9, 0.5);
 }

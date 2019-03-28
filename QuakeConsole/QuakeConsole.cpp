@@ -1,8 +1,6 @@
 #include "QuakeConsole.h"
 #include "shaders.h"
-
 #include "../__trash.h"
-
 #include "TextDefs.h"
 
 QuakeConsole::QuakeConsole() : _enabled{false}

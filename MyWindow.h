@@ -29,7 +29,7 @@ public:
     HWND GetHwnd(){return _hwnd;};
 
     void GetSize(RECT* r);
-
+    void fullscreenBorderless();
 protected:
 
 private:

@@ -1,6 +1,8 @@
 #include "IMAGELoad.h"
 #include "Model.h"
 #include "PNGLoad.h"
+#include "BMPLoad.h"
+
 GLuint loadTex(const char* path)
 {
     int pathLen = strlen(path);
@@ -16,7 +18,7 @@ GLuint loadTex(const char* path)
 
     if (memcmp(imgExt, bmp, 3) == 0)
     {
-        return loadBMP_custom(path);
+        return loadBMP(path);
     }
     else if  (memcmp(imgExt, png, 3) == 0)
     {

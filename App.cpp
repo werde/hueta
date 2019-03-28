@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Renderer.h"
 
+#include "./scene/Scene.h"
 #include "./src/Model.h"
 
 App::App() : _mw(NULL)
@@ -23,6 +24,8 @@ App::App() : _mw(NULL)
     mouseX = p.x;
     mouseY = p.y;
 }
+
+
 
 void App::run()
 {
@@ -53,6 +56,7 @@ void App::run()
     m.LoadObj(&m);
     _ren->registerModel(&m);
     _q = new QuakeConsole();
+    Scene* scene = new Scene();
 //------------------
 
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
@@ -79,17 +83,20 @@ void App::run()
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(sp);
 
-		mat4 ProjectionMatrix = perspective(45.0f, (float)4.0f / 3.0f, 0.1f, 100.0f);
-		mat4 ViewMatrix = lookAt(c->pos, c->focus); ;
+        RECT hwRect;
+        _mw->GetSize(&hwRect);
+        GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
+		mat4 ProjectionMatrix = perspective(45.0f, hwratio, 0.1f, 100.0f);
+		mat4 ViewMatrix = lookAt(c->pos, c->focus);
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
-        mat4 MVP = multymat(&temp, &ProjectionMatrix);;
+        mat4 MVP = multymat(&temp, &ProjectionMatrix);
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
 
         _ren->render();
-
+        scene->render();
         _q->draw();
 
         SwapBuffers(myHDC);

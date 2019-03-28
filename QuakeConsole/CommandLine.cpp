@@ -19,9 +19,6 @@ CommandLine::CommandLine(Pos p, Font* f)
     bottomLine = _pos.y;
     leftLine = _pos.x;
 
-    memset(_buf, 137, 10);
-    _szBuf=10;
-
     fillvv();
 }
 
