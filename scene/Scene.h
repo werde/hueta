@@ -8,6 +8,9 @@
 
 #include "../mat.h"
 
+class App;
+extern App* a;
+
 class Scene
 {
     public:

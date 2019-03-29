@@ -3,7 +3,8 @@
 #include "../src/PNGLoad.h"
 #include "../__trash.h"
 #include "../src/Model.h"
-#include "TextArea.h"
+
+#include "QuakeConsole.h"
 
 CommandLine::CommandLine(Pos p, Font* f)
     : _f{f}, _curPos{0}, _szBuf{0}
@@ -39,11 +40,11 @@ void CommandLine::left()
     refillvv();
 }
 
-void CommandLine::enter(TextArea* ta)
+void CommandLine::enter(QuakeConsole* qc)
 {
     if(_szBuf < 1) return;
+    qc->onCommand(_buf, _szBuf);
 
-    ta->appendBuffer(_buf, _szBuf);
     _szBuf = 0;
     _curPos = 0;
 
@@ -114,7 +115,7 @@ void CommandLine::fillvv()
         _v.push_back({r, t, 0.0f});
         _v.push_back({l, t, 0.0f});
 
-        int sIndex = _buf[i];
+        int sIndex = convert(_buf[i]);
         _uv.push_back(_f->symbols[sIndex].uv[0]);
         _uv.push_back(_f->symbols[sIndex].uv[1]);
         _uv.push_back(_f->symbols[sIndex].uv[3]);

@@ -11,6 +11,7 @@
 #include "QCBackplate.h"
 #include "TextArea.h"
 #include "CommandLine.h"
+#include "CommandInterpretor.h"
 #include "Font.h"
 
 class QuakeConsole
@@ -21,6 +22,7 @@ class QuakeConsole
 
 
         void draw();
+        void onCommand(char* p, int sz);
         void key(WPARAM wParam, bool zaglav);
 
         void toggle(){_enabled = !_enabled;};
@@ -35,6 +37,7 @@ class QuakeConsole
         QCBackplate* _qbc;
         TextArea*    _ta;
         CommandLine* _cl;
+        CommandInterpretor* _ci;
 };
 
 #endif // QUAKECONSOLE_H

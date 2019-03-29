@@ -90,7 +90,7 @@ void App::run()
 		mat4 ViewMatrix = lookAt(c->pos, c->focus);
         mat4 ModelMatrix = IDENTITY_MATRIX;
         mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
-        mat4 MVP = multymat(&temp, &ProjectionMatrix);
+        MVP = multymat(&temp, &ProjectionMatrix);
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
         glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);

@@ -85,5 +85,7 @@ typedef struct
 } Symbol;
 
 unsigned char convert(char c);
+char szlToStr(unsigned char uc);
+unsigned char* convertString(char* p, int sz);
 
 #endif // TEXTDEFS_H_INCLUDED

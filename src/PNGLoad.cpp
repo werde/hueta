@@ -165,7 +165,6 @@ PNGImageStruct* makePNG_IS(const char* path)
 
     FILE* f = fopen(path, "rb");
     fread(signature, sizeof(unsigned char), 8, f);
-    printf("%u %d %d %d %d %d %d %d\n", signature[0],signature[1],signature[2],signature[3],signature[4],signature[5],signature[6],signature[7]);
 
     void* imgData = 0;
     unsigned long szImgData = 0;
@@ -189,7 +188,6 @@ PNGImageStruct* makePNG_IS(const char* path)
         fread(crc, 1, 4, f);
 
         //memcmp
-        printf("%c%c%c%c block of length: %d\n", type[0], type[1], type[2], type[3], length);
         if (memcmp("IEND", type, 4) == 0)
         {
             break;
@@ -233,7 +231,6 @@ PNGImageStruct* makePNG_IS(const char* path)
             }
 
             is->bytes_per_pixel = is->samples_per_pixel * is->bytes_per_sample;
-            printf("is->bytes_per_pixel %d\n", is->bytes_per_pixel);
 
             szImgData = is->width*is->height*is->bytes_per_pixel + is->height;
             imgData = malloc(szImgData);
@@ -258,8 +255,6 @@ PNGImageStruct* makePNG_IS(const char* path)
     }
 
     zdecompress(imgData, rawData, szImgData, szRawData);
-
-    printf("is->bytes_per_pixel %d\n", is->bytes_per_pixel);
 
     void* trg = refilter(imgData, szImgData/is->height, is->height, is->bytes_per_pixel);
     void* trg2 = malloc(is->szPixelData);

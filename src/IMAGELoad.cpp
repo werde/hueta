@@ -12,10 +12,6 @@ GLuint loadTex(const char* path)
     char png[3] = {'p', 'n', 'g'};
     char dds[3] = {'d', 'd', 's'};
 
-    printf("%s\n%s\n", png, imgExt);
-
-    printf("memcmp(imgExt, png, 3) %d\n", memcmp(imgExt, png, 3));
-
     if (memcmp(imgExt, bmp, 3) == 0)
     {
         return loadBMP(path);

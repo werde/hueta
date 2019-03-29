@@ -1,9 +1,7 @@
 #include "BMPLoad.h"
 
-GLuint loadBMP(const char * imagepath){
-
-	printf("Reading image %s\n", imagepath);
-
+GLuint loadBMP(const char * imagepath)
+{
 	// Data read from the header of the BMP file
 	unsigned char header[54];
 	unsigned int dataPos;

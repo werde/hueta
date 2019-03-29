@@ -2,6 +2,8 @@
 #include "shaders.h"
 #include "../__trash.h"
 
+#include "../App.h"
+
 Scene::Scene()
 {
     int w = 101;
@@ -17,10 +19,15 @@ Scene::Scene()
         GLfloat y = 0;
         GLfloat z = (i/w) * stride;
 
-        _v.push_back({x,               y,               z              });
-        _v.push_back({x + stride-0.01, y,               z              });
-        _v.push_back({x,               y,               z + stride-0.01});
-        _v.push_back({x + stride-0.01, y,               z+ stride-0.01});
+        _v.push_back({x,               y,          z              });
+        _v.push_back({x,               y,          z + stride     });
+        _v.push_back({x + stride,      y,          z              });
+
+
+        _v.push_back({x,               y,               z + stride});
+        _v.push_back({x + stride,      y,               z + stride});
+        _v.push_back({x + stride,      y,               z         });
+
         //sprintf("%f %f %f \n", x, y, z);
     }
 
@@ -35,12 +42,15 @@ Scene::Scene()
 
 void Scene::render()
 {
+    glUseProgram(_sp);
+    GLuint MatrixID = glGetUniformLocation(_sp, "MVP");
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(a->MVP.m[0]));
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
 
-    glDrawArrays(GL_QUAD_STRIP, 0, _v.size());
+    glDrawArrays(GL_TRIANGLES, 0, _v.size());
 
     glDisableVertexAttribArray(0);
 }

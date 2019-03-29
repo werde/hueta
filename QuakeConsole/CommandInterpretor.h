@@ -1,6 +1,12 @@
 #ifndef COMMANDINTERPRETOR_H
 #define COMMANDINTERPRETOR_H
 
+#include <stdio.h>
+#include <memory>
+#include <zlib.h>
+
+class App;
+extern App* a;
 
 class CommandInterpretor
 {
@@ -8,8 +14,7 @@ class CommandInterpretor
         CommandInterpretor();
         virtual ~CommandInterpretor();
 
-        char* process();
-
+        char* process(char*, int);
     protected:
 
     private:

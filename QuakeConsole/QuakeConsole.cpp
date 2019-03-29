@@ -16,6 +16,7 @@ QuakeConsole::QuakeConsole() : _enabled{false}
     _qbc = new QCBackplate(_pos);
     _ta = new TextArea(_pos, f);
     _cl = new CommandLine(_pos, f);
+    _ci = new CommandInterpretor();
 }
 
 void QuakeConsole::draw()
@@ -27,6 +28,16 @@ void QuakeConsole::draw()
     _qbc->render(_bsp);
     _ta->render(_bsp);
     _cl->render(_bsp);
+}
+
+void QuakeConsole::onCommand(char* p, int sz)
+{
+    _ta->appendBuffer(p, sz);
+    unsigned char* result = _ci->process(p, sz);
+    int szRes = 6;
+    _ta->appendBuffer(result, szRes);
+
+    delete result;
 }
 
 void QuakeConsole::key(WPARAM wParam, bool zaglav)
@@ -46,7 +57,7 @@ void QuakeConsole::key(WPARAM wParam, bool zaglav)
         //_cl->right();
         break;
     case VK_RETURN:
-        _cl->enter(_ta);
+        _cl->enter(this);
         break;
     case VK_DELETE:
         _cl->delet();
@@ -54,14 +65,17 @@ void QuakeConsole::key(WPARAM wParam, bool zaglav)
     case VK_BACK:
         _cl->backspace();
         break;
+    case 0x30 ... 0x39:
+        _cl->addLetter(wParam);
+        break;
     case 0x41 ... 0x5A:
         {
+            char value = static_cast<char>(wParam);
             char l;
             if (zaglav)
-                l = convert(wParam);
+                l = value;
             else
-                l = convert(wParam + 32);
-
+                l = value + 32;
             _cl->addLetter(l);
         }
         break;

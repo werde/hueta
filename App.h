@@ -19,6 +19,7 @@ class MyWindow;
 class Renderer;
 class App
 {
+    friend CommandInterpretor;
     public:
         App();
         void cfgInit();
@@ -27,6 +28,8 @@ class App
 
         void handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam);
         void handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam);
+
+        mat4 MVP;
     private:
         void* cfg;
         void* state;

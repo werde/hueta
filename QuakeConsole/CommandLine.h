@@ -13,7 +13,7 @@
 
 #define CL_MAX_BUF 25
 
-class TextArea;
+class QuakeConsole;
 
 typedef struct
 {
@@ -30,7 +30,7 @@ class CommandLine
         void render(GLuint sp);
         void right();
         void left();
-        void enter(TextArea* ta);
+        void enter(QuakeConsole* qc);
         void delet();
         void backspace();
         void addLetter(char l);

@@ -27,10 +27,7 @@ TextArea::TextArea(Pos p, Font* f)
     _szBuf = len;
     memcpy(_buf, str, len);
 
-    for (int i = 0; i < _szBuf; i++)
-    {
-        _buf[i] = convert(_buf[i]);
-    }
+    printf("****************char %c\n", 0x30);
 
     fillvv();
 }
@@ -65,7 +62,7 @@ void TextArea::appendBuffer(char* p, int len)
 
 void TextArea::uv(int i)
 {
-    int sIndex = _buf[i];
+    int sIndex = convert(_buf[i]);
     _uv.push_back(_f->symbols[sIndex].uv[0]);
     _uv.push_back(_f->symbols[sIndex].uv[1]);
     _uv.push_back(_f->symbols[sIndex].uv[3]);
