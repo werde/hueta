@@ -25,6 +25,7 @@ class App
         void cfgInit();
         void run();
         bool resize();
+        bool changeResolution(int, int);
 
         void handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam);
         void handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam);

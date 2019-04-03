@@ -18,7 +18,7 @@
 	<GL/GL.h>
 	<GL/glext.h>
 
-1553866750 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
+1554300901 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.h
 	<iostream>
 	<Windows.h>
 	<Windowsx.h>
@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1553866741 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1554300961 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -43,12 +43,12 @@
 	"./scene/Scene.h"
 	"./src/Model.h"
 
-1553784296 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.h
+1554301821 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.h
 	<stdio.h>
 	<iostream>
 	<Windows.h>
 
-1553784318 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.cpp
+1554301831 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mywindow.cpp
 	"MyWindow.h"
 	"__trash.h"
 	"App.h"
@@ -255,7 +255,7 @@
 	<GL/gl.h>
 	<GL/glext.h>
 
-1553865899 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandinterpretor.cpp
+1554301953 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\commandinterpretor.cpp
 	"CommandInterpretor.h"
 	"../App.h"
 	"../MyWindow.h"

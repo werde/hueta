@@ -24,6 +24,7 @@ char* CommandInterpretor::process(char* p, int sz)
     }
     else if (memcmp(com2, p, sz) == 0)
     {
+        a->changeResolution(1280, 720);
         printf("res2");
     }
     else if (memcmp(com3, p, sz) == 0)

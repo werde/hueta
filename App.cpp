@@ -25,8 +25,6 @@ App::App() : _mw(NULL)
     mouseY = p.y;
 }
 
-
-
 void App::run()
 {
     ///**** window*/
@@ -128,7 +126,6 @@ void App::run()
                 c->strafe(speed*_lastFrame);
             }
         }
-
     }
 }
 
@@ -206,6 +203,15 @@ bool App::resize()
     _mw->GetSize(&rect);
     glViewport(0,0,rect.right,rect.bottom);
 
+    return true;
+}
+
+bool App::changeResolution(int w, int h)
+{
+    glViewport(0, 0, w, h);
+
+    RECT rect {0, 0, w, h};
+    _mw->setClientAreaResolution(&rect);
     return true;
 }
 

@@ -30,6 +30,7 @@ public:
 
     void GetSize(RECT* r);
     void fullscreenBorderless();
+    void setClientAreaResolution(RECT* rect);
 protected:
 
 private:

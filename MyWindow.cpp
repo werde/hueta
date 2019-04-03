@@ -99,6 +99,11 @@ void MyWindow::fullscreenBorderless()
     SetWindowPos(_hwnd, HWND_TOP, 0, 0, w, h, SWP_FRAMECHANGED);
 }
 
+void MyWindow::setClientAreaResolution(RECT* rect)
+{
+    SetWindowPos(_hwnd, HWND_TOP, 0, 0, rect->right, rect->bottom, SWP_FRAMECHANGED);
+};
+
 HDC MyWindow::GetDC()
 {
     return ::GetDC(this->_hwnd);
