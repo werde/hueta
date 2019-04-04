@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1554300961 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1554302068 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -53,7 +53,7 @@
 	"__trash.h"
 	"App.h"
 
-1553763411 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1554386415 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 	"IMAGELoad.h"
 
@@ -224,7 +224,7 @@
 	"GL/glext.h"
 	"../mat.h"
 
-1553763332 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
+1554367108 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -236,16 +236,17 @@
 1553865962 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\pngload.cpp
 	"PNGLoad.h"
 
-1553697305 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imageload.h
+1554366038 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imageload.h
 	"GL/gl.h"
 	"GL/glext.h"
 	"PNGLoad.h"
 
-1553866000 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imageload.cpp
+1554370944 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\imageload.cpp
 	"IMAGELoad.h"
 	"Model.h"
 	"PNGLoad.h"
 	"BMPLoad.h"
+	"DDSLoad.h"
 
 1553866110 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\bmpload.cpp
 	"BMPLoad.h"
@@ -265,4 +266,16 @@
 	<stdio.h>
 	<memory>
 	<zlib.h>
+
+1554383784 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.h
+	<stdio.h>
+	<ddraw.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	"dds.h"
+
+1554367768 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\dds.h
+
+1554386337 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
+	"DDSLoad.h"
 

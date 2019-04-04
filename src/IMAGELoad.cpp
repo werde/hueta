@@ -2,6 +2,7 @@
 #include "Model.h"
 #include "PNGLoad.h"
 #include "BMPLoad.h"
+#include "DDSLoad.h"
 
 GLuint loadTex(const char* path)
 {
@@ -20,9 +21,9 @@ GLuint loadTex(const char* path)
     {
         return texturePNG(makePNG_IS(path));
     }
-    else if  (memcmp(imgExt, png, 3) == 0)
+    else if  (memcmp(imgExt, dds, 3) == 0)
     {
-        return 1;//loadDDS(path);
+        return loadDDS(path);
     };
 
     return 0;
