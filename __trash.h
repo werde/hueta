@@ -58,6 +58,7 @@ extern PFNGLUNIFORM3FPROC glUniform3f;
 //extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 //extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
 //extern PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
+extern PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 
 GLboolean MyGLInit();
 #endif

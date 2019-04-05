@@ -14,7 +14,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\window.h
 
-1552916084 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
+1554457297 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 	<GL/GL.h>
 	<GL/glext.h>
 
@@ -53,7 +53,7 @@
 	"__trash.h"
 	"App.h"
 
-1554386415 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1554457489 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 	"IMAGELoad.h"
 
@@ -106,7 +106,7 @@
 1552914439 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
 	"GL/glext.h"
 
-1552916092 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
+1554457438 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
 	"__trash.h"
 
 1550825397 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.cpp
@@ -276,6 +276,7 @@
 
 1554367768 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\dds.h
 
-1554386337 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
+1554456826 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
 	"DDSLoad.h"
+	"../__trash.h"
 

@@ -30,6 +30,7 @@ extern PFNGLGENERATEMIPMAPPROC glGenerateMipmap;
 //extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 //extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
 //extern PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
+extern PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 
 
 #endif // _TRASH_H_INCLUDED

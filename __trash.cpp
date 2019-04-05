@@ -27,6 +27,7 @@ PFNGLUNIFORM3FPROC glUniform3f;
 //PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 //PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
 //PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
+PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 
 GLboolean MyGLInit()
 {
@@ -57,6 +58,7 @@ GLboolean MyGLInit()
     //glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC) wglGetProcAddress("glGenFramebuffers");
     //glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC) wglGetProcAddress("glBindFramebuffer");
     //glBlitFramebuffer = (PFNGLBLITFRAMEBUFFERPROC) wglGetProcAddress("glBlitFramebuffer");
+    glCompressedTexImage2D = (PFNGLCOMPRESSEDTEXIMAGE2DPROC) wglGetProcAddress("glCompressedTexImage2D");
 
 	return true;
 }
