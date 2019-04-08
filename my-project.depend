@@ -14,7 +14,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\window.h
 
-1554457297 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
+1554731278 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.h
 	<GL/GL.h>
 	<GL/glext.h>
 
@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1554302068 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1554732486 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -53,7 +53,7 @@
 	"__trash.h"
 	"App.h"
 
-1554457489 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
+1554732908 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.cpp
 	"Model.h"
 	"IMAGELoad.h"
 
@@ -93,7 +93,7 @@
 1553779147 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 
-1553696086 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1554731867 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"../src/Model.h"
 	"../__trash.h"
@@ -106,7 +106,7 @@
 1552914439 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
 	"GL/glext.h"
 
-1554457438 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
+1554731303 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
 	"__trash.h"
 
 1550825397 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.cpp
@@ -133,7 +133,7 @@
 	"CommandInterpretor.h"
 	"Font.h"
 
-1553697289 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
+1554728335 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\qcbackplate.cpp
 	"QCBackplate.h"
 	"../__trash.h"
 	"../src/IMAGELoad.h"
@@ -192,12 +192,12 @@
 	"TextDefs.h"
 	"Font.h"
 
-1553864987 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.cpp
+1554728404 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\textarea.cpp
 	"TextArea.h"
 	"../__trash.h"
 	"../src/IMAGELoad.h"
 
-1553697273 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\font.cpp
+1554728513 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\font.cpp
 	"Font.h"
 	"../__trash.h"
 	"../src/IMAGELoad.h"
@@ -224,7 +224,7 @@
 	"GL/glext.h"
 	"../mat.h"
 
-1554367108 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
+1554730264 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -276,7 +276,7 @@
 
 1554367768 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\dds.h
 
-1554456826 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
+1554473198 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
 	"DDSLoad.h"
 	"../__trash.h"
 

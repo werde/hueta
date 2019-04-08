@@ -53,6 +53,11 @@ void App::run()
     Model m;
     m.LoadObj(&m);
     _ren->registerModel(&m);
+
+    /*Model s;
+    s.LoadObj(&s, ".\\assets\\meshes\\t2.obj");
+    _ren->registerModel(&s);*/
+
     _q = new QuakeConsole();
     Scene* scene = new Scene();
 //------------------
@@ -60,11 +65,6 @@ void App::run()
     GLuint MatrixID = glGetUniformLocation(sp, "MVP");
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
-
-    for (int i=0; i<m.vt.size(); i++)
-    {
-        //printf("%f %f\n", m.vt[i].m[0], m.vt[i].m[1]);
-    }
 
     while (!_quit)
     {

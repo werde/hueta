@@ -10,14 +10,12 @@ Model::Model()
     vn.reserve(100);
 }
 
-bool Model::LoadObj(Model* m)
+bool Model::LoadObj(Model* m, const char* path = ".\\assets\\meshes\\t.obj")
 {
-    std::string path = ".\\t.obj";
-
-    FILE * f = fopen(path.c_str(), "rb");
+    FILE * f = fopen(path, "rb");
     if( f == NULL ){
         printf("Impossible to open the file !\n");
-        printf("%s\n", path.c_str());
+        printf("%s\n", path);
         return false;
     }
     printf("loadobj end !\n");
@@ -114,7 +112,7 @@ bool Model::LoadObj(Model* m)
     fclose(f);
 
     //
-    m->tex = loadTex(".\\cube.dds");
+    m->tex = loadTex(".\\assets\\t.dds");
 
     return true;
 }

@@ -50,7 +50,6 @@ void TextArea::appendBuffer(char* p, int len)
         int free = TA_MAX_BUF - _szBuf;
         int toCopy = _szBuf - (len + 1 - free);
 
-        printf("%d %d %d", _szBuf, len, toCopy);
         memcpy(pStart, pStart + (len + 1 - free), toCopy);
         memcpy(pStart + toCopy, p, len);
         _buf[TA_MAX_BUF-1] = '\n';

@@ -29,7 +29,7 @@ QCBackplate::QCBackplate(Pos p)
     glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
 
     //_tex = loadBMP_custom(".\\QCbg.bmp");
-    _tex = loadTex(".\\QCbg.png");
+    _tex = loadTex(".\\assets\\QCbg.png");
 }
 
 void QCBackplate::render(GLuint sp)

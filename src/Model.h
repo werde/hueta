@@ -17,7 +17,7 @@ class Model
         Model();
         virtual ~Model();
 
-    static bool LoadObj(Model* m);
+    static bool LoadObj(Model* m, const char* path = ".\\assets\\meshes\\t.obj");
 
     std::vector<vec3> v;
     std::vector<vec2> vt;

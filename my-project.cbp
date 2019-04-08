@@ -66,6 +66,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="mat.cpp" />
 		<Unit filename="mat.h" />
+		<Unit filename="scene/Entity.cpp" />
+		<Unit filename="scene/Entity.h" />
 		<Unit filename="scene/Scene.cpp" />
 		<Unit filename="scene/Scene.h" />
 		<Unit filename="src/BMPLoad.cpp" />

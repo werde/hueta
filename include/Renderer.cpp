@@ -44,6 +44,11 @@ void Renderer::render()
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
         glDrawArrays(GL_TRIANGLES, 0, m->v.size());
+        /*
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mos[i].vbo);
+        int size;
+        glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+        glDrawElements(GL_TRIANGLES, size/sizeof(GLushort), GL_UNSIGNED_SHORT, 0);*/
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

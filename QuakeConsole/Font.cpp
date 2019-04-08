@@ -37,7 +37,7 @@ Font::Font(int w, int h)
         }
 
     /// Load font texture
-    tex = loadTex(".\\shizzle_i.png");
+    tex = loadTex(".\\assets\\shizzle_i.png");
 }
 
 Font::~Font()
