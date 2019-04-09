@@ -7,7 +7,7 @@
 #include "Renderer.h"
 
 #include "./scene/Scene.h"
-#include "./src/Model.h"
+#include "./scene/Entity.h"
 
 App::App() : _mw(NULL)
 {
@@ -48,21 +48,19 @@ void App::run()
                     1.0f, -1.0f,  0.0f,
                     0.0f, 1.0f,  0.0f
                     };
-    GLfloat ex_Color[3] = {0.3,0.2,0.6};
+    GLfloat ex_Color[3] = {0.3, 0.2, 0.6};
 
-    Model m;
-    m.LoadObj(&m);
-    _ren->registerModel(&m);
+    Entity e {".\\assets\\meshes\\spider.obj", ".\\assets\\uvmap.dds"};
+    _ren->registerEntity(&e);
 
-    /*Model s;
-    s.LoadObj(&s, ".\\assets\\meshes\\t2.obj");
-    _ren->registerModel(&s);*/
+    Entity e2 {".\\assets\\meshes\\t2.obj", ".\\assets\\uvmap.dds"};
+    _ren->registerEntity(&e2);
 
     _q = new QuakeConsole();
     Scene* scene = new Scene();
 //------------------
 
-    GLuint MatrixID = glGetUniformLocation(sp, "MVP");
+
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
 
@@ -78,23 +76,11 @@ void App::run()
         }
 
         ///*Rendering part
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);;
         glUseProgram(sp);
 
-        RECT hwRect;
-        _mw->GetSize(&hwRect);
-        GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
-		mat4 ProjectionMatrix = perspective(45.0f, hwratio, 0.1f, 100.0f);
-		mat4 ViewMatrix = lookAt(c->pos, c->focus);
-        mat4 ModelMatrix = IDENTITY_MATRIX;
-        mat4 temp = multymat(&ViewMatrix, &ModelMatrix);
-        MVP = multymat(&temp, &ProjectionMatrix);
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
-
-        glUniform3f(ex_ColorID, ex_Color[0], ex_Color[1], ex_Color[2]);
-
-        _ren->render();
-        scene->render();
+        _ren->render(sp);
+        //scene->render();
         _q->draw();
 
         SwapBuffers(myHDC);
@@ -185,13 +171,13 @@ bool App::InitGLVars()
 
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.5f, 0.2f, 0.5f, 0.5f);				// Black Background
-//	glClearDepth(1.0f);									// Depth Buffer Setup
-//	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
-	//glDepthFunc(GL_LESS);								// The Type Of Depth Testing To Do
+	glClearDepth(1.0f);									// Depth Buffer Setup
+	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
+	glDepthFunc(GL_LESS);								// The Type Of Depth Testing To Do
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+//  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     return true;
 }
 

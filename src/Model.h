@@ -22,13 +22,6 @@ class Model
     std::vector<vec3> v;
     std::vector<vec2> vt;
     std::vector<vec3> vn;
-
-    GLuint tex;
-    GLenum activeTex;
-
-    protected:
-
-    private:
 };
 
 #endif // MODEL_H

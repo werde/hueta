@@ -68,5 +68,7 @@ void normalizevec4(vec4* v);
 vec4 crossvec4(vec4 v1, vec4 v2);
 float dotvec4(vec4 v1, vec4 v2);
 mat4 lookAt(vec4 pos, vec4 dir);
+void scale(const mat4* m, float x, float y, float z);
+void translate(const mat4* m, float x, float y, float z);
 
 #endif // MAT_H_INCLUDED

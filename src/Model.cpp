@@ -4,7 +4,6 @@
 
 Model::Model()
 {
-    tex = 0;
     v.reserve(100);
     vt.reserve(100);
     vn.reserve(100);
@@ -13,7 +12,8 @@ Model::Model()
 bool Model::LoadObj(Model* m, const char* path = ".\\assets\\meshes\\t.obj")
 {
     FILE * f = fopen(path, "rb");
-    if( f == NULL ){
+    if( f == NULL )
+    {
         printf("Impossible to open the file !\n");
         printf("%s\n", path);
         return false;
@@ -110,9 +110,6 @@ bool Model::LoadObj(Model* m, const char* path = ".\\assets\\meshes\\t.obj")
     }
 
     fclose(f);
-
-    //
-    m->tex = loadTex(".\\assets\\t.dds");
 
     return true;
 }

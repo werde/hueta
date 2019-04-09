@@ -44,7 +44,7 @@ void Scene::render()
 {
     glUseProgram(_sp);
     GLuint MatrixID = glGetUniformLocation(_sp, "MVP");
-    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(a->MVP.m[0]));
+//    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(a->MVP.m[0]));
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);

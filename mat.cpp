@@ -96,3 +96,24 @@ mat4 lookAt(vec4 pos, vec4 dir) {
 	out.m[14] =  dotvec4(f, pos);
 	return out;
 }
+
+void scale(const mat4* m, float x, float y, float z)
+{
+	mat4 scale = IDENTITY_MATRIX;
+    mat4 temp;
+	scale.m[0]  = x;
+	scale.m[5]  = y;
+	scale.m[10] = z;
+    temp = multymat(m, &scale);
+	memcpy(m->m, temp.m, sizeof(m->m));
+}
+void translate(const mat4* m, float x, float y, float z)
+{
+	mat4 translation = IDENTITY_MATRIX;
+    mat4 temp;
+	translation.m[12] = x;
+	translation.m[13] = y;
+	translation.m[14] = z;
+    temp = multymat(m, &translation);
+	memcpy(m->m, temp.m, sizeof(m->m));
+}

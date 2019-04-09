@@ -3,6 +3,8 @@
 
 #include <GL/gl.h>
 
+#include "../mat.h"
+
 class Model;
 
 class Entity
@@ -13,7 +15,7 @@ public:
 
     Model*  _m;
     GLuint* _t;
-    mat3 _pos;
+    vec3 _pos;
 private:
 };
 

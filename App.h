@@ -30,7 +30,8 @@ class App
         void handleKeyDown(UINT msg, WPARAM wParam, LPARAM lParam);
         void handleMouseMove(UINT msg, WPARAM wParam, LPARAM lParam);
 
-        mat4 MVP;
+        Camera* c;
+        MyWindow* _mw;
     private:
         void* cfg;
         void* state;
@@ -42,9 +43,6 @@ class App
         int _counter = 0;
         float _lastFrame;
 
-
-        MyWindow* _mw;
-        Camera* c;
         Renderer* _ren;
         HGLRC _ctx;
 
