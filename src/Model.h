@@ -22,6 +22,9 @@ class Model
     std::vector<vec3> v;
     std::vector<vec2> vt;
     std::vector<vec3> vn;
+
+    GLuint vbo=0, uvbo=0, nvo=0;
+    bool registered = false;
 };
 
 #endif // MODEL_H

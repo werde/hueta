@@ -14,7 +14,7 @@ App::App() : _mw(NULL)
     char buf[1024];
     GetModuleFileNameA(NULL, buf, 1024);
 
-    _ren = new Renderer();
+
     c = new Camera();
 
     printf("%s\n", buf);
@@ -50,11 +50,11 @@ void App::run()
                     };
     GLfloat ex_Color[3] = {0.3, 0.2, 0.6};
 
-    Entity e {".\\assets\\meshes\\spider.obj", ".\\assets\\uvmap.dds"};
+    /*Entity e {".\\assets\\meshes\\spider.obj", ".\\assets\\uvmap.dds"};
     _ren->registerEntity(&e);
 
     Entity e2 {".\\assets\\meshes\\t2.obj", ".\\assets\\uvmap.dds"};
-    _ren->registerEntity(&e2);
+    _ren->registerEntity(&e2);*/
 
     _q = new QuakeConsole();
     Scene* scene = new Scene();
@@ -63,7 +63,7 @@ void App::run()
 
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
-
+_ren = new Renderer();
     while (!_quit)
     {
         malloc(2048);

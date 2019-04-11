@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1554820161 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1554992929 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -93,7 +93,7 @@
 1553779147 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 
-1554820167 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1554992976 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"../src/Model.h"
 	"../scene/Entity.h"
@@ -101,8 +101,9 @@
 	"../App.h"
 	"../MyWindow.h"
 	"Camera.h"
+	"../src/IMAGELoad.h"
 
-1554818211 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.h
+1554991083 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.h
 	<vector>
 	<GL/gl.h>
 	<GL/glext.h>
@@ -228,7 +229,7 @@
 	"GL/glext.h"
 	"../mat.h"
 
-1554810527 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
+1554990813 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
 	<iostream>
 	<string>
 	<vector>
@@ -284,12 +285,12 @@
 	"DDSLoad.h"
 	"../__trash.h"
 
-1554798878 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.cpp
+1554990877 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.cpp
 	"Entity.h"
 	"Model.h"
 	"IMAGELoad.h"
 
-1554793932 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.h
+1554990905 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.h
 	<GL/gl.h>
 	"../mat.h"
 

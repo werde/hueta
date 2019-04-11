@@ -11,6 +11,7 @@ class Entity
 {
 public:
     Entity(const char* p1=".\\assets\\meshes\\t.obj", const char* p2=".\\assets\\t.dds");
+    Entity::Entity(Model* m, GLuint texture);
     virtual ~Entity();
 
     Model*  _m;
