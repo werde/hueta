@@ -24,10 +24,13 @@ void QuakeConsole::draw()
     if (!_enabled) return;
 
     glUseProgram(_bsp);
+    glDisable(GL_DEPTH_TEST);
 
     _qbc->render(_bsp);
     _ta->render(_bsp);
     _cl->render(_bsp);
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 void QuakeConsole::onCommand(char* p, int sz)

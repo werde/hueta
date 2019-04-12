@@ -1,8 +1,9 @@
 #include "Scene.h"
 #include "shaders.h"
 #include "../__trash.h"
-
+#include "../MyWindow.h"
 #include "../App.h"
+#include "Camera.h"
 
 Scene::Scene()
 {
@@ -16,7 +17,7 @@ Scene::Scene()
     for (int i = 0; i < sz; i++)
     {
         GLfloat x = (i%w) * stride;
-        GLfloat y = 0;
+        GLfloat y = 6*rand()/(GLfloat)RAND_MAX;
         GLfloat z = (i/w) * stride;
 
         _v.push_back({x,               y,          z              });
@@ -42,9 +43,18 @@ Scene::Scene()
 
 void Scene::render()
 {
+    RECT hwRect;
+    a->_mw->GetSize(&hwRect);
+    GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
     glUseProgram(_sp);
+    mat4 ModelMatrix = IDENTITY_MATRIX;
+    mat4 ProjectionMatrix = perspective(45.0f, hwratio, 0.1f, 100.0f);
+    mat4 ViewMatrix = lookAt(a->c->pos, a->c->focus);
+    mat4 temp = multymat( &ModelMatrix, &ViewMatrix);
+    mat4 MVP = multymat(&temp, &ProjectionMatrix);
     GLuint MatrixID = glGetUniformLocation(_sp, "MVP");
-//    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(a->MVP.m[0]));
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
+
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);

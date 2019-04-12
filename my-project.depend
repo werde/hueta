@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1554992929 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1555077808 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -85,7 +85,7 @@
 	"GL/gl.h"
 	"GL/glext.h"
 
-1550215038 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.h
+1555079695 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.h
 	"GL/gl.h"
 	<math.h>
 	<../mat.h>
@@ -93,7 +93,7 @@
 1553779147 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 
-1554992976 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1555078257 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"../src/Model.h"
 	"../scene/Entity.h"
@@ -120,7 +120,7 @@
 1550825914 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\object.h
 	"../mat.h"
 
-1553863463 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
+1555077623 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\quakeconsole\quakeconsole.cpp
 	"QuakeConsole.h"
 	"shaders.h"
 	"../__trash.h"
@@ -217,11 +217,13 @@
 	<memory>
 	<zlib.h>
 
-1554820214 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
+1555078371 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
 	"Scene.h"
 	"shaders.h"
 	"../__trash.h"
+	"../MyWindow.h"
 	"../App.h"
+	"Camera.h"
 
 1553866769 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
 	<vector>

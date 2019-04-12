@@ -63,7 +63,7 @@ void App::run()
 
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
     GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
-_ren = new Renderer();
+    _ren = new Renderer();
     while (!_quit)
     {
         malloc(2048);
@@ -76,11 +76,11 @@ _ren = new Renderer();
         }
 
         ///*Rendering part
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);;
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(sp);
 
         _ren->render(sp);
-        //scene->render();
+        scene->render();
         _q->draw();
 
         SwapBuffers(myHDC);

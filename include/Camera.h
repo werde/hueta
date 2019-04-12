@@ -27,9 +27,11 @@ class Camera
 
         void rotate(GLfloat p, GLfloat y);
 
+        mat4 mProj;
     protected:
 
     private:
+        void proj_matrix();
 };
 
 #endif // CAMERA_H

@@ -1,5 +1,8 @@
 #include "Camera.h"
 
+#include "../App.h"
+#include "../MyWindow.h"
+
 Camera::Camera()
 {
     pos = {{0.0, 0.0, 10.0, 0.0}};
@@ -8,16 +11,8 @@ Camera::Camera()
 
     yaw = 0;
     pitch = 0;
-/*
-    const float hpi = 1.5707963;
-    if(pitch > hpi) pitch = hpi;
-    if(pitch < -hpi) pitch = -hpi;
-    float cosp = cos(pitch);
-    focus.x = cosp * sin(yaw);
-    focus.y = sin(pitch);
-    focus.z = -cosp * cos(yaw);
-    side = crossvec4(focus, Y_AXIS);
-    normalizevec4(&side);*/
+
+    proj_matrix();
 }
 
 Camera::~Camera()
@@ -60,4 +55,12 @@ void Camera::rotate(GLfloat p, GLfloat y)
     focus.z = -cosp * cos(yaw);
     side = crossvec4(focus, Y_AXIS);
     normalizevec4(&side);
+}
+
+void Camera::proj_matrix()
+{
+    RECT hwRect;
+    a->_mw->GetSize(&hwRect);
+    GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
+    mProj = perspective(45.0f, hwratio, 0.1f, 100.0f);
 }
