@@ -6,7 +6,7 @@
 	<iostream>
 	<Windows.h>
 
-1550757624 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\main.cpp
+1555421959 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\main.cpp
 	"App.h"
 
 1544600206 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\window.cpp
@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1555077808 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1555425376 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -90,10 +90,12 @@
 	<math.h>
 	<../mat.h>
 
-1553779147 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
+1555422001 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
+	"../App.h"
+	"../MyWindow.h"
 
-1555078257 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1555425849 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"../src/Model.h"
 	"../scene/Entity.h"
@@ -283,16 +285,16 @@
 
 1554367768 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\dds.h
 
-1554473198 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
+1555423753 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\ddsload.cpp
 	"DDSLoad.h"
 	"../__trash.h"
 
-1554990877 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.cpp
+1555423579 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.cpp
 	"Entity.h"
 	"Model.h"
 	"IMAGELoad.h"
 
-1554990905 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.h
+1555425490 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.h
 	<GL/gl.h>
 	"../mat.h"
 

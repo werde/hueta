@@ -7,7 +7,7 @@ GLuint loadDDS(const char * imagepath)
 	DDS_HEADER header;
 
 	FILE *fp;
-
+    printf("%s could not be\n", imagepath);
 	/* try to open the file */
 	fp = fopen(imagepath, "rb");
 	if (fp == NULL){

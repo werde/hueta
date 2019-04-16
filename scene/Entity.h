@@ -15,7 +15,7 @@ public:
     virtual ~Entity();
 
     Model*  _m;
-    GLuint* _t;
+    GLuint _t;
     vec3 _pos;
 private:
 };

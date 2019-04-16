@@ -29,8 +29,9 @@ void Renderer::registerModel(Model* m)
 void Renderer::registerEntity(Entity* e)
 {
     registerModel(e->_m);
-
-    _es.push_back(e);
+    printf("\n1Renderer %x \n", e);
+    _es.push_back(0);
+    printf("\n2Renderer\n");
 }
 
 void Renderer::render(GLuint sp)
@@ -43,15 +44,17 @@ void Renderer::render(GLuint sp)
 
     for (int i = 0; i < _es.size(); i++)
     {
+        printf("ren Renderer\n");
         mat4 ModelMatrix = IDENTITY_MATRIX;
-        translate(&ModelMatrix, _es[i]->_pos.x, _es[i]->_pos.y, _es[i]->_pos.z);
+        //translate(&ModelMatrix, _es[i]->_pos.x, _es[i]->_pos.y, _es[i]->_pos.z);
+
         mat4 temp = multymat( &ModelMatrix, &ViewMatrix);
         mat4 MVP = multymat(&temp, &ProjectionMatrix);
         GLuint MatrixID = glGetUniformLocation(sp, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
         GLuint TextureID;
-        Model* m = _es[i]->_m;
+        Model* m = _es[i]->_m;printf("t Renderer\n");
         GLuint tex = _es[i]->_t;
 
         glActiveTexture(tex);
@@ -82,15 +85,18 @@ void Renderer::render(GLuint sp)
 
 Renderer::Renderer()
 {
+    //_es.reserve(10);
     Model* m = new Model();
-    m->LoadObj(m, ".\\assets\\meshes\\t2.obj");
-    GLuint t = loadTex(".\\assets\\t.dds");
-    for (int i = 0; i < 9; i++)
+    m->LoadObj(m, ".\\assets\\meshes\\t.obj");
+    GLuint t = loadTex(".\\assets\\uvmap.dds");
+    for (int i = 0; i < 3; i++)
     {
-        Entity* e = new Entity(".\\assets\\meshes\\t2.obj", ".\\assets\\uvmap.dds");
+        Entity* e = new Entity(m, t);
         registerEntity(e);
         GLfloat fx = 16*(std::rand()/(GLfloat)RAND_MAX);
         e->_pos.x = fx;
+        e->_pos.y = 0.0;
+        e->_pos.z = 0.0;
     }
 }
 

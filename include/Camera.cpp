@@ -12,7 +12,7 @@ Camera::Camera()
     yaw = 0;
     pitch = 0;
 
-    proj_matrix();
+    //proj_matrix();
 }
 
 Camera::~Camera()
@@ -59,8 +59,8 @@ void Camera::rotate(GLfloat p, GLfloat y)
 
 void Camera::proj_matrix()
 {
-    RECT hwRect;
+    /*RECT hwRect;
     a->_mw->GetSize(&hwRect);
     GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
-    mProj = perspective(45.0f, hwratio, 0.1f, 100.0f);
+    mProj = perspective(45.0f, hwratio, 0.1f, 100.0f);*/
 }

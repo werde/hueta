@@ -9,6 +9,7 @@ Entity::Entity(const char* p1=".\\assets\\meshes\\t.obj", const char* p2=".\\ass
     _m = new Model();
     _m->LoadObj(_m, p1);
     _t=loadTex(p2);
+    printf("%skoko%d", p2, _t);
 }
 
 Entity::Entity(Model* m, GLuint texture)

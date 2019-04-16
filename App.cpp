@@ -51,10 +51,10 @@ void App::run()
     GLfloat ex_Color[3] = {0.3, 0.2, 0.6};
 
     /*Entity e {".\\assets\\meshes\\spider.obj", ".\\assets\\uvmap.dds"};
-    _ren->registerEntity(&e);
+    _ren->registerEntity(&e);*/
 
-    Entity e2 {".\\assets\\meshes\\t2.obj", ".\\assets\\uvmap.dds"};
-    _ren->registerEntity(&e2);*/
+    /*Entity* e2 = new Entity(".\\assets\\meshes\\t2.obj", ".\\assets\\t2.dds");
+    _ren->registerEntity(e2);*/
 
     _q = new QuakeConsole();
     Scene* scene = new Scene();
