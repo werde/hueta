@@ -7,9 +7,28 @@
 #include "Camera.h"
 #include "../src/IMAGELoad.h"
 
+Renderer::Renderer()
+{
+    _es.reserve(10);
+    printf("#%d \n", _es.size());
+    Model* m = new Model();
+    m->LoadObj(m, ".\\assets\\meshes\\t2.obj");
+    GLuint t = loadTex(".\\assets\\t2.png");
+    for (int i = 0; i < 3; i++)
+    {
+        Entity* e = new Entity(m, t);
+        registerEntity(e);
+        GLfloat fx = 16*(std::rand()/(GLfloat)RAND_MAX);
+        e->_pos.x = fx;
+        e->_pos.y = 0.0;
+        e->_pos.z = 0.0;
+    }
+}
+
 GLuint Renderer::registerBuffer(int sz, const GLvoid* data, GLenum usage=GL_STATIC_DRAW)
 {
-    GLuint bo;
+    printf("sz %d, data %d\n", sz, data);
+    GLuint bo = 0;
     glGenBuffers(1, &bo);
     glBindBuffer(GL_ARRAY_BUFFER, bo);
     glBufferData(GL_ARRAY_BUFFER, sz, data, usage);
@@ -19,19 +38,22 @@ GLuint Renderer::registerBuffer(int sz, const GLvoid* data, GLenum usage=GL_STAT
 
 void Renderer::registerModel(Model* m)
 {
+    printf("registereing model %d\n", m);
     if (m->registered) return;
+
+    printf("%d %d\n", m->vbo, m->uvbo);
 
     m->vbo = registerBuffer(m->v.size()*sizeof(vec3), &(m->v[0]));
     m->uvbo = registerBuffer(m->vt.size()*sizeof(vec2), &(m->vt[0]));
     m->registered = true;
+    printf("registered model %d\n", m);
 }
 
 void Renderer::registerEntity(Entity* e)
 {
     registerModel(e->_m);
-    printf("\n1Renderer %x \n", e);
-    _es.push_back(0);
-    printf("\n2Renderer\n");
+    _es.push_back(e);
+    printf("#%d \n", _es.size());
 }
 
 void Renderer::render(GLuint sp)
@@ -44,9 +66,11 @@ void Renderer::render(GLuint sp)
 
     for (int i = 0; i < _es.size(); i++)
     {
+        printf("#%d %d \n", i, _es.size());
+
         printf("ren Renderer\n");
         mat4 ModelMatrix = IDENTITY_MATRIX;
-        //translate(&ModelMatrix, _es[i]->_pos.x, _es[i]->_pos.y, _es[i]->_pos.z);
+        translate(&ModelMatrix, _es[i]->_pos.x, _es[i]->_pos.y, _es[i]->_pos.z);
 
         mat4 temp = multymat( &ModelMatrix, &ViewMatrix);
         mat4 MVP = multymat(&temp, &ProjectionMatrix);
@@ -54,7 +78,7 @@ void Renderer::render(GLuint sp)
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
         GLuint TextureID;
-        Model* m = _es[i]->_m;printf("t Renderer\n");
+        Model* m = _es[i]->_m;
         GLuint tex = _es[i]->_t;
 
         glActiveTexture(tex);
@@ -78,25 +102,8 @@ void Renderer::render(GLuint sp)
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-        //_es[i]->_pos.z += 0.01;
-        //_es[i]->_pos.y += 0.01;
-    }
-}
-
-Renderer::Renderer()
-{
-    //_es.reserve(10);
-    Model* m = new Model();
-    m->LoadObj(m, ".\\assets\\meshes\\t.obj");
-    GLuint t = loadTex(".\\assets\\uvmap.dds");
-    for (int i = 0; i < 3; i++)
-    {
-        Entity* e = new Entity(m, t);
-        registerEntity(e);
-        GLfloat fx = 16*(std::rand()/(GLfloat)RAND_MAX);
-        e->_pos.x = fx;
-        e->_pos.y = 0.0;
-        e->_pos.z = 0.0;
+        _es[i]->_pos.z += 0.01;
+        _es[i]->_pos.y += 0.01;
     }
 }
 

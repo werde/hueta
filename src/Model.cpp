@@ -7,6 +7,8 @@ Model::Model()
     v.reserve(100);
     vt.reserve(100);
     vn.reserve(100);
+
+
 }
 
 bool Model::LoadObj(Model* m, const char* path = ".\\assets\\meshes\\t.obj")
