@@ -58,14 +58,38 @@ void generateHeightMap(int w, int h)
 
 }
 
-void perlin(float x, float y)
+double grad(int h, double x, double y)
+{
+    switch(h & 0xF)
+    {
+        case 0x0: return  x + y;
+        case 0x1: return -x + y;
+        case 0x2: return  x - y;
+        case 0x3: return -x - y;
+        case 0x4: return  x + y;
+        case 0x5: return -x + y;
+        case 0x6: return  x - y;
+        case 0x7: return -x - y;
+        case 0x8: return  x + y;
+        case 0x9: return -x + y;
+        case 0xA: return  x - y;
+        case 0xB: return -x - y;
+        case 0xC: return  x + y;
+        case 0xD: return -x + y;
+        case 0xE: return  x - y;
+        case 0xF: return -x - y;
+        default: return 0; // never happens
+    }
+}
+
+double perlin(float x, float y)
 {
     int p[512];
     for(int i=0;i<512;i++) {
         p[i] = permutation[i%256];
     }
 
-    int xi = (int)x % 255;
+    int ix = (int)x % 255;
     int iy = (int)y % 255;
 
     double dx = x - (int)x;
@@ -75,17 +99,21 @@ void perlin(float x, float y)
     double v = fade(dy);
 
     int aa, ab, ba, bb;
-    aaa = p[p[p[    xi ]+    yi ]];
-    aba = p[p[p[    xi ]+inc(yi)]];
-    aab = p[p[p[    xi ]+    yi ]];
-    abb = p[p[p[    xi ]+inc(yi)]+inc(zi)];
-    baa = p[p[p[inc(xi)]+    yi ]+    zi ];
-    bba = p[p[p[inc(xi)]+inc(yi)]+    zi ];
-    bab = p[p[p[inc(xi)]+    yi ]+inc(zi)];
-    bbb = p[p[p[inc(xi)]+inc(yi)]+inc(zi)];
+    aa = p[p[ix    ] + iy    ];
+    ab = p[p[ix    ] + iy + 1];
+    ba = p[p[ix + 1] + iy    ];
+    bb = p[p[ix + 1] + iy + 1];
 
+    double x1, x2, y1, y2;
+    x1 = lerp(  grad (aa, dx  , dy),           // The gradient function calculates the dot product between a pseudorandom
+                grad (ba, dx-1, dy),             // gradient vector and the vector from the input coordinate to the 8
+                u);                                     // surrounding points in its unit cube.
+    x2 = lerp(  grad (ab, dx  , dy-1),           // This is all then lerped together as a sort of weighted average based on the faded (u,v,w)
+                grad (bb, dx-1, dy-1),             // values we made earlier.
+                u);
+    y1 = lerp(x1, x2, v);
 
-
+    return y1;
 }
 
 Scene::Scene()
@@ -100,17 +128,25 @@ Scene::Scene()
     for (int i = 0; i < sz; i++)
     {
         GLfloat x = (i%w) * stride;
-        GLfloat y = 6*rand()/(GLfloat)RAND_MAX;
         GLfloat z = (i/w) * stride;
+        heights[i] = perlin(x, z);
+    }
 
-        _v.push_back({x,               y,          z              });
-        _v.push_back({x,               y,          z + stride     });
-        _v.push_back({x + stride,      y,          z              });
+    for (int i = 0; i < sz; i++)
+    {
+        GLfloat x = (i%w) * stride; //i = i/w + i%w
+        GLfloat z = (i/w) * stride;
+        GLfloat y = heights[i];//perlin(128*x, 128*y);//6*rand()/(GLfloat)RAND_MAX;
 
 
-        _v.push_back({x,               y,               z + stride});
-        _v.push_back({x + stride,      y,               z + stride});
-        _v.push_back({x + stride,      y,               z         });
+        _v.push_back({x,               heights[i],    z              });
+        _v.push_back({x,               heights[i + w],z + stride     });
+        _v.push_back({x + stride,      heights[i + 1],z              });
+
+
+        _v.push_back({x,               heights[i + w],    z + stride});
+        _v.push_back({x + stride,      heights[i + w + 1],z + stride});
+        _v.push_back({x + stride,      heights[i + 1],    z         });
 
         //sprintf("%f %f %f \n", x, y, z);
     }

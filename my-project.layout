@@ -2,14 +2,19 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
+	<File name="QuakeConsole\TextArea.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1568" topLine="83" />
+		</Cursor>
+	</File>
 	<File name="src\BMPLoad.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="64" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextDefs.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="__trash.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2866" topLine="0" />
+			<Cursor1 position="1024" topLine="10" />
 		</Cursor>
 	</File>
 	<File name="src\BMPLoad.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
@@ -17,9 +22,9 @@
 			<Cursor1 position="105" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QCTextBuffer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="QuakeConsole\TextDefs.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="135" topLine="0" />
+			<Cursor1 position="2866" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\DDSLoad.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,9 +32,9 @@
 			<Cursor1 position="158" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="__trash.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="QCTextBuffer.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1215" topLine="25" />
+			<Cursor1 position="135" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\DDSLoad.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -37,14 +42,14 @@
 			<Cursor1 position="196" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="__trash.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1215" topLine="25" />
+		</Cursor>
+	</File>
 	<File name="src\IMAGELoad.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="112" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\CommandLine.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="888" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\IMAGELoad.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -52,9 +57,9 @@
 			<Cursor1 position="240" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\CommandLine.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+	<File name="QuakeConsole\CommandLine.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="822" topLine="36" />
+			<Cursor1 position="888" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Model.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -62,24 +67,29 @@
 			<Cursor1 position="134" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="QuakeConsole\CommandLine.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="822" topLine="36" />
+		</Cursor>
+	</File>
+	<File name="src\Model.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="138" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="QuakeConsole\QuakeConsole.h" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="672" topLine="13" />
 		</Cursor>
 	</File>
-	<File name="src\Model.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="src\PNGLoad.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="138" topLine="4" />
+			<Cursor1 position="7520" topLine="242" />
 		</Cursor>
 	</File>
 	<File name="App.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1097" topLine="36" />
-		</Cursor>
-	</File>
-	<File name="src\PNGLoad.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7520" topLine="242" />
 		</Cursor>
 	</File>
 	<File name="src\PNGLoad.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
@@ -102,14 +112,14 @@
 			<Cursor1 position="220" topLine="34" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextArea.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="206" topLine="16" />
-		</Cursor>
-	</File>
 	<File name="include\Camera.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="475" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="QuakeConsole\TextArea.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="206" topLine="16" />
 		</Cursor>
 	</File>
 	<File name="QuakeConsole\QuakeConsole.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
@@ -122,19 +132,14 @@
 			<Cursor1 position="2914" topLine="84" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\QCBackplate.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="857" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="include\Renderer.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="893" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\TextDefs.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="QuakeConsole\QCBackplate.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1338" topLine="59" />
+			<Cursor1 position="857" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\Renderer.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
@@ -142,9 +147,9 @@
 			<Cursor1 position="247" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="MyWindow.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="QuakeConsole\TextDefs.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="603" topLine="6" />
+			<Cursor1 position="1338" topLine="59" />
 		</Cursor>
 	</File>
 	<File name="include\shaders.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -152,9 +157,9 @@
 			<Cursor1 position="123" topLine="13" />
 		</Cursor>
 	</File>
-	<File name="App.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="MyWindow.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="899" topLine="25" />
+			<Cursor1 position="603" topLine="6" />
 		</Cursor>
 	</File>
 	<File name="include\shaders.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -162,9 +167,9 @@
 			<Cursor1 position="136" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\Font.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="App.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="112" topLine="0" />
+			<Cursor1 position="899" topLine="22" />
 		</Cursor>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -172,9 +177,9 @@
 			<Cursor1 position="164" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\QCBackplate.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="QuakeConsole\Font.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="274" topLine="0" />
+			<Cursor1 position="112" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="mat.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -182,9 +187,9 @@
 			<Cursor1 position="2387" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\CommandInterpretor.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="QuakeConsole\QCBackplate.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="506" topLine="11" />
+			<Cursor1 position="274" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="mat.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
@@ -192,9 +197,9 @@
 			<Cursor1 position="1588" topLine="12" />
 		</Cursor>
 	</File>
-	<File name="QCTextBuffer.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="QuakeConsole\CommandInterpretor.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="279" topLine="0" />
+			<Cursor1 position="506" topLine="11" />
 		</Cursor>
 	</File>
 	<File name="scene\Entity.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
@@ -202,9 +207,9 @@
 			<Cursor1 position="292" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="QuakeConsole\CommandInterpretor.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="QCTextBuffer.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="148" topLine="0" />
+			<Cursor1 position="279" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="scene\Entity.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
@@ -212,29 +217,24 @@
 			<Cursor1 position="220" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="QuakeConsole\CommandInterpretor.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="148" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="scene\Scene.cpp" open="1" top="1" tabpos="14" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4816" topLine="127" />
+		</Cursor>
+	</File>
 	<File name="QuakeConsole\Font.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="633" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="scene\Scene.cpp" open="1" top="1" tabpos="14" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2487" topLine="57" />
-		</Cursor>
-	</File>
-	<File name="QuakeConsole\TextArea.cpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1568" topLine="83" />
-		</Cursor>
-	</File>
 	<File name="scene\Scene.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="151" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="__trash.cpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1024" topLine="10" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
