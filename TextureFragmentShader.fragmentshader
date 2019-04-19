@@ -2,8 +2,6 @@
 
 uniform sampler2D myTextureSampler;
 
-uniform vec3 ex_Color;
-
 varying vec2 UV;
 
 void main()

@@ -66,9 +66,6 @@ void Renderer::render(GLuint sp)
 
     for (int i = 0; i < _es.size(); i++)
     {
-        printf("#%d %d \n", i, _es.size());
-
-        printf("ren Renderer\n");
         mat4 ModelMatrix = IDENTITY_MATRIX;
         translate(&ModelMatrix, _es[i]->_pos.x, _es[i]->_pos.y, _es[i]->_pos.z);
 
@@ -77,7 +74,7 @@ void Renderer::render(GLuint sp)
         GLuint MatrixID = glGetUniformLocation(sp, "MVP");
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &(MVP.m[0]));
 
-        GLuint TextureID;
+        GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
         Model* m = _es[i]->_m;
         GLuint tex = _es[i]->_t;
 

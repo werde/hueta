@@ -34,7 +34,7 @@
 
 1544600203 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\window.h
 
-1555500603 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
+1555682228 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\app.cpp
 	"App.h"
 	"shaders.h"
 	"MyWindow.h"
@@ -73,7 +73,7 @@
 1554814476 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\mat.cpp
 	"mat.h"
 
-1553866073 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
+1555684799 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\shaders.cpp
 	"shaders.h"
 	"../__trash.h"
 
@@ -95,7 +95,7 @@
 	"../App.h"
 	"../MyWindow.h"
 
-1555500615 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
+1555684939 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\renderer.cpp
 	"Renderer.h"
 	"../src/Model.h"
 	"../scene/Entity.h"
@@ -219,15 +219,16 @@
 	<memory>
 	<zlib.h>
 
-1555595901 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
+1555684965 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
 	"Scene.h"
 	"shaders.h"
 	"../__trash.h"
 	"../MyWindow.h"
 	"../App.h"
 	"Camera.h"
+	"../src/IMAGELoad.h"
 
-1553866769 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
+1555684583 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
 	<vector>
 	"GL/gl.h"
 	"GL/glext.h"

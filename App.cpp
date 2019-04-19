@@ -47,7 +47,6 @@ void App::run()
                     1.0f, -1.0f,  0.0f,
                     0.0f, 1.0f,  0.0f
                     };
-    GLfloat ex_Color[3] = {0.3, 0.2, 0.6};
 
     _ren = new Renderer();
     Entity e {".\\assets\\meshes\\spider.obj", ".\\assets\\uvmap.dds"};
@@ -62,7 +61,6 @@ void App::run()
 
 
     GLuint TextureID = glGetUniformLocation(sp, "myTextureSampler");
-    GLuint ex_ColorID = glGetUniformLocation(sp, "ex_Color");
     while (!_quit)
     {
         malloc(2048);

@@ -41,7 +41,7 @@ void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* f
 	if ( InfoLogLength > 0 ){
 		char VertexShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(vertexShader, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-		//printf("vert %s\n", &VertexShaderErrorMessage[0]);
+		printf("vert %s\n", &VertexShaderErrorMessage[0]);
 	}
 
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &Result);
@@ -49,7 +49,7 @@ void compileShaderProgramm(GLuint* sp, const char* file_path_vert, const char* f
 	if ( InfoLogLength > 0 ){
 		char FragmentShaderErrorMessage[InfoLogLength+1];
 		glGetShaderInfoLog(fragmentShader, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-		//printf("frag %s\n", &FragmentShaderErrorMessage[0]);
+		printf("frag %s\n", &FragmentShaderErrorMessage[0]);
 	}
 
     glAttachShader(*sp, vertexShader);
