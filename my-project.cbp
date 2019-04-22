@@ -55,6 +55,8 @@
 		<Unit filename="__trash.cpp" />
 		<Unit filename="__trash.h" />
 		<Unit filename="_trash.h" />
+		<Unit filename="algo/perlin.cpp" />
+		<Unit filename="algo/perlin.h" />
 		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Object.cpp" />

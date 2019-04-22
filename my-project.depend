@@ -219,7 +219,7 @@
 	<memory>
 	<zlib.h>
 
-1555684965 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
+1555944117 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
 	"Scene.h"
 	"shaders.h"
 	"../__trash.h"
@@ -227,6 +227,7 @@
 	"../App.h"
 	"Camera.h"
 	"../src/IMAGELoad.h"
+	"../algo/perlin.h"
 
 1555684583 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
 	<vector>
@@ -298,4 +299,9 @@
 1555494598 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\entity.h
 	<GL/gl.h>
 	"../mat.h"
+
+1555944100 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.cpp
+	"perlin.h"
+
+1555943670 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.h
 
