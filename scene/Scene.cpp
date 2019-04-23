@@ -10,25 +10,28 @@
 
 Scene::Scene()
 {
-    int w = 101;
+    int w = 100;
     int sz = w*w;
     GLfloat heights[sz];
+    double* hts;
     memset(heights, 0, sizeof(GLfloat)*sz);
 
-    GLfloat stride = 5*0.1;
+    GLfloat stride = 10*0.11;
 
     for (int i = 0; i < sz; i++)
     {
         GLfloat x = (i%w) * stride;
         GLfloat z = (i/w) * stride;
-        heights[i] = octavePerlin(x, z);
+        heights[i] = 10.0*octavePerlin(x, z);
+
+        hts = tperlin(w, 4);
     }
 
     for (int i = 0; i < sz; i++)
     {
         GLfloat x = (i%w) * stride; //i = i/w + i%w
         GLfloat z = (i/w) * stride;
-        GLfloat y = heights[i];//perlin(128*x, 128*y);//6*rand()/(GLfloat)RAND_MAX;
+        GLfloat y = hts[i];//perlin(128*x, 128*y);//6*rand()/(GLfloat)RAND_MAX;
 
 
         _v.push_back({x,               heights[i],    z              });

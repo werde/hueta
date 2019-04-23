@@ -16,9 +16,9 @@ int permutation[256] =
     138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
 };
 
-float lerp(float a0, float a1, float w)
+double lerp(float a0, float a1, float w)
 {
-    return (1.0f - w)*a0 + w*a1;
+    return (double)(1.0f - w)*a0 + w*a1;
 }
 
 double fade(double t)
@@ -71,11 +71,15 @@ double perlin(float x, float y)
         p[i] = permutation[i%256];
     }
 
-    int ix = (int)x % 255;
-    int iy = (int)y % 255;
+    int ix = (int)floor(x) & 255;
+    int iy = (int)floor(y) & 255;
 
-    double dx = x - (int)x;
-    double dy = y - (int)y;
+    double dx = x - (int)floor(x);
+    double dy = y - (int)floor(y);
+    //int tx = (int)floor(x)/256;
+    //int ty = (int)floor(y)/256;
+    //double dx = (x - tx*256)/256.0;
+    //double dy = (y - ty*256)/256.0;
 
     double u = fade(dx);
     double v = fade(dy);
@@ -95,6 +99,12 @@ double perlin(float x, float y)
                 u);
     y1 = lerp(x1, x2, v);
 
+    /*printf("X - %f, Y - %f\n", x, y);
+    printf("ix - %d, iy - %d\n", ix, iy);
+    printf("dx - %f, dy - %f, u - %f, v - %f\n", dx, dy, u, v);
+    printf ("%d %d %d %d\n", aa, ab, ba, bb);
+    printf("%f %f %f\n", x1, x2, y1);*/
+
     return y1;
 }
 
@@ -102,11 +112,11 @@ double octavePerlin(float x, float y)
 {
     double r=0.0;
     double a = 1.0;
-    double freq = 2.0;
-    double persistence = 2.00;
+    double freq = 1.0;
+    double persistence = 0.7;
     double maxValue = 0.0;
 
-    int imax = 8;
+    int imax = 2;
     //if ((x < 25.0) && (y < 25.0)) imax = 2;
 
     for (int i = 0; i < imax; i++)
@@ -118,6 +128,75 @@ double octavePerlin(float x, float y)
         freq *= 2;
     }
 
-    return r;
+    return r/maxValue;
+}
+
+double* makeArray(int w)
+{
+    int sz = w*w;
+    double* ar = malloc(sz*sizeof(double));
+    srand(time(NULL));
+
+    for (int i = 0; i < sz; i++)
+    {
+        ar[i] = ((double) rand() / (RAND_MAX));
+    }
+
+    return ar;
+}
+
+void smoothArray(double* a, int w, int oct)
+{
+    int sp   = 1 << oct;
+    double sf = 1.0f / sp;
+
+    for (int i = 0; i < w; i++)
+    {
+        int i1 = (i/sp)*sp;
+        int i2 = (i1 + sp)%w;           ///%w - for wrap around
+        double blend_i = (i - i1)*sf;
+
+        for (int j = 0; j < w; j++)
+        {
+            int j1 = (j/sp)*sp;
+            int j2 = (j1 + sp)%w;           ///%w - for wrap around
+            double blend_j = (j - j1)*sf;
+
+            double x1 = lerp(a[i1*w + j1], a[i2*w + j1], blend_i);
+            double x2 = lerp(a[i1*w + j2], a[i2*w + j2], blend_i);
+                printf("first i  lioop");
+            a[i*(w-1) + j] = 0;//lerp(a[i1*w + j2], a[i2*w + j2], blend_i);
+                printf("first i  lioop");
+        }
+    }
+}
+
+double* tperlin(int w, int oct)
+{
+    int sz = w*w;
+    double* ar = malloc(sz*sizeof(double));
+    double* octaves[oct];
+    srand(time(NULL));
+
+    for (int i = 0; i < oct; i++)
+    {
+        octaves[i] = makeArray(w);
+    }
+
+    for (int i = 0; i < oct; i++)
+    {
+        smoothArray(octaves[oct], w, i);
+    }
+
+    for (int i = 0; i < sz; i++)
+    {
+        ar[i] = 0;
+        for (int o = 0; o < oct; o++)
+        {
+            ar[i] += *(octaves[o] + i);
+        }
+    }
+
+    return ar;
 }
 

@@ -219,7 +219,7 @@
 	<memory>
 	<zlib.h>
 
-1555944117 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
+1556030757 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
 	"Scene.h"
 	"shaders.h"
 	"../__trash.h"
@@ -300,8 +300,11 @@
 	<GL/gl.h>
 	"../mat.h"
 
-1555944100 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.cpp
+1556030378 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.cpp
 	"perlin.h"
 
-1555943670 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.h
+1556030765 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.h
+	<stdio.h>
+	<math.h>
+	<time.h>
 
