@@ -149,6 +149,7 @@ void smoothArray(double* a, int w, int oct)
 {
     int sp   = 1 << oct;
     double sf = 1.0f / sp;
+    printf("w=%d %d %x\n", w, sp, a);
 
     for (int i = 0; i < w; i++)
     {
@@ -164,9 +165,7 @@ void smoothArray(double* a, int w, int oct)
 
             double x1 = lerp(a[i1*w + j1], a[i2*w + j1], blend_i);
             double x2 = lerp(a[i1*w + j2], a[i2*w + j2], blend_i);
-                printf("first i  lioop");
-            a[i*(w-1) + j] = 0;//lerp(a[i1*w + j2], a[i2*w + j2], blend_i);
-                printf("first i  lioop");
+            a[i*(w-1) + j] = lerp(a[i1*w + j2], a[i2*w + j2], blend_i);
         }
     }
 }
@@ -183,17 +182,21 @@ double* tperlin(int w, int oct)
         octaves[i] = makeArray(w);
     }
 
-    for (int i = 0; i < oct; i++)
+    for (int i = 1; i < oct; i++)
     {
-        smoothArray(octaves[oct], w, i);
+        printf("#%d %x\n", i, octaves[i]);
+        smoothArray(octaves[i], w, i);
     }
 
+    float amp = 0.01;
     for (int i = 0; i < sz; i++)
     {
         ar[i] = 0;
+        amp = 1.0;
         for (int o = 0; o < oct; o++)
         {
-            ar[i] += *(octaves[o] + i);
+            ar[i] += amp * (*(octaves[o] + i));
+            amp *= 2;
         }
     }
 
