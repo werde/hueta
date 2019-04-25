@@ -156,12 +156,14 @@ void smoothArray(double* a, int w, int oct)
         int i1 = (i/sp)*sp;
         int i2 = (i1 + sp)%w;           ///%w - for wrap around
         double blend_i = (i - i1)*sf;
+        //printf("\t#i=%d; i1=%d; i2=%d\n", i, i1, i2);
 
         for (int j = 0; j < w; j++)
         {
             int j1 = (j/sp)*sp;
             int j2 = (j1 + sp)%w;           ///%w - for wrap around
             double blend_j = (j - j1)*sf;
+            //printf("\t\t#j=%d; j1=%d; j2=%d\n", j, j1, j2);
 
             double x1 = lerp(a[i1*w + j1], a[i2*w + j1], blend_i);
             double x2 = lerp(a[i1*w + j2], a[i2*w + j2], blend_i);

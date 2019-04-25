@@ -5,14 +5,12 @@
 
 Camera::Camera()
 {
-    pos = {{0.0, 0.0, 10.0, 0.0}};
+    pos   = {{0.0, 10.0, 0.0, 0.0}};
 	focus = {{1, 0, 0, 0}};
-	side = crossvec4(focus, Y_AXIS);
+	side  = crossvec4(focus, Y_AXIS);
 
     yaw = 0;
     pitch = 0;
-
-    //proj_matrix();
 }
 
 Camera::~Camera()

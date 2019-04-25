@@ -72,6 +72,8 @@
 		<Unit filename="scene/Entity.h" />
 		<Unit filename="scene/Scene.cpp" />
 		<Unit filename="scene/Scene.h" />
+		<Unit filename="scene/Terrain.cpp" />
+		<Unit filename="scene/Terrain.h" />
 		<Unit filename="src/BMPLoad.cpp" />
 		<Unit filename="src/BMPLoad.h" />
 		<Unit filename="src/DDSLoad.cpp" />

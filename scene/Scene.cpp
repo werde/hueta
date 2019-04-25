@@ -10,71 +10,26 @@
 
 Scene::Scene()
 {
-    int w = 100;
-    int sz = w*w;
-    GLfloat heights[sz];
-    double* hts;
-    memset(heights, 0, sizeof(GLfloat)*sz);
-
-    GLfloat stride = 100*0.1;
-
-    for (int i = 0; i < sz; i++)
-    {
-        GLfloat x = (i%w) * stride;
-        GLfloat z = (i/w) * stride;
-        heights[i] = 10.0*octavePerlin(x, z);
-    }
-    hts = tperlin(w, 3);
-
-    for (int i = 0; i < sz; i++)
-    {
-        GLfloat x = (i%w) * stride; //i = i/w + i%w
-        GLfloat z = (i/w) * stride;
-        GLfloat y = hts[i];//perlin(128*x, 128*y);//6*rand()/(GLfloat)RAND_MAX;
-
-
-        _v.push_back({x,               hts[i],    z              });
-        _v.push_back({x,               hts[i + w],z + stride     });
-        _v.push_back({x + stride,      hts[i + 1],z              });
-
-
-        _v.push_back({x,               hts[i + w],    z + stride});
-        _v.push_back({x + stride,      hts[i + w + 1],z + stride});
-        _v.push_back({x + stride,      hts[i + 1],    z         });
-
-        _uv.push_back({0.0, 0.0});
-        _uv.push_back({0.0, 1.0});
-        _uv.push_back({1.0, 0.0});
-
-        _uv.push_back({0.0, 1.0});
-        _uv.push_back({1.0, 1.0});
-        _uv.push_back({1.0, 0.0});
-
-        //sprintf("%f %f %f \n", x, y, z);
-    }
-
     /// Shader program
 	_sp = glCreateProgram();
     compileShaderProgramm(&_sp, ".\\terrain.vert", ".\\terrain.frag");
 
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, _v.size()*sizeof(vec3), &(_v[0]), GL_DYNAMIC_DRAW);
-
-    glGenBuffers(1, &_uvbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
-    glBufferData(GL_ARRAY_BUFFER, _uv.size()*sizeof(vec2), &(_uv[0]), GL_DYNAMIC_DRAW);
-
-    _tex=loadTex(".\\assets\\ground.dds");
+    ter = new Terrain(10, 0);
 }
 
 void Scene::render()
 {
+    GLuint _tex = ter->_tex;
+    GLuint _vbo = ter->_vbo;
+    GLuint _uvbo = ter->_uvbo;
+    vec3 pos = ter->_pos;
+
     RECT hwRect;
     a->_mw->GetSize(&hwRect);
     GLfloat hwratio = (hwRect.right - hwRect.left)/((GLfloat)hwRect.bottom - hwRect.top);
     glUseProgram(_sp);
     mat4 ModelMatrix = IDENTITY_MATRIX;
+    translate(&ModelMatrix, pos.x, pos.y, pos.z);
     mat4 ProjectionMatrix = perspective(45.0f, hwratio, 0.1f, 100.0f);
     mat4 ViewMatrix = lookAt(a->c->pos, a->c->focus);
     mat4 temp = multymat( &ModelMatrix, &ViewMatrix);
@@ -97,10 +52,31 @@ void Scene::render()
     glBindBuffer(GL_ARRAY_BUFFER, _uvbo);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-    glDrawArrays(GL_TRIANGLES, 0, _v.size());
+    glDrawArrays(GL_TRIANGLES, 0, ter->_szVert);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+
+    {
+        GLfloat fw = ter->stride*(ter->w - 1);
+        int w = ter->w - 1;
+        GLfloat xc = a->c->pos.m[0];
+        GLfloat yc = a->c->pos.m[1];
+        GLfloat zc = a->c->pos.m[2];
+
+        GLfloat x1 = xc + fw/2;
+        //GLfloat y1 = a->c->pos.m[1];
+        GLfloat z1 = zc + fw/2;
+
+        int ix1 = x1/w;
+        int iz1 = z1/w;
+        int ix2 = 1 + ix1;
+        int iz2 = 1 + iz1;
+        int ipos = (ix1*w + iz1);
+
+        printf("%f %f %d %f \n ", x1, z1, ipos, ter->hMap[ipos]);
+        a->c->pos.m[1] = ter->hMap[ipos] + 1.5;
+    }
 }
 
 Scene::~Scene()

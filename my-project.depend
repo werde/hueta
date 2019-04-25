@@ -90,7 +90,7 @@
 	<math.h>
 	<../mat.h>
 
-1555422001 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
+1556201413 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\include\camera.cpp
 	"Camera.h"
 	"../App.h"
 	"../MyWindow.h"
@@ -110,7 +110,7 @@
 	<GL/gl.h>
 	<GL/glext.h>
 
-1552914439 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
+1554457311 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\_trash.h
 	"GL/glext.h"
 
 1554731303 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\__trash.cpp
@@ -219,7 +219,7 @@
 	<memory>
 	<zlib.h>
 
-1556115471 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
+1556203442 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.cpp
 	"Scene.h"
 	"shaders.h"
 	"../__trash.h"
@@ -229,11 +229,12 @@
 	"../src/IMAGELoad.h"
 	"../algo/perlin.h"
 
-1555684583 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
+1556197517 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\scene.h
 	<vector>
 	"GL/gl.h"
 	"GL/glext.h"
 	"../mat.h"
+	"Terrain.h"
 
 1554990813 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\src\model.h
 	<iostream>
@@ -300,11 +301,24 @@
 	<GL/gl.h>
 	"../mat.h"
 
-1556116808 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.cpp
+1556183096 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.cpp
 	"perlin.h"
 
 1556030765 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\algo\perlin.h
 	<stdio.h>
 	<math.h>
 	<time.h>
+
+1556203062 source:c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\terrain.cpp
+	"Terrain.h"
+	"../src/IMAGEload.h"
+	"../algo/perlin.h"
+	"../_trash.h"
+
+1556199428 c:\users\igor\desktop\Нормали Тех.присоединение\games\projects\my-project\scene\terrain.h
+	<cstdlib>
+	<cstring>
+	<vector>
+	<GL/gl.h>
+	"../mat.h"
 
