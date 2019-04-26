@@ -10,4 +10,6 @@ double octavePerlin(float x, float y);
 
 double* tperlin(int w, int oct);
 
+double* testHMap(int w, int oct);
+
 #endif // PERLIN_H_INCLUDED

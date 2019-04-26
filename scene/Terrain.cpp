@@ -15,6 +15,7 @@ Terrain::Terrain(double strideA, char htsgen)
     {
     case 0:
         hMap = tperlin(w, 3);
+        hMap = testHMap(w, 999);
         break;
     case 1:
     default:
@@ -62,7 +63,6 @@ Terrain::Terrain(double strideA, char htsgen)
     _pos.x = -(stride * (w - 1))/2;
     _pos.y = 0;
     _pos.z = -(stride * (w - 1))/2;
-
 
     delete hMap;
 }

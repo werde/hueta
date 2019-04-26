@@ -205,3 +205,24 @@ double* tperlin(int w, int oct)
     return ar;
 }
 
+double* testHMap(int w, int oct)
+{
+    int sz = w*w;
+    double* ar = malloc(sz*sizeof(double));
+
+    for (int i = 0; i < w; i++)
+    {
+        for (int j = 0; j < w; j++)
+        {
+            ar[i*w + j] = 0.0;
+            int tH = 4.0;
+            if (i < w/2) ar[i*w +j] += tH;
+            if (j < w/2) ar[i*w +j] += 2*tH;
+        }
+    }
+
+
+    return ar;
+};
+
+

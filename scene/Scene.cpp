@@ -14,7 +14,7 @@ Scene::Scene()
 	_sp = glCreateProgram();
     compileShaderProgramm(&_sp, ".\\terrain.vert", ".\\terrain.frag");
 
-    ter = new Terrain(10, 0);
+    ter = new Terrain(11, 0);
 }
 
 void Scene::render()
@@ -64,18 +64,20 @@ void Scene::render()
         GLfloat yc = a->c->pos.m[1];
         GLfloat zc = a->c->pos.m[2];
 
-        GLfloat x1 = xc + fw/2;
+        GLfloat x1 = xc - ter->_pos.m[0];
         //GLfloat y1 = a->c->pos.m[1];
-        GLfloat z1 = zc + fw/2;
+        GLfloat z1 = zc - ter->_pos.m[2] + (0/2);
 
-        int ix1 = x1/w;
-        int iz1 = z1/w;
-        int ix2 = 1 + ix1;
-        int iz2 = 1 + iz1;
-        int ipos = (ix1*w + iz1);
 
-        printf("%f %f %d %f \n ", x1, z1, ipos, ter->hMap[ipos]);
-        a->c->pos.m[1] = ter->hMap[ipos] + 1.5;
+
+        int ix1 = x1/(fw/w);
+        int iz1 = z1/(fw/w);
+        //int ix2 = 1 + ix1;
+        //int iz2 = 1 + iz1;
+        int ipos = (iz1*w + ix1);
+        printf("fw %f; x1 = %f; z1 = %f; ipos %d\n", fw, x1, z1, ipos);
+        //printf("%f %f %d %f \n ", x1, z1, ipos, ter->hMap[ipos]);
+        //a->c->pos.m[1] = ter->hMap[ipos] + 1.5;
     }
 }
 
